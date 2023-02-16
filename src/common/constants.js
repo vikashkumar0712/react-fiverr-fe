@@ -10,7 +10,8 @@ const constants = {
     },
     ASSETS: {
       IMAGES: {
-        MY_POSTER:"https://link.storjshare.io/jwex5irwzbbgxtudo274yt3vnymq/react-fiverr-bucket%2Fassets%2Fimages%2Fmy_profile.png?wrap=0",
+        MY_POSTER:
+          "https://link.storjshare.io/jwex5irwzbbgxtudo274yt3vnymq/react-fiverr-bucket%2Fassets%2Fimages%2Fmy_profile.png?wrap=0",
         POSTER:
           "https://link.storjshare.io/s/jwnvbxo5w4wokn7mbjxkq2lc576q/react-fiverr-bucket/assets/images/man.png?wrap=0",
       },
@@ -51,6 +52,17 @@ const constants = {
         STAR: "https://link.storjshare.io/jukdhjt5onnatouxk3ipis6nxmqq/react-fiverr-bucket%2Fassets%2Fimages%2Fstar.png?wrap=0",
         TWITTER:
           "https://link.storjshare.io/jxki7eylxxaasefzdruh4dw32gvq/react-fiverr-bucket%2Fassets%2Fimages%2Ftwitter.png?wrap=0",
+      },
+      TRUSTED_BY: {
+        FACEBOOK_LOGO:
+          "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/facebook2x.188a797.png",
+        GOOGLE_LOGO:
+          "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/google2x.06d74c8.png",
+        NETFLIX_LOGO:
+          "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/netflix2x.887e47e.png",
+        PNG: "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/pandg2x.6dc32e4.png",
+        PAYPAL_LOGO:
+          "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/paypal2x.22728be.png",
       },
     },
   },

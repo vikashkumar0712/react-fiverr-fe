@@ -12,7 +12,7 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    window.removeEventListener("scroll", isActive);
+    window.addEventListener("scroll", isActive);
     return () => window.removeEventListener("scroll", isActive);
   }, []);
 
