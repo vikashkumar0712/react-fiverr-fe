@@ -1,5 +1,6 @@
 import "./TrustedBy.scss";
 import React from "react";
+import constants from "../../common/constants";
 
 export const TrustedBy = () => {
   return (
@@ -7,23 +8,20 @@ export const TrustedBy = () => {
       <div className="container">
         <span>Trusted by:</span>
         <img
-          src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/facebook2x.188a797.png"
+          src={constants.ENUMS.ASSETS.TRUSTED_BY.FACEBOOK_LOGO}
           alt="facebook-logo"
         />
         <img
-          src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/google2x.06d74c8.png"
+          src={constants.ENUMS.ASSETS.TRUSTED_BY.GOOGLE_LOGO}
           alt="google-logo"
         />
         <img
-          src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/netflix2x.887e47e.png"
+          src={constants.ENUMS.ASSETS.TRUSTED_BY.NETFLIX_LOGO}
           alt="netflix-logo"
         />
+        <img src={constants.ENUMS.ASSETS.TRUSTED_BY.PNG} alt="p&g-logo" />
         <img
-          src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/pandg2x.6dc32e4.png"
-          alt="p&g-logo"
-        />
-        <img
-          src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/paypal2x.22728be.png"
+          src={constants.ENUMS.ASSETS.TRUSTED_BY.PAYPAL_LOGO}
           alt="paypal-logo"
         />
       </div>
