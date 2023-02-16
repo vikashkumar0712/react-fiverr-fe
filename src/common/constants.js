@@ -9,11 +9,18 @@ const constants = {
       ADMIN: "admin",
     },
     ASSETS: {
+      VIDEOS: {
+        PROMO:
+          "https://link.storjshare.io/jvlh23ehzpij4kuwzry7dfuebjja/react-fiverr-bucket%2Fassets%2Fvideos%2Fpromo.mp4?wrap=0",
+      },
+
       IMAGES: {
         MY_POSTER:
           "https://link.storjshare.io/jwex5irwzbbgxtudo274yt3vnymq/react-fiverr-bucket%2Fassets%2Fimages%2Fmy_profile.png?wrap=0",
         POSTER:
           "https://link.storjshare.io/s/jwnvbxo5w4wokn7mbjxkq2lc576q/react-fiverr-bucket/assets/images/man.png?wrap=0",
+        POSTER_BUSINESS:
+          "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_836,dpr_1.0/v1/attachments/generic_asset/asset/7d30a5eab61a328ed8c036a1d998595d-1599837114294/business-mobile-836-x1.png",
       },
       ICONS: {
         SEARCH:

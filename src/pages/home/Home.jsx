@@ -1,20 +1,30 @@
 import "./Home.scss";
-import  React from "react";
-import { cards } from "../../common/data";
-import { Featured } from "../../components/featured/Featured";
+import React from "react";
+import { cards, projects } from "../../common/data";
+import { HeroSection } from "../../components/hero_section/HeroSection";
 import { TrustedBy } from "../../components/trusted_by/TrustedBy";
 import { Slider } from "../../components/slider/Slider";
 import { CatCard } from "../../components/cat_card/CatCard";
+import { FeaturesPromo } from "../../components/features_promo/FeaturesPromo";
+import { FeaturesBusiness } from "../../components/features_business/FeaturesBusiness";
+import { ProjectCard } from "../../components/project_card/ProjectCard";
 export const Home = () => {
   return (
     <div className="home">
-      <Featured/>
-      <TrustedBy/>
+      <HeroSection />
+      <TrustedBy />
       <Slider slidesToShow={5} arrowsScroll={5}>
-         {cards.map((card) => (
-            <CatCard item={card} key={card.id} />
-          ))}
+        {cards.map((card) => (
+          <CatCard item={card} key={card.id} />
+        ))}
+      </Slider>
+      <FeaturesPromo/>
+      <FeaturesBusiness/>
+      <Slider slidesToShow={4} arrowsScroll={4}>
+        {projects.map((card) => (
+          <ProjectCard item={card} key={card.id} />
+        ))}
       </Slider>
     </div>
-  )
-}
+  );
+};

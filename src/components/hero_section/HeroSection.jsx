@@ -1,10 +1,10 @@
-import "./Featured.scss";
+import "./HeroSection.scss";
 import React from "react";
 import constants from "../../common/constants";
 
-export const Featured = () => {
+export const HeroSection = () => {
   return (
-    <div className="featured">
+    <div className="hero-section">
       <div className="container">
         <div className="left">
           <h1>
