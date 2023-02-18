@@ -14,15 +14,15 @@ export const Home = () => {
       <HeroSection />
       <TrustedBy />
       <Slider slidesToShow={5} arrowsScroll={5}>
-        {cards.map((card) => (
-          <CatCard item={card} key={card.id} />
+        {cards.map((catCard) => (
+          <CatCard item={catCard} key={catCard.id} />
         ))}
       </Slider>
       <FeaturesPromo/>
       <FeaturesBusiness/>
       <Slider slidesToShow={4} arrowsScroll={4}>
-        {projects.map((card) => (
-          <ProjectCard item={card} key={card.id} />
+        {projects.map((projectCard) => (
+          <ProjectCard item={projectCard} key={projectCard.id} />
         ))}
       </Slider>
     </div>

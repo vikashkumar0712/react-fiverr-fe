@@ -4,6 +4,10 @@ const constants = {
       ASC: "asc",
       DESC: "desc",
     },
+    SORT: {
+      NEWEST: "createdAt",
+      BEST_SELLING: "sales",
+    },
     ROLE: {
       USER: "user",
       ADMIN: "admin",
