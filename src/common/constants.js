@@ -11,6 +11,8 @@ const constants = {
     ROLE: {
       USER: "user",
       ADMIN: "admin",
+      SELLER: "seller",
+      BUYER: "buyer",
     },
     ASSETS: {
       VIDEOS: {
