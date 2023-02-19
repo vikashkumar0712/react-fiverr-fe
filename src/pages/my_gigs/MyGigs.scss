@@ -9,9 +9,16 @@
 
     .title {
       display: flex;
-      align-items: center;
       justify-content: space-between;
 
+      button {
+        background-color: #1dbf73;
+        color: white;
+        font-weight: 500;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
     }
 
     table {
@@ -19,30 +26,27 @@
 
       tr {
         height: 50px;
-
         th {
           text-align: left;
         }
-
         td {
-          sup {
+
+          sup{
             font-size: 12px;
           }
-
-          .gig-image {
+          
+          .image {
             width: 50px;
             height: 25px;
             object-fit: cover;
           }
 
           .delete {
-            padding-top: 1.2%;
-            padding-left: 5%;
             width: 20px;
             cursor: pointer;
           }
-        }
 
+        }
         &:nth-child(even) {
           background-color: #1dbf730f;
         }
