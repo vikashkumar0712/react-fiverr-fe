@@ -1,11 +1,14 @@
 import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { newRequest } from "../../utils/request";
+import constants from "../../common/constants";
 export const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -16,14 +19,20 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", isActive);
   }, []);
 
+  const currentUser = JSON.parse(
+    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
+  );
+
   const handleOpen = () => setOpen(!open);
 
-  const currentUser = {
-    id: 1,
-    username: "Zuber Khan",
-    isSeller: true,
-    profileImage:
-      "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg",
+  const handleLogout = async () => {
+    try {
+      await newRequest.post("/user/logout");
+      localStorage.setItem(constants.LOCAL_STORAGE.CURRENT_USER, null);
+      navigate(constants.ROUTES.HOME);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -41,16 +50,21 @@ export const Navbar = () => {
           <span>English</span>
           <span>Sign in</span>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
-          {!currentUser && <button>Join</button>}
+          {!currentUser && (
+            <button onClick={() => navigate("/register")}>Join</button>
+          )}
           {currentUser && (
             <div className="user" onClick={handleOpen}>
-              <img src={currentUser?.profileImage} alt="profile-picture" />
+              <img
+                src={currentUser?.img || constants.ENUMS.ASSETS.IMAGES.AVATAR}
+                alt="profile-picture"
+              />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
                   {currentUser?.isSeller && (
                     <>
-                      <Link className="link" to={`mygigs`}>
+                      <Link className="link" to={`my-gigs`}>
                         Gigs
                       </Link>
                       <Link className="link" to={`add`}>
@@ -64,7 +78,7 @@ export const Navbar = () => {
                   <Link className="link" to={`messages`}>
                     Messages
                   </Link>
-                  <Link className="link" to={`/`}>
+                  <Link className="link" onClick={handleLogout}>
                     Logout
                   </Link>
                 </div>

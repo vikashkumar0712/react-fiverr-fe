@@ -11,7 +11,9 @@ import { MyGigs } from "./pages/my_gigs/MyGigs";
 import { Add } from "./pages/add/Add";
 import { Messages } from "./pages/messages/Messages";
 import { Message } from "./pages/message/Message";
-
+import { Login } from "./pages/login/Login";
+import { Register } from "./pages/register/Register";
+import constants from "./common/constants";
 
 function App() {
   const Layout = () => {
@@ -26,42 +28,49 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: constants.ROUTES.HOME,
       element: <Layout />,
       children: [
         {
-          path: "/",
+          path: constants.ROUTES.HOME,
           element: <Home />,
         },
         {
-          path: "/gigs",
+          path: constants.ROUTES.GIGS,
           element: <Gigs />,
         },
         {
-          path: "/gig/:id",
+          path: constants.ROUTES.GIG_WITH_ID,
           element: <Gig />,
         },
         {
-          path: "/orders",
+          path: constants.ROUTES.ORDERS,
           element: <Orders />,
         },
         {
-          path: "/mygigs",
+          path: constants.ROUTES.MY_GIGS,
           element: <MyGigs />,
         },
         {
-          path: "/add",
+          path: constants.ROUTES.ADD,
           element: <Add />,
         },
         {
-          path: "/messages",
+          path: constants.ROUTES.MESSAGES,
           element: <Messages />,
         },
         {
-          path: "/message/:id",
+          path: constants.ROUTES.MESSAGE_WITH_ID,
           element: <Message />,
         },
-       
+        {
+          path: constants.ROUTES.LOGIN,
+          element: <Login />,
+        },
+        {
+          path: constants.ROUTES.REGISTER,
+          element: <Register />,
+        },
       ],
     },
   ]);

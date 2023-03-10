@@ -21,10 +21,10 @@ const constants = {
       },
 
       IMAGES: {
-        MY_POSTER:
-          "https://link.storjshare.io/jwex5irwzbbgxtudo274yt3vnymq/react-fiverr-bucket%2Fassets%2Fimages%2Fmy_profile.png?wrap=0",
+        AVATAR:
+          "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg",
         POSTER:
-          "https://link.storjshare.io/s/jwnvbxo5w4wokn7mbjxkq2lc576q/react-fiverr-bucket/assets/images/man.png?wrap=0",
+          "https://link.storjshare.io/s/jvtxxc64egnlxhutmo5xghayw62a/react-fiverr-bucket/assets/images/me.png?wrap=0",
         POSTER_BUSINESS:
           "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_836,dpr_1.0/v1/attachments/generic_asset/asset/7d30a5eab61a328ed8c036a1d998595d-1599837114294/business-mobile-836-x1.png",
       },
@@ -109,7 +109,7 @@ const constants = {
     LIMIT_REACHED: "Limit reached",
     HASH_EXPIRED: "Hash expired",
     HASH_NOT_FOUND: "Link is expired.",
-    ADDRS_NOT_FOUND: "User billing address not found.",
+    ADDRESS_NOT_FOUND: "User billing address not found.",
     SESSIONS_NOT_FOUND: "Stripe session_id not found.",
     PAYMENT_PENDING: "Payment Pending.",
     PLAN_NOT_FOUND: "Plan not found.",
@@ -125,6 +125,21 @@ const constants = {
     EMAIL_UPDATED: "Email updated successfully",
   },
   INS_EXCLUDE_COLS: ["created_at", "updated_at", "deleted_at"],
+  ROUTES: {
+    HOME: "/",
+    LOGIN: "/login",
+    REGISTER: "/register",
+    GIGS: "/gigs",
+    GIG_WITH_ID: "/gig/:id",
+    ORDERS: "/orders",
+    MY_GIGS: "/my-gigs",
+    ADD: "/add",
+    MESSAGES: "/messages",
+    MESSAGE_WITH_ID: "/message/:id",
+  },
+  LOCAL_STORAGE: {
+    CURRENT_USER: "currentUser",
+  },
 };
 
 export default constants;
