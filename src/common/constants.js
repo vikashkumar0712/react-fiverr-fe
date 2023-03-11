@@ -1,19 +1,24 @@
 const constants = {
   ENUMS: {
+    BE_BASE_URL: "http://localhost:8002/",
+
     ORDER: {
       ASC: "asc",
       DESC: "desc",
     },
+
     SORT: {
       NEWEST: "createdAt",
       BEST_SELLING: "sales",
     },
+
     ROLE: {
       USER: "user",
       ADMIN: "admin",
       SELLER: "seller",
       BUYER: "buyer",
     },
+
     ASSETS: {
       VIDEOS: {
         PROMO:
@@ -28,6 +33,7 @@ const constants = {
         POSTER_BUSINESS:
           "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_836,dpr_1.0/v1/attachments/generic_asset/asset/7d30a5eab61a328ed8c036a1d998595d-1599837114294/business-mobile-836-x1.png",
       },
+
       ICONS: {
         SEARCH:
           "https://link.storjshare.io/jvjjjueaip7fm5d3h67z6ibekd7a/react-fiverr-bucket%2Fassets%2Fimages%2Fsearch.png?wrap=0",
@@ -66,6 +72,7 @@ const constants = {
         TWITTER:
           "https://link.storjshare.io/jxki7eylxxaasefzdruh4dw32gvq/react-fiverr-bucket%2Fassets%2Fimages%2Ftwitter.png?wrap=0",
       },
+
       TRUSTED_BY: {
         FACEBOOK_LOGO:
           "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/facebook2x.188a797.png",
@@ -92,6 +99,7 @@ const constants = {
     ERR_410: 410,
     ERR_412: 412,
   },
+
   ERROR_MESSAGES: {
     NOT_AUTHORIZED: "You are not authorized",
     USER_NOT_FOUND: "User not found.",
@@ -115,6 +123,7 @@ const constants = {
     PLAN_NOT_FOUND: "Plan not found.",
     FORGOT_PASSWORD_REQUEST: `The account currently has no password set. We recommend requesting a 'Forgot Password'.`,
   },
+
   SUCCESS_MESSAGES: {
     EMAIL_SEND: "Email send successfully",
     OK: "OK",
@@ -124,7 +133,9 @@ const constants = {
     PASSWORD_RESET: "Password reset successfully",
     EMAIL_UPDATED: "Email updated successfully",
   },
+
   INS_EXCLUDE_COLS: ["created_at", "updated_at", "deleted_at"],
+
   ROUTES: {
     HOME: "/",
     LOGIN: "/login",
@@ -137,6 +148,7 @@ const constants = {
     MESSAGES: "/messages",
     MESSAGE_WITH_ID: "/message/:id",
   },
+
   LOCAL_STORAGE: {
     CURRENT_USER: "currentUser",
   },
