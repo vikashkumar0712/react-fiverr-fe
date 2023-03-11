@@ -1,7 +1,7 @@
 {
   "name": "fiverr-fe",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -22,7 +22,6 @@
     "@vitejs/plugin-react": "^3.0.0",
     "eslint": "^8.34.0",
     "eslint-plugin-react": "^7.32.2",
-    "react-error-overlay": "^6.0.9",
     "vite": "^4.0.0"
   }
 }
