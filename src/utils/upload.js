@@ -12,7 +12,8 @@ export const upload = async (file) => {
     });
     const url = data.data;
     return url;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
+    throw new Error(error);
   }
 };

@@ -152,6 +152,14 @@ const constants = {
   LOCAL_STORAGE: {
     CURRENT_USER: "currentUser",
   },
+
+  PARAMS: {
+    IMAGE_UPLOADING: {
+      pending: "Uploading image...",
+      success: "Image uploaded successfully!",
+      error: "Failed to upload image. Please try again.",
+    },
+  },
 };
 
 export default constants;

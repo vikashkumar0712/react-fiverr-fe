@@ -1,4 +1,6 @@
 import "./Register.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import React, { useState } from "react";
 import { upload } from "../../utils/upload";
 import { newRequest } from "../../utils/request";
@@ -12,9 +14,9 @@ export const Register = () => {
     email: "",
     password: "",
     country: "",
-    img: "",
-    phone: "",
-    desc: "",
+    img: undefined,
+    phone: undefined,
+    desc: undefined,
     isSeller: false,
   });
 
@@ -41,13 +43,23 @@ export const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const url = await upload(file);
+      const url = file
+        ? await toast.promise(upload(file), constants.PARAMS.IMAGE_UPLOADING)
+        : undefined;
+
       const registerData = { ...credentials, img: url };
-      await newRequest.post("/services/register", registerData);
-      navigate(constants.ROUTES.HOME);
-    } catch (err) {
-      console.log(err);
+      const { data } = await newRequest.post(
+        "/services/register",
+        registerData
+      );
+
+      toast.success(data.data);
+      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response.data.error || error.message);
     }
   };
 
@@ -64,6 +76,7 @@ export const Register = () => {
             type="text"
             placeholder="Username"
             onChange={handleCredentials}
+            required
           />
           <label htmlFor="">
             Email <span>*</span>
@@ -73,6 +86,7 @@ export const Register = () => {
             type="email"
             placeholder="Email"
             onChange={handleCredentials}
+            required
           />
           <label htmlFor="">
             Password <span>*</span>
@@ -82,6 +96,7 @@ export const Register = () => {
             type="password"
             placeholder="Password"
             onChange={handleCredentials}
+            required
           />
           <label htmlFor="">Profile Picture</label>
           <input type="file" name="images/*" onChange={handleFile} />
@@ -93,6 +108,7 @@ export const Register = () => {
             type="text"
             placeholder="USA"
             onChange={handleCredentials}
+            required
           />
           <button type="submit">Register</button>
         </div>
@@ -123,6 +139,18 @@ export const Register = () => {
           ></textarea>
         </div>
       </form>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

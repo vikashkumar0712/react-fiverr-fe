@@ -1,4 +1,6 @@
 import "./Login.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
@@ -10,7 +12,6 @@ export const Login = () => {
     username: "",
     password: "",
   });
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   // Methods
@@ -29,10 +30,11 @@ export const Login = () => {
         constants.LOCAL_STORAGE.CURRENT_USER,
         JSON.stringify(currentUser)
       );
-      navigate(constants.ROUTES.HOME);
-    } catch (err) {
-      console.log(err.response.data.error);
-      setError(err.response.data.error);
+      toast.success("User logged in successfully");
+      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+    } catch (error) {
+      console.error(error.response.data.error);
+      toast.error(error.response.data.error);
     }
   };
 
@@ -47,6 +49,7 @@ export const Login = () => {
           placeholder="Username"
           value={credentials.username}
           onChange={handleCredentials}
+          required
         />
 
         <label htmlFor="">Password</label>
@@ -56,10 +59,22 @@ export const Login = () => {
           placeholder="Password"
           value={credentials.password}
           onChange={handleCredentials}
+          required
         />
         <button type="submit">Login</button>
       </form>
-      {error && error}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
