@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { GigCard } from "../../components/gig_card/GigCard";
 import { useLocation } from "react-router-dom";
-import { Loader } from "../../components/loader/loader";
+import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
 import utility from "../../utils/utility";
 

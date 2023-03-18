@@ -6,7 +6,7 @@ import { Slider } from "infinite-react-carousel/lib";
 import { useParams } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useQuery } from "@tanstack/react-query";
-import { Loader } from "../../components/loader/loader";
+import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
 export const Gig = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
