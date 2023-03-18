@@ -24,12 +24,18 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await newRequest.post("/services/login", credentials);
-      const currentUser = data.data.user;
+      const { data: response } = await newRequest.post(
+        "/services/login",
+        credentials
+      );
+
+      const currentUser = response.data.user;
+
       localStorage.setItem(
         constants.LOCAL_STORAGE.CURRENT_USER,
         JSON.stringify(currentUser)
       );
+
       toast.success("User logged in successfully");
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
@@ -46,7 +52,7 @@ export const Login = () => {
         <input
           name="username"
           type="text"
-          placeholder="Username"
+          placeholder="Email / Username"
           value={credentials.username}
           onChange={handleCredentials}
           required

@@ -50,12 +50,12 @@ export const Register = () => {
         : undefined;
 
       const registerData = { ...credentials, img: url };
-      const { data } = await newRequest.post(
+      const { data: response } = await newRequest.post(
         "/services/register",
         registerData
       );
 
-      toast.success(data.data);
+      toast.success(response.data);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       console.error(error);

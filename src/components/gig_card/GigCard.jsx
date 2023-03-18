@@ -4,19 +4,25 @@ import { Link } from "react-router-dom";
 import constants from "../../common/constants";
 
 export const GigCard = ({ item }) => {
+  const { userDetails: user } = item;
+
+  const stars = !isNaN(item.totalStars / item.starNumber)
+    ? Math.round(item.totalStars / item.starNumber)
+    : 0;
+
   return (
-    <Link to={`/gig/123`} className="link">
+    <Link to={`/gig/${item._id}`} className="link">
       <div className="gig-card">
-        <img src={item.img} alt="gig-image" />
+        <img src={item.cover} alt="gig-image" />
         <div className="info">
           <div className="user">
-            <img src={item.pp} alt={item.username} />
-            <span>{item.username}</span>
+            <img src={user.img} alt={user.username} />
+            <span>{user.username}</span>
           </div>
           <p>{item.desc}</p>
           <div className="star">
             <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
-            <span>{item.star}</span>
+            <span>{stars}</span>
           </div>
         </div>
         <hr />
@@ -24,10 +30,7 @@ export const GigCard = ({ item }) => {
           <img src={constants.ENUMS.ASSETS.ICONS.HEART} alt="heart" />
           <div className="price">
             <span>STARTING AT</span>
-            <h2>
-                $ {item.price}
-                  <sup>99</sup>
-            </h2>
+            <h2>$ {item.price}</h2>
           </div>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import "./Navbar.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
@@ -29,9 +31,11 @@ export const Navbar = () => {
     try {
       await newRequest.post("/user/logout");
       localStorage.setItem(constants.LOCAL_STORAGE.CURRENT_USER, null);
-      navigate(constants.ROUTES.HOME);
-    } catch (err) {
-      console.log(err);
+      toast.success("User logged out successfully");
+      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+    } catch (error) {
+      console.error(error.response.data.error);
+      toast.error(error.response.data.error);
     }
   };
 
@@ -48,7 +52,9 @@ export const Navbar = () => {
           <span>Fiverr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <span>Sign in</span>
+          <Link className="link" to={`login`}>
+            Sign in
+          </Link>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {!currentUser && (
             <button onClick={() => navigate("/register")}>Join</button>
@@ -122,6 +128,18 @@ export const Navbar = () => {
           <hr />
         </>
       )}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

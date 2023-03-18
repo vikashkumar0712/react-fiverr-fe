@@ -2,12 +2,12 @@ const constants = {
   ENUMS: {
     BE_BASE_URL: "http://localhost:8002/",
 
-    ORDER: {
+    SORT: {
       ASC: "asc",
       DESC: "desc",
     },
 
-    SORT: {
+    ORDER_BY: {
       NEWEST: "createdAt",
       BEST_SELLING: "sales",
     },

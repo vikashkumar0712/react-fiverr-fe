@@ -1,17 +1,68 @@
 import "./Gigs.scss";
-import React, { useState } from "react";
-import constants from "../../common/constants";
-import { gigs } from "../../common/data";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import React, { useState, useRef, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { newRequest } from "../../utils/request";
 import { GigCard } from "../../components/gig_card/GigCard";
+import { useLocation } from "react-router-dom";
+import { Loader } from "../../components/loader/loader";
+import constants from "../../common/constants";
+import utility from "../../utils/utility";
+
 export const Gigs = () => {
   const [open, setOpen] = useState(false);
-  const [sort, setSort] = useState(constants.ENUMS.SORT.BEST_SELLING);
+  const [orderBy, setOrderBy] = useState(constants.ENUMS.ORDER_BY.BEST_SELLING);
+  const [prevErrorMessage, setPrevErrorMessage] = useState(null);
+  const minRef = useRef();
+  const maxRef = useRef();
+
+  const { search } = useLocation();
+
+  const {
+    isLoading,
+    error,
+    data: gigs,
+    refetch,
+  } = useQuery({
+    queryKey: ["gigs"],
+    queryFn: async () => {
+      const queryParams = utility.urlParamsToObject(search);
+
+      const filters = {
+        ...queryParams,
+        ...(minRef?.current?.value && { min: minRef.current.value }),
+        ...(maxRef?.current?.value && { max: maxRef.current.value }),
+        ...(orderBy && { orderBy: orderBy }),
+      };
+
+      const { data: response } = await newRequest.post(
+        "/services/gigs",
+        filters
+      );
+      return response.data;
+    },
+  });
+
+  useEffect(() => {
+    orderBy && refetch();
+    if (error) {
+      const newErrorMessage = error.response.data.error;
+      if (newErrorMessage && newErrorMessage !== prevErrorMessage) {
+        toast.error(newErrorMessage);
+        setPrevErrorMessage(newErrorMessage);
+      }
+    }
+  }, [error, prevErrorMessage, orderBy]);
 
   const handleClick = () => setOpen(!open);
-  const handleSort = (type) => {
-    setSort(type);
+
+  const handleOrderBy = (type) => {
+    setOrderBy(type);
     setOpen(false);
   };
+
+  const handleApply = () => refetch();
 
   return (
     <div className="gigs">
@@ -24,15 +75,15 @@ export const Gigs = () => {
         </p>
         <div className="menu">
           <div className="left">
-            <span>Budged</span>
-            <input type="text" placeholder="min" />
-            <input type="text" placeholder="max" />
-            <button>Apply</button>
+            <span>Budget</span>
+            <input ref={minRef} type="number" placeholder="min" />
+            <input ref={maxRef} type="number" placeholder="max" />
+            <button onClick={handleApply}>Apply</button>
           </div>
           <div className="right">
             <span className="sort-by">SortBy</span>
             <span className="sort-type">
-              {sort === "sales" ? "Best Selling" : "Newest"}
+              {orderBy === "sales" ? "Best Selling" : "Newest"}
             </span>
             <img
               src={constants.ENUMS.ASSETS.ICONS.DOWN}
@@ -41,14 +92,18 @@ export const Gigs = () => {
             />
             {open && (
               <div className="right-menu">
-                {sort === constants.ENUMS.SORT.BEST_SELLING ? (
-                  <span onClick={() => handleSort(constants.ENUMS.SORT.NEWEST)}>
+                {orderBy === constants.ENUMS.ORDER_BY.BEST_SELLING ? (
+                  <span
+                    onClick={() =>
+                      handleOrderBy(constants.ENUMS.ORDER_BY.NEWEST)
+                    }
+                  >
                     Newest
                   </span>
                 ) : (
                   <span
                     onClick={() =>
-                      handleSort(constants.ENUMS.SORT.BEST_SELLING)
+                      handleOrderBy(constants.ENUMS.ORDER_BY.BEST_SELLING)
                     }
                   >
                     Best selling
@@ -58,12 +113,32 @@ export const Gigs = () => {
             )}
           </div>
         </div>
+
         <div className="cards">
-          {gigs.map((gigCard) => (
-            <GigCard item={gigCard} key={gigCard.id} />
-          ))}
+          {isLoading ? (
+            <div className="loading">
+              <Loader />
+              <h3>Loading...</h3>
+            </div>
+          ) : error ? (
+            <h3 className="error">Something went wrong!</h3>
+          ) : (
+            gigs.map((gigCard) => <GigCard item={gigCard} key={gigCard._id} />)
+          )}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
