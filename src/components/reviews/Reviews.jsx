@@ -10,10 +10,10 @@ export const Reviews = () => {
       <h2>Reviews</h2>
       {reviewsCount.map((_review, index) => {
         return (
-          <>
-            <Review key={index} />
+          <div key={index}>
+            <Review />
             <hr />
-          </>
+          </div>
         );
       })}
     </div>

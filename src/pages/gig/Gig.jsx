@@ -7,8 +7,9 @@ import { useParams } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../../components/loader/Loader";
-import constants from "../../common/constants";
 import { Reviews } from "../../components/reviews/Reviews";
+import utility from "../../utils/utility";
+import constants from "../../common/constants";
 export const Gig = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
 
@@ -122,7 +123,9 @@ export const Gig = () => {
                   </div>
                   <div className="item">
                     <span className="title">Member since</span>
-                    <span className="desc">Aug 2022</span>
+                    <span className="desc">
+                      {utility.timeStampToDate(user.createdAt)}
+                    </span>
                   </div>
                   <div className="item">
                     <span className="title">Avg. response time</span>
