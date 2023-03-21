@@ -67,12 +67,12 @@ export const Gig = () => {
               <span>{user.username}</span>
 
               <div className="stars">
-                {starsCount.map((_star, index) => {
+                {starsCount.map((star, index) => {
                   return (
                     <img
                       key={index}
                       src={constants.ENUMS.ASSETS.ICONS.STAR}
-                      alt={`star-${index + 1}`}
+                      alt={`${star}-${index + 1}`}
                     />
                   );
                 })}
@@ -101,12 +101,12 @@ export const Gig = () => {
                 <div className="info">
                   <span>{user.username}</span>
                   <div className="stars">
-                    {starsCount.map((_star, index) => {
+                    {starsCount.map((star, index) => {
                       return (
                         <img
                           key={index}
                           src={constants.ENUMS.ASSETS.ICONS.STAR}
-                          alt={`star-${index + 1}`}
+                          alt={`${star}-${index + 1}`}
                         />
                       );
                     })}
@@ -144,7 +144,7 @@ export const Gig = () => {
                 <p>{user.desc}</p>
               </div>
             </div>
-            <Reviews />
+            <Reviews gigId={id} />
           </div>
           <div className="right">
             <div className="price">

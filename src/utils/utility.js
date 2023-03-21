@@ -1,3 +1,5 @@
+import constants from "../common/constants";
+import { countries } from "../common/data";
 class Utility {
   urlParamsToObject(params) {
     const urlParams = new URLSearchParams(params);
@@ -21,6 +23,16 @@ class Utility {
     };
     const formattedDate = date.toLocaleDateString("en-IN", options);
     return formattedDate;
+  }
+
+  countryToFlag(params) {
+    const country = params.toLowerCase();
+    for (let code in countries) {
+      if (countries[code] === country) {
+        return `https://flagcdn.com/h60/${code}.png`;
+      }
+    }
+    return constants.ENUMS.ASSETS.ICONS.NO_FLAG;
   }
 }
 

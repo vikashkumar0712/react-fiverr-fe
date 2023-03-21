@@ -35,6 +35,8 @@ const constants = {
       },
 
       ICONS: {
+        NO_FLAG:
+          "https://link.storjshare.io/s/jwpwwfgpbga3cjpfl3jauamu7x6a/react-fiverr-bucket/assets/images/no_flag.png?wrap=0",
         SEARCH:
           "https://link.storjshare.io/jvjjjueaip7fm5d3h67z6ibekd7a/react-fiverr-bucket%2Fassets%2Fimages%2Fsearch.png?wrap=0",
         ACCESSIBILITY:
