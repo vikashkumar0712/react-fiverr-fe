@@ -22,6 +22,30 @@
       }
     }
 
+    .loading {
+      margin-top: 15%;
+      margin-bottom: 20%;
+      margin-left: 45%;
+      display: flex;
+      align-items: center;
+
+      h3 {
+        margin: 10%;
+      }
+    }
+
+    .error {
+      margin-top: 15%;
+      margin-bottom: 10%;
+      margin-left: 44%;
+    }
+
+    .empty {
+      margin-top: 15%;
+      margin-bottom: 10%;
+      margin-left: 44%;
+    }
+
     table {
       width: 100%;
 

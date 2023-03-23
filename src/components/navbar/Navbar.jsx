@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import constants from "../../common/constants";
+
 export const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);

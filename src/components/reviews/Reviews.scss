@@ -1,6 +1,39 @@
 .reviews {
   margin-top: 50px;
 
+  .add-review {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .review-form {
+      display: flex;
+      gap: 10px;
+
+      input {
+        width: 75%;
+        padding: 20px;
+      }
+
+      select {
+        width: 10%;
+        padding: 20px;
+        align-self: flex-end;
+      }
+
+      button {
+        width: 15%;
+        padding: 20px;
+        border: none;
+        align-self: flex-end;
+        color: white;
+        background-color: #1dbf73;
+        cursor: pointer;
+      }
+    }
+  }
+
   .loading {
     margin-top: 15%;
     margin-bottom: 10%;
@@ -11,8 +44,14 @@
       margin: 10%;
     }
   }
+
   .error {
     margin-top: 15%;
+    margin-bottom: 10%;
+  }
+
+  .empty {
+    margin-top: 10%;
     margin-bottom: 10%;
   }
 

@@ -1,14 +1,39 @@
 import "./Orders.scss";
-import React from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { newRequest } from "../../utils/request";
+import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
+
 export const Orders = () => {
-  const currentUser = {
-    id: 1,
-    username: "Zuber Khan",
-    isSeller: true,
-    profileImage:
-      "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg",
-  };
+  const [prevErrorMessage, setPrevErrorMessage] = useState(null);
+  const currentUser = JSON.parse(
+    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
+  );
+
+  const {
+    isLoading,
+    error,
+    data: orders,
+  } = useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => {
+      const { data: response } = await newRequest.get(`/orders`);
+      return response.data;
+    },
+  });
+
+  useEffect(() => {
+    if (error) {
+      const newErrorMessage = error.response.data.error;
+      if (newErrorMessage && newErrorMessage !== prevErrorMessage) {
+        toast.error(newErrorMessage);
+        setPrevErrorMessage(newErrorMessage);
+      }
+    }
+  }, [error, prevErrorMessage]);
 
   return (
     <div className="orders">
@@ -16,115 +41,62 @@ export const Orders = () => {
         <div className="title">
           <h1>Orders</h1>
         </div>
-        <table>
-          <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>
-              {currentUser?.isSeller
-                ? constants.ENUMS.ROLE.BUYER
-                : constants.ENUMS.ROLE.SELLER}
-            </th>
-            <th>Contact</th>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="gig-image"
-                className="gig-image"
-              />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>123</td>
-            <td>
-              <img
-                src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
-                alt="message"
-                className="message"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="gig-image"
-                className="gig-image"
-              />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>123</td>
-            <td>
-              <img
-                src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
-                alt="message"
-                className="message"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="gig-image"
-                className="gig-image"
-              />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>123</td>
-            <td>
-              <img
-                src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
-                alt="message"
-                className="message"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="gig-image"
-                className="gig-image"
-              />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>123</td>
-            <td>
-              <img
-                src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
-                alt="message"
-                className="message"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="gig-image"
-                className="gig-image"
-              />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>123</td>
-            <td>
-              <img
-                src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
-                alt="message"
-                className="message"
-              />
-            </td>
-          </tr>
-        </table>
+        {isLoading ? (
+          <div className="loading">
+            <Loader />
+            <h3>Loading...</h3>
+          </div>
+        ) : error ? (
+          <h3 className="error">Something went wrong!</h3>
+        ) : orders.length === 0 ? (
+          <h3 className="empty">No Orders Found!</h3>
+        ) : (
+          <table>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
+              <th>Contact</th>
+            </tr>
+            {orders.map((order) => {
+              return (
+                <tr key={order._id}>
+                  <td>
+                    <img
+                      src={order.img}
+                      alt="gig-cover-image"
+                      className="gig-image"
+                    />
+                  </td>
+                  <td>{order.title}</td>
+                  <td>{order.price}</td>
+                  <td>{order.userDetails.username}</td>
+                  <td>
+                    <img
+                      src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
+                      alt="message"
+                      className="message"
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </table>
+        )}
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

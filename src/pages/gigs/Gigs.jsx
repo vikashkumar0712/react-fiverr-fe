@@ -122,6 +122,8 @@ export const Gigs = () => {
             </div>
           ) : error ? (
             <h3 className="error">Something went wrong!</h3>
+          ) : gigs.length === 0 ? (
+            <h3 className="empty">No Gigs Found!</h3>
           ) : (
             gigs.map((gigCard) => <GigCard item={gigCard} key={gigCard._id} />)
           )}
