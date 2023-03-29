@@ -8,7 +8,7 @@ export const Message = () => {
         <span className="breadcrumbs">
           <Link to={`/messages`} className="link">
             MESSAGES
-          </Link>{" "}
+          </Link>
           &gt; JOHN DOE &gt;
         </span>
         <div className="messages">

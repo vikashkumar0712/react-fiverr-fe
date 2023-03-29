@@ -3,7 +3,6 @@ import React from "react";
 import constants from "../../common/constants";
 
 export const Footer = () => {
-  //dynamic year
   const year = new Date().getFullYear();
   return (
     <div className="footer">

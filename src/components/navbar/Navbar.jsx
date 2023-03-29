@@ -35,8 +35,8 @@ export const Navbar = () => {
       toast.success("User logged out successfully");
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
-      console.error(error.response.data.error);
-      toast.error(error.response.data.error);
+      console.error(error);
+      toast.error(error?.response?.data?.error || error.message);
     }
   };
 
@@ -62,10 +62,7 @@ export const Navbar = () => {
           )}
           {currentUser && (
             <div className="user" onClick={handleOpen}>
-              <img
-                src={currentUser?.img || constants.ENUMS.ASSETS.IMAGES.AVATAR}
-                alt="profile-picture"
-              />
+              <img src={currentUser?.img} alt="profile-picture" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">

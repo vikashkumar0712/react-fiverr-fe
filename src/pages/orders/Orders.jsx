@@ -9,6 +9,7 @@ import constants from "../../common/constants";
 
 export const Orders = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
+
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
   );
@@ -41,6 +42,7 @@ export const Orders = () => {
         <div className="title">
           <h1>Orders</h1>
         </div>
+        <hr />
         {isLoading ? (
           <div className="loading">
             <Loader />
@@ -52,36 +54,40 @@ export const Orders = () => {
           <h3 className="empty">No Orders Found!</h3>
         ) : (
           <table>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
-              <th>Contact</th>
-            </tr>
-            {orders.map((order) => {
-              return (
-                <tr key={order._id}>
-                  <td>
-                    <img
-                      src={order.img}
-                      alt="gig-cover-image"
-                      className="gig-image"
-                    />
-                  </td>
-                  <td>{order.title}</td>
-                  <td>{order.price}</td>
-                  <td>{order.userDetails.username}</td>
-                  <td>
-                    <img
-                      src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
-                      alt="message"
-                      className="message"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => {
+                return (
+                  <tr key={order._id}>
+                    <td>
+                      <img
+                        src={order.img}
+                        alt="gig-cover-image"
+                        className="gig-image"
+                      />
+                    </td>
+                    <td>{order.title}</td>
+                    <td>{order.price}</td>
+                    <td>{order.userDetails.username}</td>
+                    <td>
+                      <img
+                        src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
+                        alt="message"
+                        className="message"
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         )}
       </div>

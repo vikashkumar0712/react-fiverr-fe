@@ -7,6 +7,12 @@
     width: 1400px;
     padding: 50px 0px;
 
+    hr {
+      margin: 50px 0px;
+      height: 0;
+      border: 1px solid rgb(237, 236, 236);
+    }
+
     .title {
       display: flex;
       align-items: center;
@@ -30,7 +36,7 @@
       align-items: center;
 
       h3 {
-        margin: 10%;
+        margin: 2%;
       }
     }
 
@@ -48,35 +54,43 @@
 
     table {
       width: 100%;
+      thead {
+        tr {
+          height: 50px;
 
-      tr {
-        height: 50px;
-
-        th {
-          text-align: left;
-        }
-
-        td {
-          sup {
-            font-size: 12px;
-          }
-
-          .gig-image {
-            width: 50px;
-            height: 25px;
-            object-fit: cover;
-          }
-
-          .message {
-            padding-top: 1.2%;
-            padding-left: 5%;
-            width: 20px;
-            cursor: pointer;
+          th {
+            text-align: center;
           }
         }
+      }
 
-        &:nth-child(even) {
-          background-color: #1dbf730f;
+      tbody {
+        tr {
+          height: 50px;
+
+          td {
+            text-align: center;
+            sup {
+              font-size: 12px;
+            }
+
+            .gig-image {
+              width: 50px;
+              height: 25px;
+              object-fit: cover;
+            }
+
+            .message {
+              padding-top: 1.2%;
+              padding-left: 43%;
+              width: 20px;
+              cursor: pointer;
+            }
+          }
+
+          &:nth-child(odd) {
+            background-color: #1dbf730f;
+          }
         }
       }
     }
