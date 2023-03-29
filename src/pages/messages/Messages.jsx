@@ -78,11 +78,11 @@ export const Messages = () => {
         ) : (
           <table>
             <tr>
-              <th>Profile Picture</th>
-              <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
-              <th>Last Message</th>
-              <th>Timeline</th>
-              <th>Action</th>
+              <th>PROFILE</th>
+              <th>{currentUser.isSeller ? "BUYER" : "SELLER"}</th>
+              <th>LAST MASSAGE</th>
+              <th>TIMELINE</th>
+              <th>ACTION</th>
             </tr>
             {conversations.map((conversation) => {
               return (

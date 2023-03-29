@@ -56,11 +56,11 @@ export const Orders = () => {
           <table>
             <thead>
               <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
-                <th>Contact</th>
+                <th>COVER</th>
+                <th>TITLE</th>
+                <th>PRICE</th>
+                <th>{currentUser?.isSeller ? "BUYER" : "SELLER"}</th>
+                <th>CONTACT</th>
               </tr>
             </thead>
             <tbody>
