@@ -6,9 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
+import { useNavigate } from "react-router-dom";
 
 export const Orders = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
@@ -35,6 +38,34 @@ export const Orders = () => {
       }
     }
   }, [error, prevErrorMessage]);
+
+  const handleContact = async (order) => {
+    const { sellerId, buyerId } = order;
+
+    try {
+      const { data: conversation } = await newRequest.get(
+        `/conversation/${sellerId}/${buyerId}`
+      );
+
+      navigate(`/message/${conversation.data._id}`);
+    } catch (error) {
+      if (error.response.status === constants.RESP_ERR_CODES.ERR_404) {
+        const conversationData = {
+          to: currentUser.isSeller ? buyerId : sellerId,
+        };
+
+        const { data: conversation } = await newRequest.post(
+          `conversation`,
+          conversationData
+        );
+
+        navigate(`/message/${conversation.data._id}`);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
+    }
+  };
 
   return (
     <div className="orders">
@@ -82,6 +113,7 @@ export const Orders = () => {
                         src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
                         alt="message"
                         className="message"
+                        onClick={() => handleContact(order)}
                       />
                     </td>
                   </tr>

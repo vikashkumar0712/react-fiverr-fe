@@ -149,7 +149,7 @@ export const Gig = () => {
           <div className="right">
             <div className="price">
               <h3>{gig.shortTitle}</h3>
-              <h2>$ {gig.price}</h2>
+              <h2>₹ {gig.price}</h2>
             </div>
             <p>{gig.shortDesc}</p>
             <div className="details">

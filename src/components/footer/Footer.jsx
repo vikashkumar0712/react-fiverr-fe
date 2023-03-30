@@ -105,9 +105,12 @@ export const Footer = () => {
             </div>
             <div className="link">
               <img src={constants.ENUMS.ASSETS.ICONS.COIN} alt="coin" />
-              <span>USD</span>
+              <span>INR</span>
             </div>
-            <img src={constants.ENUMS.ASSETS.ICONS.ACCESSIBILITY} alt="accessibility" />
+            <img
+              src={constants.ENUMS.ASSETS.ICONS.ACCESSIBILITY}
+              alt="accessibility"
+            />
           </div>
         </div>
       </div>

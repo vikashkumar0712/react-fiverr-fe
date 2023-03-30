@@ -21,6 +21,30 @@
       height: 500px;
       overflow: scroll;
 
+      .loading {
+        margin-top: 15%;
+        margin-bottom: 15%;
+        margin-left: 40%;
+        display: flex;
+        align-items: center;
+
+        h3 {
+          margin: 2%;
+        }
+      }
+
+      .error {
+        margin-top: 10%;
+        margin-bottom: 10%;
+        margin-left: 40%;
+      }
+
+      .empty {
+        margin-top: 10%;
+        margin-bottom: 10%;
+        margin-left: 40%;
+      }
+
       .item {
         &.owner {
           flex-direction: row-reverse;
