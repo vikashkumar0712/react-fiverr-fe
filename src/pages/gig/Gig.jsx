@@ -67,7 +67,7 @@ export const Gig = () => {
       );
 
       const stripePaymentUrl = response.data;
-      setTimeout(() => window.replace(stripePaymentUrl), 4000);
+      setTimeout(() => (window.location.href = stripePaymentUrl), 4000);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
