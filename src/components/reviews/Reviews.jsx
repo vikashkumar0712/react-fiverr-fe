@@ -6,6 +6,7 @@ import { Review } from "../review/Review";
 import { newRequest } from "../../utils/request";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "../loader/Loader";
+import constants from "../../common/constants";
 
 export const Reviews = ({ gigId }) => {
   const initialReviewValues = {
@@ -61,8 +62,12 @@ export const Reviews = ({ gigId }) => {
       await mutation.mutateAsync(review);
       setReview(initialReviewValues);
     } catch (error) {
-      console.error(error.response.data.error);
-      toast.error(error.response.data.error);
+      if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+        toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
     }
   };
 

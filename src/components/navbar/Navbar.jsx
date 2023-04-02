@@ -32,11 +32,15 @@ export const Navbar = () => {
     try {
       await newRequest.post("/user/logout");
       localStorage.setItem(constants.LOCAL_STORAGE.CURRENT_USER, null);
-      toast.success("User logged out successfully");
+      toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_OUT);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.error || error.message);
+      if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+        toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
     }
   };
 

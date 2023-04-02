@@ -41,6 +41,7 @@ const constants = {
           "https://link.storjshare.io/jvjjjueaip7fm5d3h67z6ibekd7a/react-fiverr-bucket%2Fassets%2Fimages%2Fsearch.png?wrap=0",
         ACCESSIBILITY:
           "https://link.storjshare.io/jumpe7qrgowye3mdcwg5gzzvq4ya/react-fiverr-bucket%2Fassets%2Fimages%2Faccessibility.png?wrap=0",
+        CHAT: "https://link.storjshare.io/s/jugwdv6ljvt7bisvawfmqwrz4e2q/react-fiverr-bucket/assets/images/chat.png?wrap=0",
         CHECK:
           "https://link.storjshare.io/jvrnyfb5xa2os4sntsogjflkutna/react-fiverr-bucket%2Fassets%2Fimages%2Fcheck.png?wrap=0",
         CLOCK:
@@ -100,9 +101,12 @@ const constants = {
     ERR_409: 409,
     ERR_410: 410,
     ERR_412: 412,
+    ERR_NETWORK: "ERR_NETWORK",
   },
 
   ERROR_MESSAGES: {
+    ORDER_CANCEL:
+      "Order canceled -- continue to shop around and checkout when you're ready.",
     NOT_AUTHORIZED: "You are not authorized",
     USER_NOT_FOUND: "User not found.",
     USER_ALREADY_EXISTS: "User already exists",
@@ -127,6 +131,7 @@ const constants = {
   },
 
   SUCCESS_MESSAGES: {
+    ORDER_SUCCESS: "Order placed! You will receive an email confirmation.",
     EMAIL_SEND: "Email send successfully",
     OK: "OK",
     REGISTERED: "Registered",
@@ -134,6 +139,8 @@ const constants = {
     PASSWORD_SET: "Password set successfully",
     PASSWORD_RESET: "Password reset successfully",
     EMAIL_UPDATED: "Email updated successfully",
+    USER_LOGGED_OUT: "User logged out successfully",
+    USER_LOGGED_IN: "User logged in successfully",
   },
 
   INS_EXCLUDE_COLS: ["created_at", "updated_at", "deleted_at"],
@@ -160,6 +167,10 @@ const constants = {
       pending: "Uploading image...",
       success: "Image uploaded successfully!",
       error: "Failed to upload image. Please try again.",
+    },
+    PAYMENT_PROCESSING: {
+      pending: "Payment link processing...",
+      success: "Redirecting to checkout page...",
     },
   },
 };

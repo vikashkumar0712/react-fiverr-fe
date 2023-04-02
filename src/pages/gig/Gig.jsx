@@ -28,6 +28,18 @@ export const Gig = () => {
   });
 
   useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query) {
+      if (query.get("success")) {
+        toast.success(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
+      }
+
+      if (query.get("canceled")) {
+        toast.error(constants.ERROR_MESSAGES.ORDER_CANCEL);
+      }
+    }
+
     if (error) {
       const newErrorMessage = error.response.data.error;
       if (newErrorMessage && newErrorMessage !== prevErrorMessage) {
@@ -45,6 +57,26 @@ export const Gig = () => {
       : 0;
 
   const starsCount = new Array(stars > 0 ? stars : 1).fill("star");
+
+  const handleCheckout = async () => {
+    try {
+      const CheckoutParams = { gigId: id };
+      const { data: response } = await toast.promise(
+        newRequest.post(`order/checkout`, CheckoutParams),
+        constants.PARAMS.PAYMENT_PROCESSING
+      );
+
+      const stripePaymentUrl = response.data;
+      setTimeout(() => window.open(stripePaymentUrl), 4000);
+    } catch (error) {
+      if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+        toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
+    }
+  };
 
   return (
     <div className="gig">
@@ -175,7 +207,7 @@ export const Gig = () => {
                 );
               })}
             </div>
-            <button>Continue</button>
+            <button onClick={handleCheckout}>Checkout</button>
           </div>
         </div>
       )}

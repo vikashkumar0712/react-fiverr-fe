@@ -6,7 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import utility from "../../utils/utility";
 
 export const Orders = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
@@ -43,23 +44,23 @@ export const Orders = () => {
     const { sellerId, buyerId } = order;
 
     try {
-      const { data: conversation } = await newRequest.get(
+      const { data: response } = await newRequest.get(
         `/conversation/${sellerId}/${buyerId}`
       );
 
-      navigate(`/message/${conversation.data._id}`);
+      navigate(`/message/${response.data._id}`);
     } catch (error) {
       if (error.response.status === constants.RESP_ERR_CODES.ERR_404) {
         const conversationData = {
           to: currentUser.isSeller ? buyerId : sellerId,
         };
 
-        const { data: conversation } = await newRequest.post(
+        const { data: response } = await newRequest.post(
           `conversation`,
           conversationData
         );
 
-        navigate(`/message/${conversation.data._id}`);
+        navigate(`/message/${response.data._id}`);
       } else {
         console.error(error);
         toast.error(error?.response?.data?.error || error.message);
@@ -88,10 +89,11 @@ export const Orders = () => {
             <thead>
               <tr>
                 <th>COVER</th>
+                <th>{currentUser?.isSeller ? "BUYER" : "SELLER"}</th>
                 <th>TITLE</th>
                 <th>PRICE</th>
-                <th>{currentUser?.isSeller ? "BUYER" : "SELLER"}</th>
-                <th>CONTACT</th>
+                <th>TIMELINE</th>
+                <th>MESSAGE</th>
               </tr>
             </thead>
             <tbody>
@@ -99,18 +101,25 @@ export const Orders = () => {
                 return (
                   <tr key={order._id}>
                     <td>
-                      <img
-                        src={order.img}
-                        alt="gig-cover-image"
-                        className="gig-image"
-                      />
+                      <Link className="link" to={`/gig/${order.gigId}`}>
+                        <img
+                          src={order.img}
+                          alt="gig-cover-image"
+                          className="gig-image"
+                        />
+                      </Link>
                     </td>
-                    <td>{order.title}</td>
-                    <td>{order.price}</td>
                     <td>{order.userDetails.username}</td>
                     <td>
+                      <Link className="link" to={`/gig/${order.gigId}`}>
+                        {order.title}
+                      </Link>
+                    </td>
+                    <td>₹ {order.price}</td>
+                    <td>{utility.timeAgo(order.createdAt)}</td>
+                    <td>
                       <img
-                        src={constants.ENUMS.ASSETS.ICONS.MESSAGE}
+                        src={constants.ENUMS.ASSETS.ICONS.CHAT}
                         alt="message"
                         className="message"
                         onClick={() => handleContact(order)}

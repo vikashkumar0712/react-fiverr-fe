@@ -77,49 +77,62 @@ export const Messages = () => {
           <h3 className="empty">No Messages Found!</h3>
         ) : (
           <table>
-            <tr>
-              <th>PROFILE</th>
-              <th>{currentUser.isSeller ? "BUYER" : "SELLER"}</th>
-              <th>LAST MASSAGE</th>
-              <th>TIMELINE</th>
-              <th>ACTION</th>
-            </tr>
-            {conversations.map((conversation) => {
-              return (
-                <tr
-                  className={
-                    (currentUser.isSeller && !conversation.readBySeller) ||
-                    (!currentUser.isSeller && !conversation.readByBuyer)
-                      ? "active"
-                      : undefined
-                  }
-                  key={conversation._id}
-                >
-                  <td><img src={conversation.userDetails.img} alt="profile-picture" /></td>
-                  <td>{conversation.userDetails.username}</td>
-                  <td>
-                    <Link to={`/message/${conversation._id}`} className="link">
-                      {conversation?.lastMessage?.substring(0, 100)}...
-                    </Link>
-                  </td>
-                  <td>{utility.timeAgo(conversation.updatedAt)}</td>
-                  <td>
-                    {(currentUser.isSeller && !conversation.readBySeller) ||
-                    (!currentUser.isSeller && !conversation.readByBuyer) ? (
-                      <button
-                        onClick={() => handleMarkAsRead(conversation._id)}
+            <thead>
+              <tr>
+                <th>PROFILE</th>
+                <th>{currentUser.isSeller ? "BUYER" : "SELLER"}</th>
+                <th>LAST MASSAGE</th>
+                <th>TIMELINE</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {conversations.map((conversation) => {
+                return (
+                  <tr
+                    className={
+                      (currentUser.isSeller && !conversation.readBySeller) ||
+                      (!currentUser.isSeller && !conversation.readByBuyer)
+                        ? "active"
+                        : undefined
+                    }
+                    key={conversation._id}
+                  >
+                    <td>
+                      <img
+                        src={conversation.userDetails.img}
+                        alt="profile-picture"
+                      />
+                    </td>
+                    <td>{conversation.userDetails.username}</td>
+                    <td>
+                      <Link
+                        to={`/message/${conversation._id}`}
+                        className="link"
+                        style={{ color: "blue" }}
                       >
-                        Mark as read
-                      </button>
-                    ) : (
-                      <button className="button-disabled">
-                        Marked as read
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+                        {conversation?.lastMessage?.substring(0, 100)}...
+                      </Link>
+                    </td>
+                    <td>{utility.timeAgo(conversation.updatedAt)}</td>
+                    <td>
+                      {(currentUser.isSeller && !conversation.readBySeller) ||
+                      (!currentUser.isSeller && !conversation.readByBuyer) ? (
+                        <button
+                          onClick={() => handleMarkAsRead(conversation._id)}
+                        >
+                          Mark as read
+                        </button>
+                      ) : (
+                        <button className="button-disabled">
+                          Marked as read
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         )}
       </div>

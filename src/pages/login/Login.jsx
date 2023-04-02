@@ -36,7 +36,7 @@ export const Login = () => {
         JSON.stringify(currentUser)
       );
 
-      toast.success("User logged in successfully");
+      toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_IN);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       console.error(error.response.data.error);
