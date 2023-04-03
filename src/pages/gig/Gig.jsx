@@ -32,11 +32,11 @@ export const Gig = () => {
     const query = new URLSearchParams(window.location.search);
     if (query) {
       if (query.get("success")) {
-        toast.success(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
+        toast(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
       }
 
       if (query.get("canceled")) {
-        toast.error(constants.ERROR_MESSAGES.ORDER_CANCEL);
+        toast.warn(constants.ERROR_MESSAGES.ORDER_CANCEL);
       }
     }
 

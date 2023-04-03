@@ -131,7 +131,7 @@ const constants = {
   },
 
   SUCCESS_MESSAGES: {
-    ORDER_SUCCESS: "Order placed! You will receive an email confirmation.",
+    ORDER_SUCCESS: "🎉 Order placed! You will receive an email confirmation.",
     EMAIL_SEND: "Email send successfully",
     OK: "OK",
     REGISTERED: "Registered",
