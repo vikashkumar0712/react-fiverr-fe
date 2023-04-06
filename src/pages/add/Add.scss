@@ -1,6 +1,9 @@
 .add {
   display: flex;
   justify-content: center;
+  span {
+    color: #ff0000;
+  }
 
   .container {
     width: 1400px;
@@ -35,6 +38,7 @@
         select,
         textarea {
           padding: 20px;
+          border: 1px solid rgb(216, 214, 214);
         }
 
         button {
@@ -45,6 +49,32 @@
           font-size: 18px;
           background-color: #1dbf73;
           cursor: pointer;
+        }
+
+        .add-features {
+          display: flex;
+          justify-content: space-between;
+
+          input {
+            width: 80%;
+          }
+        }
+
+        .added-features {
+          display: flex;
+          gap: 20px;
+
+          button {
+            height: 30px;
+            font-size: 12px;
+            font-weight: 400;
+            background: transparent;
+            color: red;
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+          }
         }
       }
     }

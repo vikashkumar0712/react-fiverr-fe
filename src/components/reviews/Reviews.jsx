@@ -84,7 +84,7 @@ export const Reviews = ({ gigId }) => {
       ) : reviews.length === 0 ? (
         <h3 className="empty">No Reviews Found!</h3>
       ) : (
-        reviews.map((review) => <Review key={review._id} review={review} />)
+        reviews.map((review) => <Review review={review} key={review._id} />)
       )}
       <div className="add-review">
         <h3>Write a review</h3>

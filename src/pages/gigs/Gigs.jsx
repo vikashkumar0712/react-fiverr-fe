@@ -125,7 +125,7 @@ export const Gigs = () => {
           ) : gigs.length === 0 ? (
             <h3 className="empty">No Gigs Found!</h3>
           ) : (
-            gigs.map((gigCard) => <GigCard item={gigCard} key={gigCard._id} />)
+            gigs.map((gig) => <GigCard gig={gig} key={gig._id} />)
           )}
         </div>
       </div>

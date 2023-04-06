@@ -3,23 +3,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import constants from "../../common/constants";
 
-export const GigCard = ({ item }) => {
-  const { userDetails: user } = item;
+export const GigCard = ({ gig }) => {
+  const { userDetails: user } = gig;
 
-  const stars = !isNaN(item.totalStars / item.starNumber)
-    ? Math.round(item.totalStars / item.starNumber)
+  const stars = !isNaN(gig.totalStars / gig.starNumber)
+    ? Math.round(gig.totalStars / gig.starNumber)
     : 0;
 
   return (
-    <Link to={`/gig/${item._id}`} className="link">
+    <Link to={`/gig/${gig._id}`} className="link">
       <div className="gig-card">
-        <img src={item.cover} alt="gig-image" />
+        <img src={gig.cover} alt="gig-image" />
         <div className="info">
           <div className="user">
             <img src={user.img} alt={user.username} />
             <span>{user.username}</span>
           </div>
-          <p>{item.desc}</p>
+          <p>{gig.desc}</p>
           <div className="star">
             <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
             <span>{stars}</span>
@@ -30,7 +30,7 @@ export const GigCard = ({ item }) => {
           <img src={constants.ENUMS.ASSETS.ICONS.HEART} alt="heart" />
           <div className="price">
             <span>STARTING AT</span>
-            <h2>₹ {item.price}</h2>
+            <h2>₹ {gig.price}</h2>
           </div>
         </div>
       </div>

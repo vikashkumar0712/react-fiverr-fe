@@ -31,8 +31,10 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       await newRequest.post("/user/logout");
+
       localStorage.setItem(constants.LOCAL_STORAGE.CURRENT_USER, null);
       toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_OUT);
+
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {

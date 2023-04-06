@@ -54,8 +54,12 @@ export const Messages = () => {
     try {
       await mutation.mutateAsync(id);
     } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.error || error.message);
+      if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+        toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
     }
   };
 

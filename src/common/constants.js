@@ -131,6 +131,9 @@ const constants = {
   },
 
   SUCCESS_MESSAGES: {
+    GIG_DELETE: "Gig deleted successfully",
+    GIG_ADD: "New Gig added successfully",
+    REVIEW_DELETE: "Review deleted successfully",
     ORDER_SUCCESS: "🎉 Order placed! You will receive an email confirmation.",
     EMAIL_SEND: "Email send successfully",
     OK: "OK",
@@ -168,9 +171,30 @@ const constants = {
       success: "Image uploaded successfully!",
       error: "Failed to upload image. Please try again.",
     },
+    COVER_UPLOADING: {
+      pending: "Uploading cover image...",
+      success: "Cover image uploaded successfully!",
+      error: "Failed to upload cover image. Please try again.",
+    },
+    IMAGES_UPLOADING: {
+      pending: "Uploading multiple images...",
+      success: "Multiple images uploaded successfully!",
+      error: "Failed to upload multiple images. Please try again.",
+    },
     PAYMENT_PROCESSING: {
       pending: "Payment link processing...",
       success: "Redirecting to checkout page...",
+    },
+  },
+
+  REDUCER: {
+    ADD_GIG: {
+      ACTION_TYPES: {
+        CHANGE_INPUT: "CHANGE_INPUT",
+        ADD_IMAGES: "ADD_IMAGES",
+        ADD_FEATURE: "ADD_FEATURE",
+        REMOVE_FEATURE: "REMOVE_FEATURE",
+      },
     },
   },
 };
