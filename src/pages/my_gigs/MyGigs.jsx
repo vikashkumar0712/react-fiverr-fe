@@ -7,15 +7,12 @@ import { newRequest } from "../../utils/request";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import constants from "../../common/constants";
 import { Loader } from "../../components/loader/Loader";
+import utility from "../../utils/utility";
 
 export const MyGigs = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
 
   const queryClient = useQueryClient();
-
-  const currentUser = JSON.parse(
-    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
-  );
 
   const {
     isLoading,
@@ -24,13 +21,7 @@ export const MyGigs = () => {
   } = useQuery({
     queryKey: ["myGigs"],
     queryFn: async () => {
-      const filters = { userId: currentUser._id, orderBy: "createdAt" };
-
-      const { data: response } = await newRequest.post(
-        "/services/gigs",
-        filters
-      );
-
+      const { data: response } = await newRequest.get("my-gigs");
       return response.data;
     },
   });
@@ -72,12 +63,10 @@ export const MyGigs = () => {
     <div className="my-gigs">
       <div className="container">
         <div className="title">
-          <h1>{currentUser.isSeller ? "Gigs" : "Orders"}</h1>
-          {currentUser.isSeller && (
-            <Link to="/add">
-              <button>Add New Gig</button>
-            </Link>
-          )}
+          <h1>Gigs</h1>
+          <Link to="/add">
+            <button>Add New Gig</button>
+          </Link>
         </div>
         <hr />
         {isLoading ? (
@@ -97,6 +86,7 @@ export const MyGigs = () => {
                 <th>TITLE</th>
                 <th>PRICE</th>
                 <th>SALES</th>
+                <th>LAST DELIVERY</th>
                 <th>ACTION</th>
               </tr>
             </thead>
@@ -107,7 +97,7 @@ export const MyGigs = () => {
                     <td>
                       <Link className="link" to={`/gig/${gig._id}`}>
                         <img
-                          className="image"
+                          className="gig-image"
                           src={gig.cover}
                           alt="gig-cover"
                         />
@@ -115,11 +105,16 @@ export const MyGigs = () => {
                     </td>
                     <td>
                       <Link className="link" to={`/gig/${gig._id}`}>
-                        {gig.title}
+                        {gig?.title?.substring(0, 60)}...
                       </Link>
                     </td>
                     <td>₹ {gig.price}</td>
-                    <td>{gig.sales}</td>
+                      <td>{gig.sales}</td>
+                    <td>
+                      {gig.lastDelivery
+                        ? utility.timeAgo(gig.lastDelivery)
+                        : "No last delivery available!"}
+                    </td>
                     <td>
                       <img
                         className="delete"

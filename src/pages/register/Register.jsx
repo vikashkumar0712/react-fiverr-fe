@@ -1,10 +1,10 @@
 import "./Register.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { upload } from "../../utils/upload";
 import { newRequest } from "../../utils/request";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import constants from "../../common/constants";
 export const Register = () => {
   // States management
@@ -20,7 +20,16 @@ export const Register = () => {
     isSeller: false,
   });
 
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleChange = {
+      ...credentials,
+      isSeller: searchParams.has("seller"),
+    };
+    setCredentials(handleChange);
+  }, []);
 
   // Methods
   const handleCredentials = (e) => {
@@ -106,7 +115,7 @@ export const Register = () => {
           <input
             name="country"
             type="text"
-            placeholder="USA"
+            placeholder="India"
             onChange={handleCredentials}
             required
           />
@@ -117,7 +126,11 @@ export const Register = () => {
           <div className="toggle">
             <label htmlFor="">Activate the seller account</label>
             <label className="switch">
-              <input type="checkbox" onChange={handleSeller} />
+              <input
+                type="checkbox"
+                checked={searchParams.has("seller") ? true : undefined}
+                onChange={handleSeller}
+              />
               <span className="slider round"></span>
             </label>
           </div>
@@ -125,7 +138,7 @@ export const Register = () => {
           <input
             name="phone"
             type="text"
-            placeholder="+1 234 567 89"
+            placeholder="+91 9876543210"
             onChange={handleCredentials}
           />
           <label htmlFor="">Description</label>

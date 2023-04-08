@@ -33,6 +33,7 @@
         overflow: hidden;
 
         .search-input {
+          width: 100%;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -44,6 +45,7 @@
           }
 
           input {
+            width: 100%;
             border: none;
             outline: none;
           }
@@ -56,6 +58,12 @@
           background-color: #1dbf73;
           color: white;
           cursor: pointer;
+
+          &:hover {
+            background-color: #22ad6c;
+            border-color: #22ad6c;
+            color: white;
+          }
         }
       }
 
@@ -63,8 +71,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        span {
-        }
+
         button {
           color: white;
           background-color: transparent;

@@ -109,7 +109,7 @@ export const Message = () => {
               return (
                 <div
                   className={
-                    message.userId === currentUser._id ? "owner item" : "item"
+                    message.userId === currentUser?._id ? "owner item" : "item"
                   }
                   key={message._id}
                 >

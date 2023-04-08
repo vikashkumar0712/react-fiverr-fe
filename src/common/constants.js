@@ -134,7 +134,7 @@ const constants = {
     GIG_DELETE: "Gig deleted successfully",
     GIG_ADD: "New Gig added successfully",
     REVIEW_DELETE: "Review deleted successfully",
-    ORDER_SUCCESS: "🎉 Order placed! You will receive an email confirmation.",
+    ORDER_SUCCESS: "🎉 Order placed! You will redirecting to Orders page.",
     EMAIL_SEND: "Email send successfully",
     OK: "OK",
     REGISTERED: "Registered",

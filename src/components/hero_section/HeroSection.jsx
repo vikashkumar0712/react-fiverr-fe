@@ -13,7 +13,7 @@ export const HeroSection = () => {
     setInput(value);
   };
 
-  const handleSearch = () => navigate(`gigs?search=${input}`);
+  const handleSearch = () => navigate(input !== "" && `gigs?search=${input}`);
 
   const handlePopular = (params) => navigate(`gigs?cat=${params}`);
 

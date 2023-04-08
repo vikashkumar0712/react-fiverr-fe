@@ -52,6 +52,7 @@ export const Review = ({ review }) => {
         </div>
       </div>
       <div className="stars">
+        <span>{review.star}</span>
         {starsCount.map((star, index) => {
           return (
             <img
@@ -61,7 +62,6 @@ export const Review = ({ review }) => {
             />
           );
         })}
-        <span>{review.star}</span>
       </div>
       <p>{review.desc}</p>
       <div className="helpful">
@@ -70,7 +70,7 @@ export const Review = ({ review }) => {
         <span>Yes</span>
         <img src={constants.ENUMS.ASSETS.ICONS.DISLIKE} alt="dislike" />
         <span>No</span>
-        {currentUser._id === user._id && (
+        {currentUser?._id === user._id && (
           <img
             src={constants.ENUMS.ASSETS.ICONS.DELETE}
             alt="delete"

@@ -3,17 +3,21 @@ import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Slider } from "infinite-react-carousel/lib";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../../components/loader/Loader";
 import { Reviews } from "../../components/reviews/Reviews";
 import utility from "../../utils/utility";
 import constants from "../../common/constants";
+
 export const Gig = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
 
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -28,16 +32,17 @@ export const Gig = () => {
   });
 
   useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query) {
-      if (query.get("success")) {
-        toast(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
-      }
+    if (searchParams.has("success")) {
+      searchParams.delete("success");
+      setSearchParams(searchParams);
+      toast(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
+      setTimeout(() => navigate(constants.ROUTES.ORDERS), 4000);
+    }
 
-      if (query.get("canceled")) {
-        toast.warn(constants.ERROR_MESSAGES.ORDER_CANCEL);
-      }
+    if (searchParams.has("canceled")) {
+      searchParams.delete("canceled");
+      setSearchParams(searchParams);
+      toast.warn(constants.ERROR_MESSAGES.ORDER_CANCEL);
     }
 
     if (error) {
@@ -60,9 +65,9 @@ export const Gig = () => {
 
   const handleCheckout = async () => {
     try {
-      const CheckoutParams = { gigId: id };
+      const checkoutParams = { gigId: id };
       const { data: response } = await toast.promise(
-        newRequest.post(`order/checkout`, CheckoutParams),
+        newRequest.post(`order/checkout`, checkoutParams),
         constants.PARAMS.PAYMENT_PROCESSING
       );
 
@@ -99,6 +104,7 @@ export const Gig = () => {
               <span>{user.username}</span>
 
               <div className="stars">
+                <span>{stars}</span>
                 {starsCount.map((star, index) => {
                   return (
                     <img
@@ -108,7 +114,6 @@ export const Gig = () => {
                     />
                   );
                 })}
-                <span>{stars}</span>
               </div>
             </div>
 
@@ -133,6 +138,7 @@ export const Gig = () => {
                 <div className="info">
                   <span>{user.username}</span>
                   <div className="stars">
+                    <span>{stars}</span>
                     {starsCount.map((star, index) => {
                       return (
                         <img
@@ -142,7 +148,6 @@ export const Gig = () => {
                         />
                       );
                     })}
-                    <span>{stars}</span>
                   </div>
                   <button>Contact Me</button>
                 </div>
@@ -165,7 +170,11 @@ export const Gig = () => {
                   </div>
                   <div className="item">
                     <span className="title">Last delivery</span>
-                    <span className="desc">1 day</span>
+                    <span className="desc">
+                      {gig.lastDelivery
+                        ? utility.timeAgo(gig.lastDelivery)
+                        : "No last delivery available!"}
+                    </span>
                   </div>
                   <div className="item">
                     <span className="title">Languages</span>
@@ -207,7 +216,7 @@ export const Gig = () => {
                 );
               })}
             </div>
-            <button onClick={handleCheckout}>Checkout</button>
+            <button onClick={handleCheckout}>Checkout ( ₹ {gig.price} )</button>
           </div>
         </div>
       )}

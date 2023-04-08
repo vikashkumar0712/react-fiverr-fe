@@ -19,10 +19,10 @@ export const GigCard = ({ gig }) => {
             <img src={user.img} alt={user.username} />
             <span>{user.username}</span>
           </div>
-          <p>{gig.desc}</p>
+          <p>{gig?.title?.substring(0, 38)}...</p>
           <div className="star">
-            <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
             <span>{stars}</span>
+            <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
           </div>
         </div>
         <hr />

@@ -5,12 +5,18 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import constants from "../../common/constants";
+import utility from "../../utils/utility";
 
 export const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
 
-  const { pathname } = useLocation();
+  const currentUser = JSON.parse(
+    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
+  );
+
+  const { pathname, search } = useLocation();
   const navigate = useNavigate();
 
   const isActive = () => {
@@ -18,13 +24,13 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
+    if (search) {
+      const queryParams = utility.urlParamsToObject(search);
+      setInput(queryParams.search);
+    }
     window.addEventListener("scroll", isActive);
     return () => window.removeEventListener("scroll", isActive);
-  }, []);
-
-  const currentUser = JSON.parse(
-    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
-  );
+  }, [search]);
 
   const handleOpen = () => setOpen(!open);
 
@@ -46,23 +52,62 @@ export const Navbar = () => {
     }
   };
 
+  const handleInput = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
+
+  const handleSearch = () => navigate(input !== "" && `gigs?search=${input}`);
+
+  const isSearchActive = pathname !== "/" ? true : active;
+
+  const clearSearch = () => setInput("");
+
   return (
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
-          <Link to={`/`} className="link">
+          <Link to={`/`} className="link" onClick={clearSearch}>
             <span className="text">fiverr</span>
           </Link>
           <span className="dot">.</span>
         </div>
+        {isSearchActive && (
+          <div className="search">
+            <div className="search-input">
+              <img
+                src={constants.ENUMS.ASSETS.ICONS.SEARCH}
+                alt="search-icon"
+              />
+              <input
+                type="text"
+                placeholder="What service are you looking for today?"
+                value={input}
+                onChange={handleInput}
+              />
+            </div>
+            <button onClick={handleSearch}>Search</button>
+          </div>
+        )}
         <div className="links">
-          <span>Fiverr Business</span>
-          <span>Explore</span>
-          <span>English</span>
-          <Link className="link" to={`login`}>
-            Sign in
+          <Link
+            className="link"
+            to={`https://business.fiverr.com/business?source=top_nav`}
+          >
+            Explore
           </Link>
-          {!currentUser?.isSeller && <span>Become a Seller</span>}
+
+          <span>English</span>
+          {!currentUser && (
+            <Link className="link" to={`login`}>
+              Sign in
+            </Link>
+          )}
+          {!currentUser && (
+            <Link className="link" to={`register?seller=true`}>
+              Become a Seller
+            </Link>
+          )}
           {!currentUser && (
             <button onClick={() => navigate("/register")}>Join</button>
           )}

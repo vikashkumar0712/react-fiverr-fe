@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import constants from "../common/constants";
 import { countries } from "../common/data";
 class Utility {
@@ -36,19 +37,7 @@ class Utility {
   }
 
   timeAgo(timestamp) {
-    const date = new Date(timestamp);
-    const diff = Date.now() - date.getTime();
-    if (diff < 60 * 60 * 1000) {
-      const minutes = Math.floor(diff / (60 * 1000));
-      if (minutes === 0) return "a few seconds ago";
-      return minutes + " minutes ago";
-    } else if (diff < 24 * 60 * 60 * 1000) {
-      const hours = Math.floor(diff / (60 * 60 * 1000));
-      return hours + " hours ago";
-    } else {
-      const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-      return days + " days ago";
-    }
+    return moment(timestamp).fromNow();
   }
 }
 

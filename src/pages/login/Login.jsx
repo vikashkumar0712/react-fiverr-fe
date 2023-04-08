@@ -48,7 +48,9 @@ export const Login = () => {
     <div className="login">
       <form onSubmit={handleSubmit}>
         <h1>Sign in</h1>
-        <label htmlFor="">Username</label>
+        <label htmlFor="">
+          Email address or username <span>*</span>
+        </label>
         <input
           name="username"
           type="text"
@@ -58,7 +60,9 @@ export const Login = () => {
           required
         />
 
-        <label htmlFor="">Password</label>
+        <label htmlFor="">
+          Password <span>*</span>
+        </label>
         <input
           name="password"
           type="password"

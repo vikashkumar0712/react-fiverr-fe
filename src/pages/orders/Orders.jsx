@@ -52,7 +52,7 @@ export const Orders = () => {
     } catch (error) {
       if (error.response.status === constants.RESP_ERR_CODES.ERR_404) {
         const conversationData = {
-          to: currentUser.isSeller ? buyerId : sellerId,
+          to: currentUser?.isSeller ? buyerId : sellerId,
         };
 
         const { data: response } = await newRequest.post(
@@ -89,10 +89,11 @@ export const Orders = () => {
             <thead>
               <tr>
                 <th>COVER</th>
-                <th>{currentUser?.isSeller ? "BUYER" : "SELLER"}</th>
                 <th>TITLE</th>
                 <th>PRICE</th>
                 <th>TIMELINE</th>
+                <th>PROFILE</th>
+                <th>{currentUser?.isSeller ? "BUYER" : "SELLER"}</th>
                 <th>MESSAGE</th>
               </tr>
             </thead>
@@ -109,14 +110,21 @@ export const Orders = () => {
                         />
                       </Link>
                     </td>
-                    <td>{order.userDetails.username}</td>
                     <td>
                       <Link className="link" to={`/gig/${order.gigId}`}>
-                        {order.title}
+                        {order?.title?.substring(0, 60)}...
                       </Link>
                     </td>
                     <td>₹ {order.price}</td>
                     <td>{utility.timeAgo(order.createdAt)}</td>
+                    <td>
+                      <img
+                        src={order.userDetails.img}
+                        alt="profile-image"
+                        className="profile-image"
+                      />
+                    </td>
+                    <td>{order.userDetails.username}</td>
                     <td>
                       <img
                         src={constants.ENUMS.ASSETS.ICONS.CHAT}
