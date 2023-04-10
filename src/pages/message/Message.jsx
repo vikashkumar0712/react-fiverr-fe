@@ -92,7 +92,7 @@ export const Message = () => {
           <Link to={`/messages`} className="link">
             MESSAGES &nbsp;
           </Link>
-          &gt;
+          &gt;&nbsp;
           {receiver?.username ? receiver?.username.toUpperCase() : receiver}
         </span>
         <div className="messages">
