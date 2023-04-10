@@ -1,15 +1,15 @@
-import "./MyGigs.scss";
+import "./MyFavorites.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import constants from "../../common/constants";
 import { Loader } from "../../components/loader/Loader";
 import utility from "../../utils/utility";
+import constants from "../../common/constants";
 
-export const MyGigs = () => {
+export const MyFavorites = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
 
   const queryClient = useQueryClient();
@@ -17,11 +17,11 @@ export const MyGigs = () => {
   const {
     isLoading,
     error,
-    data: myGigs,
+    data: favorites,
   } = useQuery({
-    queryKey: ["myGigs"],
+    queryKey: ["myFavorites"],
     queryFn: async () => {
-      const { data: response } = await newRequest.get("my-gigs");
+      const { data: response } = await newRequest.get("favorites");
       return response.data;
     },
   });
@@ -38,17 +38,17 @@ export const MyGigs = () => {
 
   const mutation = useMutation({
     mutationFn: async (id) => {
-      await newRequest.post(`/gig/${id}`);
+      await newRequest.post(`/favorite/${id}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["myGigs"]);
+      queryClient.invalidateQueries(["myFavorites"]);
     },
   });
 
-  const handleDeleteGig = async (id) => {
+  const handleRemoveFavorite = async (id) => {
     try {
       await mutation.mutateAsync(id);
-      toast.success(constants.SUCCESS_MESSAGES.GIG_DELETE);
+      toast.success(constants.SUCCESS_MESSAGES.FAV_REMOVE);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
@@ -60,12 +60,12 @@ export const MyGigs = () => {
   };
 
   return (
-    <div className="my-gigs">
+    <div className="my-favorites">
       <div className="container">
         <div className="title">
-          <h1>My Gigs</h1>
-          <Link to="/add">
-            <button>Add New Gig</button>
+          <h1>My Favorites</h1>
+          <Link to="/gigs">
+            <button>Explore More Gigs</button>
           </Link>
         </div>
         <hr />
@@ -76,8 +76,8 @@ export const MyGigs = () => {
           </div>
         ) : error ? (
           <h3 className="error">Something went wrong!</h3>
-        ) : myGigs.length === 0 ? (
-          <h3 className="empty">No Gigs Found!</h3>
+        ) : favorites.length === 0 ? (
+          <h3 className="empty">No Items Added!</h3>
         ) : (
           <table>
             <thead>
@@ -85,42 +85,36 @@ export const MyGigs = () => {
                 <th>COVER</th>
                 <th>TITLE</th>
                 <th>PRICE</th>
-                <th>SALES</th>
-                <th>LAST DELIVERY</th>
+                <th>ADDED</th>
                 <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
-              {myGigs.map((gig) => {
+              {favorites.map((favorite) => {
                 return (
-                  <tr key={gig._id}>
+                  <tr key={favorite._id}>
                     <td>
-                      <Link className="link" to={`/gig/${gig._id}`}>
+                      <Link className="link" to={`/gig/${favorite.gigId}`}>
                         <img
                           className="gig-image"
-                          src={gig.cover}
+                          src={favorite.img}
                           alt="gig-cover"
                         />
                       </Link>
                     </td>
                     <td>
-                      <Link className="link" to={`/gig/${gig._id}`}>
-                        {gig?.title?.substring(0, 60)}...
+                      <Link className="link" to={`/gig/${favorite.gigId}`}>
+                        {favorite?.title?.substring(0, 60)}...
                       </Link>
                     </td>
-                    <td>₹ {gig.price}</td>
-                    <td>{gig.sales}</td>
-                    <td>
-                      {gig.lastDelivery
-                        ? utility.timeAgo(gig.lastDelivery)
-                        : "No last delivery available!"}
-                    </td>
+                    <td>₹ {favorite.price}</td>
+                    <td>{utility.timeAgo(favorite.createdAt)}</td>
                     <td>
                       <img
                         className="delete"
                         src={constants.ENUMS.ASSETS.ICONS.DELETE}
                         alt="delete"
-                        onClick={() => handleDeleteGig(gig._id)}
+                        onClick={() => handleRemoveFavorite(favorite.gigId)}
                       />
                     </td>
                   </tr>

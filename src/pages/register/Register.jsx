@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import constants from "../../common/constants";
 export const Register = () => {
   // States management
+  const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [credentials, setCredentials] = useState({
     username: "",
@@ -54,6 +55,8 @@ export const Register = () => {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
+
       const url = file
         ? await toast.promise(upload(file), constants.PARAMS.IMAGE_UPLOADING)
         : undefined;
@@ -63,12 +66,13 @@ export const Register = () => {
         "/services/register",
         registerData
       );
-
+      setIsLoading(false);
       toast.success(response.data);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.error || error.message);
+      setIsLoading(false);
     }
   };
 
@@ -119,7 +123,9 @@ export const Register = () => {
             onChange={handleCredentials}
             required
           />
-          <button type="submit">Register</button>
+          <button type="submit">
+            {isLoading ? "Registering..." : "Register"}
+          </button>
         </div>
         <div className="right">
           <h1>I want to become a seller</h1>

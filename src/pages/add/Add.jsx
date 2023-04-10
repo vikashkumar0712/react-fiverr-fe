@@ -44,18 +44,23 @@ export const Add = () => {
 
   const handleAddFeature = (e) => {
     e.stopPropagation();
-    dispatch({
-      type: constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_FEATURE,
-      payload: feature,
-    });
 
-    setFeature("");
+    if (feature !== "") {
+      dispatch({
+        type: constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_FEATURE,
+        payload: feature,
+      });
+
+      setFeature("");
+    } else {
+      toast.error(constants.ERROR_MESSAGES.FEATURE_NOT_VALID);
+    }
   };
 
-  const handleRemoveFeature = (feature) => {
+  const handleRemoveFeature = (removeFeature) => {
     dispatch({
       type: constants.REDUCER.ADD_GIG.ACTION_TYPES.REMOVE_FEATURE,
-      payload: feature,
+      payload: removeFeature,
     });
   };
 

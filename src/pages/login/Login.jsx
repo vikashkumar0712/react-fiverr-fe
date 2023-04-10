@@ -8,10 +8,12 @@ import constants from "../../common/constants";
 
 export const Login = () => {
   // States management
+  const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
+
   const navigate = useNavigate();
 
   // Methods
@@ -24,10 +26,13 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const { data: response } = await newRequest.post(
         "/services/login",
         credentials
       );
+
+      setIsLoading(false);
 
       const currentUser = response.data.user;
 
@@ -39,6 +44,7 @@ export const Login = () => {
       toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_IN);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
+      setIsLoading(false);
       console.error(error.response.data.error);
       toast.error(error.response.data.error);
     }
@@ -71,7 +77,7 @@ export const Login = () => {
           onChange={handleCredentials}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">{isLoading ? "Signing in..." : "Sign in"}</button>
       </form>
       <ToastContainer
         position="bottom-left"

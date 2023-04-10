@@ -3,7 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import constants from "../../common/constants";
 
-export const GigCard = ({ gig }) => {
+export const GigCard = ({
+  gig,
+  isAdded = false,
+  onClickAdd,
+  onClickRemove,
+}) => {
   const { userDetails: user } = gig;
 
   const stars = !isNaN(gig.totalStars / gig.starNumber)
@@ -11,8 +16,8 @@ export const GigCard = ({ gig }) => {
     : 0;
 
   return (
-    <Link to={`/gig/${gig._id}`} className="link">
-      <div className="gig-card">
+    <div className="gig-card">
+      <Link to={`/gig/${gig._id}`} className="link">
         <img src={gig.cover} alt="gig-image" />
         <div className="info">
           <div className="user">
@@ -26,14 +31,28 @@ export const GigCard = ({ gig }) => {
           </div>
         </div>
         <hr />
-        <div className="detail">
-          <img src={constants.ENUMS.ASSETS.ICONS.HEART} alt="heart" />
-          <div className="price">
-            <span>STARTING AT</span>
-            <h2>₹ {gig.price}</h2>
-          </div>
+      </Link>
+      <div className="detail">
+        <img
+          src={constants.ENUMS.ASSETS.ICONS.HEART}
+          alt="heart"
+          className={isAdded ? "fill-red" : undefined}
+          onClick={() =>
+            isAdded
+              ? onClickRemove(gig._id)
+              : onClickAdd({
+                  gigId: gig._id,
+                  title: gig.title,
+                  img: gig.cover,
+                  price: gig.price,
+                })
+          }
+        />
+        <div className="price">
+          <span>STARTING AT</span>
+          <h2>₹ {gig.price}</h2>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

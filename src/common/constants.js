@@ -41,7 +41,7 @@ const constants = {
           "https://link.storjshare.io/jvjjjueaip7fm5d3h67z6ibekd7a/react-fiverr-bucket%2Fassets%2Fimages%2Fsearch.png?wrap=0",
         ACCESSIBILITY:
           "https://link.storjshare.io/jumpe7qrgowye3mdcwg5gzzvq4ya/react-fiverr-bucket%2Fassets%2Fimages%2Faccessibility.png?wrap=0",
-        CHAT: "https://link.storjshare.io/s/jugwdv6ljvt7bisvawfmqwrz4e2q/react-fiverr-bucket/assets/images/chat.png?wrap=0",
+        CHAT: "https://link.storjshare.io/s/julyampgujo5545f4idop6tau3fq/react-fiverr-bucket/assets/images/chat.png?wrap=0",
         CHECK:
           "https://link.storjshare.io/jvrnyfb5xa2os4sntsogjflkutna/react-fiverr-bucket%2Fassets%2Fimages%2Fcheck.png?wrap=0",
         CLOCK:
@@ -57,7 +57,7 @@ const constants = {
         GREEN_CHECK:
           "https://link.storjshare.io/jwrmmgx656bcdnnjg3exzpxvyewq/react-fiverr-bucket%2Fassets%2Fimages%2Fgreencheck.png?wrap=0",
         HEART:
-          "https://link.storjshare.io/jxblvh5rsmcmxfq5syopyr4mbcwq/react-fiverr-bucket%2Fassets%2Fimages%2Fheart.png?wrap=0",
+          "https://link.storjshare.io/s/jud7xzptbrr6fquu4y4e6q77k2jq/react-fiverr-bucket/assets/images/heart.svg?wrap=0",
         INSTAGRAM:
           "https://link.storjshare.io/jx467krgrm3arhfdz2xfl2f2jwca/react-fiverr-bucket%2Fassets%2Fimages%2Finstagram.png?wrap=0",
         LANGUAGE:
@@ -105,6 +105,7 @@ const constants = {
   },
 
   ERROR_MESSAGES: {
+    FEATURE_NOT_VALID: "Please enter a feature before add!",
     ORDER_CANCEL:
       "Order canceled -- continue to shop around and checkout when you're ready.",
     NOT_AUTHORIZED: "You are not authorized",
@@ -132,6 +133,7 @@ const constants = {
 
   SUCCESS_MESSAGES: {
     GIG_DELETE: "Gig deleted successfully",
+    FAV_REMOVE: "Gig remove from My Favorites",
     GIG_ADD: "New Gig added successfully",
     REVIEW_DELETE: "Review deleted successfully",
     ORDER_SUCCESS: "🎉 Order placed! You will redirecting to Orders page.",
@@ -156,6 +158,7 @@ const constants = {
     GIG_WITH_ID: "/gig/:id",
     ORDERS: "/orders",
     MY_GIGS: "/my-gigs",
+    MY_FAVORITES: "/my-favorites",
     ADD: "/add",
     MESSAGES: "/messages",
     MESSAGE_WITH_ID: "/message/:id",

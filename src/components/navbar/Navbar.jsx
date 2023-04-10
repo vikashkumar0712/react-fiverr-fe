@@ -1,7 +1,7 @@
 import "./Navbar.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import constants from "../../common/constants";
@@ -11,6 +11,8 @@ export const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+
+  const refClick = useRef(null);
 
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
@@ -24,15 +26,18 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
+    pathname === "/" && setInput("");
+
     if (search) {
       const queryParams = utility.urlParamsToObject(search);
       setInput(queryParams.search);
     }
+
+    document.addEventListener("click", handleClick, true);
+
     window.addEventListener("scroll", isActive);
     return () => window.removeEventListener("scroll", isActive);
-  }, [search]);
-
-  const handleOpen = () => setOpen(!open);
+  }, [search, pathname]);
 
   const handleLogout = async () => {
     try {
@@ -61,13 +66,19 @@ export const Navbar = () => {
 
   const isSearchActive = pathname !== "/" ? true : active;
 
-  const clearSearch = () => setInput("");
+  const handleClick = (e) => {
+    if (!refClick.current.contains(e.target)) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  };
 
   return (
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
-          <Link to={`/`} className="link" onClick={clearSearch}>
+          <Link to={`/`} className="link">
             <span className="text">fiverr</span>
           </Link>
           <span className="dot">.</span>
@@ -99,42 +110,47 @@ export const Navbar = () => {
 
           <span>English</span>
           {!currentUser && (
-            <Link className="link" to={`login`}>
+            <Link className="link" to={`/login`}>
               Sign in
             </Link>
           )}
           {!currentUser && (
-            <Link className="link" to={`register?seller=true`}>
+            <Link className="link" to={`/register?seller=true`}>
               Become a Seller
+            </Link>
+          )}
+          {currentUser?.isSeller && (
+            <Link className="link" to={`/my-gigs`}>
+              My Gigs
+            </Link>
+          )}
+          {currentUser?.isSeller === false && (
+            <Link className="link" to={`/my-favorites`}>
+              My Favorites
             </Link>
           )}
           {!currentUser && (
             <button onClick={() => navigate("/register")}>Join</button>
           )}
           {currentUser && (
-            <div className="user" onClick={handleOpen}>
+            <div className="user" ref={refClick}>
               <img src={currentUser?.img} alt="profile-picture" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
                   {currentUser?.isSeller && (
-                    <>
-                      <Link className="link" to={`my-gigs`}>
-                        Gigs
-                      </Link>
-                      <Link className="link" to={`add`}>
-                        Add New Gig
-                      </Link>
-                    </>
+                    <Link className="link" to={`/add`}>
+                      Add New Gig
+                    </Link>
                   )}
-                  <Link className="link" to={`orders`}>
+                  <Link className="link" to={`/orders`}>
                     Orders
                   </Link>
-                  <Link className="link" to={`messages`}>
+                  <Link className="link" to={`/messages`}>
                     Messages
                   </Link>
                   <Link className="link" onClick={handleLogout}>
-                    Logout
+                    Sign out
                   </Link>
                 </div>
               )}

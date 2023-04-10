@@ -189,10 +189,10 @@ export const Gig = () => {
           </div>
           <div className="right">
             <div className="price">
-              <h3>{gig.shortTitle}</h3>
+              <h3>{gig.title.substring(0, 40)}...</h3>
               <h2>₹ {gig.price}</h2>
             </div>
-            <p>{gig.shortDesc}</p>
+            <p>{gig.shortDesc.substring(0, 170)}...</p>
             <div className="details">
               <div className="item">
                 <img src={constants.ENUMS.ASSETS.ICONS.CLOCK} alt="clock" />

@@ -14,10 +14,17 @@ export const Gigs = () => {
   const [open, setOpen] = useState(false);
   const [orderBy, setOrderBy] = useState(constants.ENUMS.ORDER_BY.BEST_SELLING);
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
+  const [favorites, setFavorites] = useState({});
+
   const minRef = useRef();
   const maxRef = useRef();
 
   const { search } = useLocation();
+  const { search: searchTerm } = utility.urlParamsToObject(search);
+
+  const currentUser = JSON.parse(
+    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
+  );
 
   const {
     isLoading,
@@ -44,16 +51,31 @@ export const Gigs = () => {
     },
   });
 
+  const fetchFavorites = async () => {
+    const { data: response } = await newRequest.get("favorites");
+
+    const favorites = Object.fromEntries(
+      response.data.map((favorite) => [favorite.gigId, true])
+    );
+
+    setFavorites({ ...favorites });
+  };
+
   useEffect(() => {
     orderBy && refetch();
+    searchTerm && refetch();
+
+    if (currentUser?.isSeller === false) fetchFavorites();
+
     if (error) {
       const newErrorMessage = error.response.data.error;
+
       if (newErrorMessage && newErrorMessage !== prevErrorMessage) {
         toast.error(newErrorMessage);
         setPrevErrorMessage(newErrorMessage);
       }
     }
-  }, [error, prevErrorMessage, orderBy]);
+  }, [error, prevErrorMessage, orderBy, searchTerm]);
 
   const handleClick = () => setOpen(!open);
 
@@ -63,6 +85,34 @@ export const Gigs = () => {
   };
 
   const handleApply = () => refetch();
+
+  const handleFavoriteAdd = async (params) => {
+    try {
+      await newRequest.post("/favorite", params);
+      fetchFavorites();
+    } catch (error) {
+      if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+        toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
+    }
+  };
+
+  const handleFavoriteRemove = async (id) => {
+    try {
+      await newRequest.post(`/favorite/${id}`);
+      fetchFavorites();
+    } catch (error) {
+      if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+        toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+      } else {
+        console.error(error);
+        toast.error(error?.response?.data?.error || error.message);
+      }
+    }
+  };
 
   return (
     <div className="gigs">
@@ -125,7 +175,15 @@ export const Gigs = () => {
           ) : gigs.length === 0 ? (
             <h3 className="empty">No Gigs Found!</h3>
           ) : (
-            gigs.map((gig) => <GigCard gig={gig} key={gig._id} />)
+            gigs.map((gig) => (
+              <GigCard
+                gig={gig}
+                isAdded={favorites[gig._id]}
+                onClickAdd={handleFavoriteAdd}
+                onClickRemove={handleFavoriteRemove}
+                key={gig._id}
+              />
+            ))
           )}
         </div>
       </div>

@@ -8,14 +8,17 @@ import { Gigs } from "./pages/gigs/Gigs";
 import { Gig } from "./pages/gig/Gig";
 import { Orders } from "./pages/orders/Orders";
 import { MyGigs } from "./pages/my_gigs/MyGigs";
+import { MyFavorites } from "./pages/my_favorites/MyFavorites";
 import { Add } from "./pages/add/Add";
 import { Messages } from "./pages/messages/Messages";
 import { Message } from "./pages/message/Message";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Protected } from "./routes/protected/Protected";
+import { Private } from "./routes/private/Private";
+import { Public } from "./routes/public/Public";
 import constants from "./common/constants";
-import { Protected } from "./components/protected/Protected";
 
 function App() {
   const queryClient = new QueryClient();
@@ -49,11 +52,15 @@ function App() {
         },
         {
           path: constants.ROUTES.ORDERS,
-          element: <Orders />,
+          element: <Private Component={<Orders />} />,
         },
         {
           path: constants.ROUTES.MY_GIGS,
           element: <Protected Component={<MyGigs />} />,
+        },
+        {
+          path: constants.ROUTES.MY_FAVORITES,
+          element: <Protected Component={<MyFavorites />} isSeller={false} />,
         },
         {
           path: constants.ROUTES.ADD,
@@ -61,19 +68,19 @@ function App() {
         },
         {
           path: constants.ROUTES.MESSAGES,
-          element: <Messages />,
+          element: <Private Component={<Messages />} />,
         },
         {
           path: constants.ROUTES.MESSAGE_WITH_ID,
-          element: <Message />,
+          element: <Private Component={<Message />} />,
         },
         {
           path: constants.ROUTES.LOGIN,
-          element: <Login />,
+          element: <Public Component={<Login />} />,
         },
         {
           path: constants.ROUTES.REGISTER,
-          element: <Register />,
+          element: <Public Component={<Register />} />,
         },
       ],
     },
