@@ -41,7 +41,7 @@ export const Message = () => {
         const { data: response } = await newRequest.get(
           `conversation-receiver/${id}`
         );
-        setReceiver(response.data.username);
+        setReceiver(response.data);
       } catch (error) {
         console.error(error);
         toast.error(error?.response?.data?.error || error.message);
@@ -92,7 +92,7 @@ export const Message = () => {
           <Link to={`/messages`} className="link">
             MESSAGES &nbsp;
           </Link>
-          &gt; {receiver}
+          &gt; {receiver?.username.toUpperCase()}
         </span>
         <div className="messages">
           {isLoading ? (
