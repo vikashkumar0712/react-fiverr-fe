@@ -92,7 +92,8 @@ export const Message = () => {
           <Link to={`/messages`} className="link">
             MESSAGES &nbsp;
           </Link>
-          &gt; {receiver?.username.toUpperCase()}
+          &gt;
+          {receiver?.username ? receiver?.username.toUpperCase() : receiver}
         </span>
         <div className="messages">
           {isLoading ? (
