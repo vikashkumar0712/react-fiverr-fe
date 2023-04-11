@@ -13,7 +13,8 @@ export const HeroSection = () => {
     setInput(value);
   };
 
-  const handleSearch = () => navigate(input !== "" && `gigs?search=${input}`);
+  const handleSearch = () =>
+    navigate(input !== "" ? `/gigs?search=${input}` : `/gigs`);
 
   const handlePopular = (params) => navigate(`gigs?cat=${params}`);
 
@@ -41,12 +42,18 @@ export const HeroSection = () => {
           </div>
           <div className="popular">
             <span>Popular:</span>
-            <button onClick={() => handlePopular("web")}>Web</button>
-            <button onClick={() => handlePopular("wordpress")}>
-              Wordpress
+            <button onClick={() => handlePopular("web-development")}>
+              Web Development
             </button>
-            <button onClick={() => handlePopular("logo")}>Logo</button>
-            <button onClick={() => handlePopular("ai")}>AI</button>
+            <button onClick={() => handlePopular("wordpress")}>
+              WordPress
+            </button>
+            <button onClick={() => handlePopular("logo-design")}>
+              Logo Design
+            </button>
+            <button onClick={() => handlePopular("ai-services")}>
+              AI Services
+            </button>
           </div>
         </div>
         <div className="right">

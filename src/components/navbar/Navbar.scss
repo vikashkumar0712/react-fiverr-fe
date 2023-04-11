@@ -12,10 +12,12 @@
   &.active {
     background-color: white;
     color: black;
+
     button {
       background-color: white !important;
       color: #1dbf73 !important;
       border: 1px solid #1dbf73 !important;
+
       &:hover {
         background-color: #1dbf73 !important;
         border-color: #1dbf73 !important;
@@ -29,6 +31,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px 20px;
+
     .logo {
       font-size: 34px;
       font-weight: bold;
@@ -99,13 +102,21 @@
         position: relative;
 
         img {
-          width: 32px;
-          height: 32px;
+          width: 42px;
+          height: 42px;
           border-radius: 50%;
           object-fit: cover;
         }
 
+        .verified {
+          position: absolute;
+          right: -4%;
+          top: -5%;
+        }
+
         .options {
+          display: flex;
+          justify-items: center;
           position: absolute;
           top: 50px;
           right: 0;
@@ -119,6 +130,25 @@
           color: grey;
           width: 200px;
           font-weight: 300;
+
+          img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .icon {
+            border-radius: 0%;
+            object-fit: contain;
+          }
+
+          .option {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: start;
+          }
         }
       }
 

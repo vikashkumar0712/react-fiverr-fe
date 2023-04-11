@@ -47,7 +47,7 @@ export const Reviews = ({ gigId }) => {
     mutationFn: async (reviewParams) => {
       await newRequest.post("/review", reviewParams);
     },
-    onSuccess: () => queryClient.invalidateQueries(["reviews"]),
+    onSuccess: () => queryClient.invalidateQueries(["reviews"]["gig"]),
   });
 
   const handleReview = (e) => {
@@ -74,6 +74,7 @@ export const Reviews = ({ gigId }) => {
   return (
     <div className="reviews">
       <h2>Reviews</h2>
+      <hr />
       {isLoading ? (
         <div className="loading">
           <Loader />

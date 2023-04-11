@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
+import { Flag } from "../flag/Flag";
 import constants from "../../common/constants";
 import utility from "../../utils/utility";
 
@@ -33,7 +34,7 @@ export const Navbar = () => {
       setInput(queryParams.search);
     }
 
-    document.addEventListener("click", handleClick, true);
+    document.addEventListener("click", handleClick);
 
     window.addEventListener("scroll", isActive);
     return () => window.removeEventListener("scroll", isActive);
@@ -67,10 +68,10 @@ export const Navbar = () => {
   const isSearchActive = pathname !== "/" ? true : active;
 
   const handleClick = (e) => {
-    if (!refClick.current.contains(e.target)) {
-      setOpen(false);
-    } else {
+    if (refClick && refClick.current.contains(e.target)) {
       setOpen(true);
+    } else {
+      setOpen(false);
     }
   };
 
@@ -101,10 +102,7 @@ export const Navbar = () => {
           </div>
         )}
         <div className="links">
-          <Link
-            className="link"
-            to={`https://business.fiverr.com/business?source=top_nav`}
-          >
+          <Link className="link" to={`https://business.fiverr.com/business`}>
             Explore
           </Link>
 
@@ -135,22 +133,69 @@ export const Navbar = () => {
           {currentUser && (
             <div className="user" ref={refClick}>
               <img src={currentUser?.img} alt="profile-picture" />
-              <span>{currentUser?.username}</span>
+              {currentUser?.isSeller && (
+                <div className="verified">
+                  <img
+                    className="icon"
+                    src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
+                    alt="orders"
+                    style={{ width: "15px", height: "15px", margin: "-1.4%" }}
+                  />
+                </div>
+              )}
               {open && (
                 <div className="options">
+                  <span>
+                    <b>{utility.getGreet()}</b>
+                  </span>
+                  <span className="option">
+                    <img src={currentUser?.img} alt="profile-picture" />
+                    &nbsp;
+                    {utility.toTitleCase(currentUser?.username)}&nbsp;
+                    <Flag country={currentUser.country} />
+                  </span>
+
                   {currentUser?.isSeller && (
-                    <Link className="link" to={`/add`}>
-                      Add New Gig
+                    <Link className="link option" to={`/add`}>
+                      <img
+                        className="icon"
+                        src={constants.ENUMS.ASSETS.ICONS.ADD}
+                        alt="add-gig"
+                        style={{
+                          width: "17px",
+                          height: "17px",
+                          margin: "1%",
+                        }}
+                      />
+                      &nbsp; Add Gig
                     </Link>
                   )}
-                  <Link className="link" to={`/orders`}>
-                    Orders
+                  <Link className="link option" to={`/orders`}>
+                    <img
+                      className="icon"
+                      src={constants.ENUMS.ASSETS.ICONS.ORDERS}
+                      alt="orders"
+                      style={{ width: "25px", height: "25px", margin: "-1.4%" }}
+                    />
+                    &nbsp; Orders
                   </Link>
-                  <Link className="link" to={`/messages`}>
-                    Messages
+                  <Link className="link option" to={`/messages`}>
+                    <img
+                      className="icon"
+                      src={constants.ENUMS.ASSETS.ICONS.MESSAGES}
+                      alt="messages"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                    &nbsp; Messages
                   </Link>
-                  <Link className="link" onClick={handleLogout}>
-                    Sign out
+                  <Link className="link option" onClick={handleLogout}>
+                    <img
+                      className="icon"
+                      src={constants.ENUMS.ASSETS.ICONS.EXIT}
+                      alt="sign-out"
+                      style={{ width: "17px", height: "17px", margin: "1.4%" }}
+                    />
+                    &nbsp; Sign out
                   </Link>
                 </div>
               )}
@@ -162,32 +207,32 @@ export const Navbar = () => {
         <>
           <hr />
           <div className="menu">
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=graphics-design`}>
               Graphics & Design
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=video-animation`}>
               Video & Animation
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=writing-translation`}>
               Writing & Translation
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=ai-services`}>
               AI Services
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=digital-marketing`}>
               Digital Marketing
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=music-audio`}>
               Music & Audio
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=programming-tech`}>
               Programming & Tech
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to={`/gigs?cat=business`}>
               Business
             </Link>
-            <Link className="link" to="/">
-              Lifestyle
+            <Link className="link" to={`/gigs?cat=photography`}>
+              Photography
             </Link>
           </div>
           <hr />

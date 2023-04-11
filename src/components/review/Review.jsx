@@ -3,8 +3,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import utility from "../../utils/utility";
 import { newRequest } from "../../utils/request";
+import { Flag } from "../flag/Flag";
+import utility from "../../utils/utility";
 import constants from "../../common/constants";
 
 export const Review = ({ review }) => {
@@ -44,9 +45,9 @@ export const Review = ({ review }) => {
       <div className="user">
         <img className="pp" src={user.img} alt="profile-picture" />
         <div className="info">
-          <span>{user.username}</span>
+          <span>{utility.toTitleCase(user.username)}</span>
           <div className="country">
-            <img src={utility.countryToFlag(user.country)} alt="flag" />
+            <Flag country={user.country} />
             <span>{user.country}</span>
           </div>
         </div>
@@ -62,6 +63,7 @@ export const Review = ({ review }) => {
             />
           );
         })}
+        <p> | {utility.timeAgo(review.createdAt)}</p>
       </div>
       <p>{review.desc}</p>
       <div className="helpful">

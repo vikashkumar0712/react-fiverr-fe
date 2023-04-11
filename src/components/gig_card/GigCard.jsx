@@ -11,10 +11,9 @@ export const GigCard = ({
 }) => {
   const { userDetails: user } = gig;
 
-  const stars = !isNaN(gig.totalStars / gig.starNumber)
-    ? Math.round(gig.totalStars / gig.starNumber)
-    : 0;
-
+  const stars =
+    !isNaN(gig.totalStars / gig.starNumber) &&
+    Math.round(gig.totalStars / gig.starNumber);
   return (
     <div className="gig-card">
       <Link to={`/gig/${gig._id}`} className="link">
@@ -22,12 +21,22 @@ export const GigCard = ({
         <div className="info">
           <div className="user">
             <img src={user.img} alt={user.username} />
+            <div className="verified">
+              <img
+                className="icon"
+                src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
+                alt="orders"
+                style={{ width: "10px", height: "10px" }}
+              />
+            </div>
             <span>{user.username}</span>
           </div>
           <p>{gig?.title?.substring(0, 38)}...</p>
           <div className="star">
-            <span>{stars}</span>
-            <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
+            <span>{stars > 0 ? stars : "No Rating!"}</span>
+            {stars > 0 && (
+              <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
+            )}
           </div>
         </div>
         <hr />

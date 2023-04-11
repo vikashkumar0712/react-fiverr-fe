@@ -5,16 +5,20 @@ import React, { useEffect, useState } from "react";
 import { upload } from "../../utils/upload";
 import { newRequest } from "../../utils/request";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import ReactFlagsSelect from "react-flags-select";
 import constants from "../../common/constants";
+import utility from "../../utils/utility";
+
 export const Register = () => {
   // States management
+  const [selected, setSelected] = useState("IN");
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
     password: "",
-    country: "",
+    country: undefined,
     img: undefined,
     phone: undefined,
     desc: undefined,
@@ -61,13 +65,18 @@ export const Register = () => {
         ? await toast.promise(upload(file), constants.PARAMS.IMAGE_UPLOADING)
         : undefined;
 
-      const registerData = { ...credentials, img: url };
+      const registerData = {
+        ...credentials,
+        img: url,
+        country: utility.codeToCountry(selected),
+      };
       const { data: response } = await newRequest.post(
         "/services/register",
         registerData
       );
-      setIsLoading(false);
+
       toast.success(response.data);
+      setIsLoading(false);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       console.error(error);
@@ -111,19 +120,20 @@ export const Register = () => {
             onChange={handleCredentials}
             required
           />
-          <label htmlFor="">Profile Picture</label>
-          <input type="file" name="images/*" onChange={handleFile} />
           <label htmlFor="">
             Country <span>*</span>
           </label>
-          <input
-            name="country"
-            type="text"
-            placeholder="India"
-            onChange={handleCredentials}
-            required
+          <ReactFlagsSelect
+            className="menu-flags"
+            searchPlaceholder="Search countries"
+            searchable={true}
+            selected={selected}
+            onSelect={(code) => setSelected(code)}
           />
-          <button type="submit">
+          <label htmlFor="">Profile Picture</label>
+          <input type="file" name="images/*" onChange={handleFile} />
+
+          <button type="submit" className="register-button">
             {isLoading ? "Registering..." : "Register"}
           </button>
         </div>

@@ -35,45 +35,49 @@ const constants = {
       },
 
       ICONS: {
-        NO_FLAG:
-          "https://link.storjshare.io/s/jwpwwfgpbga3cjpfl3jauamu7x6a/react-fiverr-bucket/assets/images/no_flag.png?wrap=0",
         SEARCH:
-          "https://link.storjshare.io/jvjjjueaip7fm5d3h67z6ibekd7a/react-fiverr-bucket%2Fassets%2Fimages%2Fsearch.png?wrap=0",
+          "https://link.storjshare.io/jvlax7hn43we5tugyd3s6cwp6vpa/react-fiverr-bucket%2Fassets%2Fimages%2Fsearch.svg?wrap=0",
         ACCESSIBILITY:
-          "https://link.storjshare.io/jumpe7qrgowye3mdcwg5gzzvq4ya/react-fiverr-bucket%2Fassets%2Fimages%2Faccessibility.png?wrap=0",
-        CHAT: "https://link.storjshare.io/s/julyampgujo5545f4idop6tau3fq/react-fiverr-bucket/assets/images/chat.png?wrap=0",
+          "https://link.storjshare.io/jw5zm7g2gekw47aiowoimrkgryvq/react-fiverr-bucket%2Fassets%2Fimages%2Faccessibility.svg?wrap=0",
+        CHAT: "https://link.storjshare.io/jvcoubjqgcjszjqvjppoksjkqs5a/react-fiverr-bucket%2Fassets%2Fimages%2Fchat.svg?wrap=0",
         CHECK:
-          "https://link.storjshare.io/jvrnyfb5xa2os4sntsogjflkutna/react-fiverr-bucket%2Fassets%2Fimages%2Fcheck.png?wrap=0",
+          "https://link.storjshare.io/jww3ptwvdaqvetejfvel3gh5c3ia/react-fiverr-bucket%2Fassets%2Fimages%2Fcheck.svg?wrap=0",
         CLOCK:
-          "https://link.storjshare.io/ju3tzhb7ua5hxi7rxs2fnkwmlxaq/react-fiverr-bucket%2Fassets%2Fimages%2Fclock.png?wrap=0",
-        COIN: "https://link.storjshare.io/jvp3imxmbm7qywudhfinh2avvysa/react-fiverr-bucket%2Fassets%2Fimages%2Fcoin.png?wrap=0",
+          "https://link.storjshare.io/jxdattspwdzl4q5jqhhpy6l6er6a/react-fiverr-bucket%2Fassets%2Fimages%2Fclock.svg?wrap=0",
+        COIN: "https://link.storjshare.io/juryj4wsjkbdvmfkliw7rukluxka/react-fiverr-bucket%2Fassets%2Fimages%2Fcoin.svg?wrap=0",
         DELETE:
-          "https://link.storjshare.io/juzmkbahga6nr7pvltl223zh3jxq/react-fiverr-bucket%2Fassets%2Fimages%2Fdelete.png?wrap=0",
+          "https://link.storjshare.io/jvk3i5ytdcelt4xzieke3vlwefcq/react-fiverr-bucket%2Fassets%2Fimages%2Fdelete.svg?wrap=0",
         DISLIKE:
-          "https://link.storjshare.io/juqgtavbisgo26oyhp7d7qpwukfa/react-fiverr-bucket%2Fassets%2Fimages%2Fdislike.png?wrap=0",
-        DOWN: "https://link.storjshare.io/juc45lcrn5qhlz3is6vgsbkrw5ka/react-fiverr-bucket%2Fassets%2Fimages%2Fdown.png?wrap=0",
+          "https://link.storjshare.io/jupzo34zejs52ksld2hgb5eekleq/react-fiverr-bucket%2Fassets%2Fimages%2Fdislike.svg?wrap=0",
+        DOWN: "https://link.storjshare.io/jukn24f2f3txujsj5mj4jvlt737q/react-fiverr-bucket%2Fassets%2Fimages%2Fdown.svg?wrap=0",
         FACEBOOK:
           "https://link.storjshare.io/juq5taluvksrxlgyzksj5ddbbupa/react-fiverr-bucket%2Fassets%2Fimages%2Ffacebook.png?wrap=0",
         GREEN_CHECK:
-          "https://link.storjshare.io/jwrmmgx656bcdnnjg3exzpxvyewq/react-fiverr-bucket%2Fassets%2Fimages%2Fgreencheck.png?wrap=0",
+          "https://link.storjshare.io/jwpbv5xyfgbemz3ye2dkubllyyoq/react-fiverr-bucket%2Fassets%2Fimages%2Fgreencheck.svg?wrap=0",
         HEART:
           "https://link.storjshare.io/s/jud7xzptbrr6fquu4y4e6q77k2jq/react-fiverr-bucket/assets/images/heart.svg?wrap=0",
         INSTAGRAM:
-          "https://link.storjshare.io/jx467krgrm3arhfdz2xfl2f2jwca/react-fiverr-bucket%2Fassets%2Fimages%2Finstagram.png?wrap=0",
+          "https://link.storjshare.io/jwbdcpqvpgqb5dtkqoik2uadk2ma/react-fiverr-bucket%2Fassets%2Fimages%2Finstagram.svg?wrap=0",
         LANGUAGE:
-          "https://link.storjshare.io/jxfa7k3dbspmwbtvrisc7536nila/react-fiverr-bucket%2Fassets%2Fimages%2Flanguage.png?wrap=0",
-        LIKE: "https://link.storjshare.io/jv4xfw5bomtooll3q7ecn7kxrzka/react-fiverr-bucket%2Fassets%2Fimages%2Flike.png?wrap=0",
+          "https://link.storjshare.io/jvtiayvv25fhekliyxfkyvpxl56a/react-fiverr-bucket%2Fassets%2Fimages%2Flanguage.svg?wrap=0",
+        LIKE: "https://link.storjshare.io/jwraczyjmz7totuqgbjqc3gt5ugq/react-fiverr-bucket%2Fassets%2Fimages%2Flike.svg?wrap=0",
         LINKEDIN:
-          "https://link.storjshare.io/jujvcbgvh6yeos52tjosqatb6kqq/react-fiverr-bucket%2Fassets%2Fimages%2Flinkedin.png?wrap=0",
-        MESSAGE:
-          "https://link.storjshare.io/jwgxdplr36wfzzyqw225yyrdci5a/react-fiverr-bucket%2Fassets%2Fimages%2Fmessage.png?wrap=0",
+          "https://link.storjshare.io/jxdftakyqeoh3chn4nrugxzapmma/react-fiverr-bucket%2Fassets%2Fimages%2Flinkedin.svg?wrap=0",
         PINTEREST:
-          "https://link.storjshare.io/jxv6kq3kga3hvoaowxkatccwfdnq/react-fiverr-bucket%2Fassets%2Fimages%2Fpinterest.png?wrap=0",
+          "https://link.storjshare.io/jx2d45yruzhjewdvv7ufshcs7cfq/react-fiverr-bucket%2Fassets%2Fimages%2Fpinterest.svg?wrap=0",
         RECYCLE:
-          "https://link.storjshare.io/jwfyv3as7mbcdgkwtphelbefzr2q/react-fiverr-bucket%2Fassets%2Fimages%2Frecycle.png?wrap=0",
-        STAR: "https://link.storjshare.io/jukdhjt5onnatouxk3ipis6nxmqq/react-fiverr-bucket%2Fassets%2Fimages%2Fstar.png?wrap=0",
+          "https://link.storjshare.io/juxs7cfqqmjjfy7jvryrwglunrcq/react-fiverr-bucket%2Fassets%2Fimages%2Frecycle.svg?wrap=0",
+        STAR: "https://link.storjshare.io/jub63xa6vnl2pa6b7725wmpcvcvq/react-fiverr-bucket%2Fassets%2Fimages%2Fstar.svg?wrap=0",
         TWITTER:
-          "https://link.storjshare.io/jxki7eylxxaasefzdruh4dw32gvq/react-fiverr-bucket%2Fassets%2Fimages%2Ftwitter.png?wrap=0",
+          "https://link.storjshare.io/jvjd6t2spwqd3i6ko3vb7gv5xsbq/react-fiverr-bucket%2Fassets%2Fimages%2Ftwitter.svg?wrap=0",
+        EXIT: "https://link.storjshare.io/jx5ysvh46cjhliun62npo6irrfsq/react-fiverr-bucket%2Fassets%2Fimages%2Fexit.svg?wrap=0",
+        MESSAGES:
+          "https://link.storjshare.io/juo5k2xwozroc5urecavj55bdgla/react-fiverr-bucket%2Fassets%2Fimages%2Fmessages.svg?wrap=0",
+        ORDERS:
+          "https://link.storjshare.io/jxzq32errspqsjdyzqbvbfayvhya/react-fiverr-bucket%2Fassets%2Fimages%2Forders.svg?wrap=0",
+        ADD: "https://link.storjshare.io/juycz6p6dxemo6465pvpkzmxykyq/react-fiverr-bucket%2Fassets%2Fimages%2Fadd.svg?wrap=0",
+        VERIFIED:
+          "https://link.storjshare.io/juw5jdgzc3ex7d4j2axwdroor35q/react-fiverr-bucket%2Fassets%2Fimages%2Fverified.svg?wrap=0",
       },
 
       TRUSTED_BY: {

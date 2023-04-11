@@ -44,16 +44,19 @@ export const Add = () => {
 
   const handleAddFeature = (e) => {
     e.stopPropagation();
+    if (state.features.length <= 4) {
+      if (feature !== "") {
+        dispatch({
+          type: constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_FEATURE,
+          payload: feature,
+        });
 
-    if (feature !== "") {
-      dispatch({
-        type: constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_FEATURE,
-        payload: feature,
-      });
-
-      setFeature("");
+        setFeature("");
+      } else {
+        toast.error(constants.ERROR_MESSAGES.FEATURE_NOT_VALID);
+      }
     } else {
-      toast.error(constants.ERROR_MESSAGES.FEATURE_NOT_VALID);
+      toast.error("LIMIT REACHED");
     }
   };
 
@@ -137,10 +140,24 @@ export const Add = () => {
               Category <span>*</span>
             </label>
             <select name="cat" onChange={handleChange}>
-              <option value="design">Design</option>
-              <option value="web">Web Development</option>
-              <option value="animation">Animation</option>
-              <option value="music">Music</option>
+              <option value="ai-artists">AI Artists</option>
+              <option value="ai-services">AI Services</option>
+              <option value="business">Business</option>
+              <option value="digital-marketing">Digital Marketing</option>
+              <option value="graphics-design">Graphics & Design</option>
+              <option value="illustration">Illustration</option>
+              <option value="logo-design">Logo Design</option>
+              <option value="music-audio">Music & Audio</option>
+              <option value="photography">Photography</option>
+              <option value="programming-tech">Programming & Tech</option>
+              <option value="seo">SEO</option>
+              <option value="social-media">Social Media</option>
+              <option value="video-animation">Video & Animation</option>
+              <option value="video-explainer">Video Explainer</option>
+              <option value="voice-over">Voice Over</option>
+              <option value="web-development">Web Development</option>
+              <option value="wordpress">WordPress</option>
+              <option value="writing-translation">Writing & Translation</option>
             </select>
 
             <label htmlFor="">
@@ -176,7 +193,7 @@ export const Add = () => {
               required
             ></textarea>
 
-            <button type="submit">Create</button>
+            <button type="submit">ADD</button>
           </div>
 
           <div className="details">
@@ -228,7 +245,7 @@ export const Add = () => {
             />
 
             <label htmlFor="">
-              Add Features <span>*</span>
+              Add Features <span>*</span> (min 1 - max 5)
             </label>
             <div className="add-features">
               <input

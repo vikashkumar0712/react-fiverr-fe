@@ -32,8 +32,6 @@ export const Login = () => {
         credentials
       );
 
-      setIsLoading(false);
-
       const currentUser = response.data.user;
 
       localStorage.setItem(
@@ -42,6 +40,7 @@ export const Login = () => {
       );
 
       toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_IN);
+      setIsLoading(false);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       setIsLoading(false);

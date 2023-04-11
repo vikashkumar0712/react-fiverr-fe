@@ -15,6 +15,10 @@ export const Gig = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
 
+  const currentUser = JSON.parse(
+    localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
+  );
+
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -61,7 +65,7 @@ export const Gig = () => {
       ? Math.round(gig.totalStars / gig.starNumber)
       : 0;
 
-  const starsCount = new Array(stars > 0 ? stars : 1).fill("star");
+  const starsCount = new Array(stars).fill("star");
 
   const handleCheckout = async () => {
     try {
@@ -83,6 +87,45 @@ export const Gig = () => {
     }
   };
 
+  const handleContact = async () => {
+    const sellerId = user._id;
+    const buyerId = currentUser
+      ? currentUser?._id
+      : toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+
+    if (currentUser.isSeller !== true && buyerId !== sellerId) {
+      try {
+        const { data: response } = await newRequest.get(
+          `/conversation/${sellerId}/${buyerId}`
+        );
+
+        navigate(`/message/${response.data._id}`);
+      } catch (error) {
+        if (error.response.status === constants.RESP_ERR_CODES.ERR_404) {
+          const conversationData = {
+            to: currentUser?.isSeller ? buyerId : sellerId,
+          };
+
+          const { data: response } = await newRequest.post(
+            `/conversation`,
+            conversationData
+          );
+
+          navigate(`/message/${response.data._id}`);
+        } else {
+          if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
+            toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+          } else {
+            console.error(error);
+            toast.error(error?.response?.data?.error || error.message);
+          }
+        }
+      }
+    } else {
+      toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
+    }
+  };
+
   return (
     <div className="gig">
       {isLoading ? (
@@ -96,15 +139,23 @@ export const Gig = () => {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              Fiverr &gt; Graphics & Design &gt;
+              Fiverr &gt; {utility.toCategoryCase(gig.cat)}
             </span>
             <h1>{gig.title}</h1>
             <div className="user">
               <img className="pp" src={user.img} alt="profile-picture" />
+              <div className="verified">
+                  <img
+                    className="icon"
+                    src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
+                    alt="orders"
+                    style={{ width: "12px", height: "12px" }}
+                  />
+                </div>
               <span>{user.username}</span>
 
               <div className="stars">
-                <span>{stars}</span>
+                <span>{stars > 0 ? stars : "No Rating!"}</span>
                 {starsCount.map((star, index) => {
                   return (
                     <img
@@ -135,10 +186,18 @@ export const Gig = () => {
               <h2>About The Seller</h2>
               <div className="user">
                 <img src={user.img} alt="profile-picture" />
+                <div className="verified">
+                  <img
+                    className="icon"
+                    src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
+                    alt="orders"
+                    style={{ width: "25px", height: "25px" }}
+                  />
+                </div>
                 <div className="info">
                   <span>{user.username}</span>
                   <div className="stars">
-                    <span>{stars}</span>
+                    <span>{stars > 0 ? stars : "No Rating!"}</span>
                     {starsCount.map((star, index) => {
                       return (
                         <img
@@ -149,7 +208,7 @@ export const Gig = () => {
                       );
                     })}
                   </div>
-                  <button>Contact Me</button>
+                  <button onClick={handleContact}>Contact Me</button>
                 </div>
               </div>
               <div className="box">
@@ -189,10 +248,10 @@ export const Gig = () => {
           </div>
           <div className="right">
             <div className="price">
-              <h3>{gig.title.substring(0, 40)}...</h3>
+              <h3>{gig.shortTitle.substring(0, 33)}...</h3>
               <h2>₹ {gig.price}</h2>
             </div>
-            <p>{gig.shortDesc.substring(0, 170)}...</p>
+            <p>{gig.shortDesc.substring(0, 168)}...</p>
             <div className="details">
               <div className="item">
                 <img src={constants.ENUMS.ASSETS.ICONS.CLOCK} alt="clock" />

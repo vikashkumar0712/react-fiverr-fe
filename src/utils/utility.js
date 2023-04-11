@@ -1,6 +1,6 @@
 import moment from "moment/moment";
-import constants from "../common/constants";
-import { countries } from "../common/data";
+import { countries, categoryDescriptions } from "../common/data";
+
 class Utility {
   urlParamsToObject(params) {
     const urlParams = new URLSearchParams(params);
@@ -26,18 +26,52 @@ class Utility {
     return formattedDate;
   }
 
-  countryToFlag(params) {
-    const country = params.toLowerCase();
-    for (let code in countries) {
-      if (countries[code] === country) {
-        return `https://flagcdn.com/h60/${code}.png`;
-      }
-    }
-    return constants.ENUMS.ASSETS.ICONS.NO_FLAG;
-  }
-
   timeAgo(timestamp) {
     return moment(timestamp).fromNow();
+  }
+
+  getGreet() {
+    const timeNow = new Date().getHours();
+    const greeting =
+      timeNow >= 5 && timeNow < 12
+        ? "Good Morning!"
+        : timeNow >= 12 && timeNow < 18
+        ? "Good Afternoon!"
+        : "Good evening!";
+    return greeting;
+  }
+
+  toTitleCase(str) {
+    return str.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    );
+  }
+
+  toCategoryCase(str) {
+    return str
+      ? str
+          .split("-")
+          .map((word) => word.toUpperCase())
+          .join(" & ")
+      : "ALL CATEGORIES";
+  }
+
+  catToDesc(str) {
+    return str ? categoryDescriptions[str] : categoryDescriptions["all"];
+  }
+
+  countryToCode(country) {
+    const code = Object.keys(countries).find(
+      (key) => countries[key] === country
+    );
+
+    return this.toTitleCase(code);
+  }
+
+  codeToCountry(code) {
+    const country = countries[code];
+    return country;
   }
 }
 

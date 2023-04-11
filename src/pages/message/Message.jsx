@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
+import utility from "../../utils/utility";
 
 export const Message = () => {
   const { id } = useParams();
@@ -93,7 +94,9 @@ export const Message = () => {
             MESSAGES &nbsp;
           </Link>
           &gt;&nbsp;
-          {receiver?.username ? receiver?.username.toUpperCase() : receiver}
+          {receiver?.username
+            ? utility.toTitleCase(receiver?.username)
+            : receiver}
         </span>
         <div className="messages">
           {isLoading ? (

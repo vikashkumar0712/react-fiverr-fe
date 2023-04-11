@@ -34,9 +34,16 @@
     gap: 20px;
 
     .user {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 10px;
+
+      .verified {
+        position: absolute;
+        right: 90%;
+        top: -17%;
+      }
 
       img {
         width: 26px;

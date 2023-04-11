@@ -37,9 +37,16 @@
       }
 
       .user {
+        position: relative;
         display: flex;
         align-items: center;
         gap: 10px;
+
+        .verified {
+          position: absolute;
+          right: 96%;
+          top: -17%;
+        }
 
         .pp {
           width: 32px;
@@ -88,9 +95,16 @@
         gap: 20px;
 
         .user {
+          position: relative;
           display: flex;
           align-items: center;
           gap: 20px;
+
+          .verified {
+            position: absolute;
+            right: 89%;
+            top: 0;
+          }
 
           img {
             width: 100px;
@@ -126,6 +140,7 @@
               border-radius: 5px;
               border: 1px solid gray;
               padding: 10px;
+              cursor: pointer;
             }
           }
         }

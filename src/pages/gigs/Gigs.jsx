@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { GigCard } from "../../components/gig_card/GigCard";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Loader } from "../../components/loader/Loader";
 import constants from "../../common/constants";
 import utility from "../../utils/utility";
@@ -20,7 +20,8 @@ export const Gigs = () => {
   const maxRef = useRef();
 
   const { search } = useLocation();
-  const { search: searchTerm } = utility.urlParamsToObject(search);
+  const { search: searchTerm, cat: categoryTerm } =
+    utility.urlParamsToObject(search);
 
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
@@ -64,6 +65,7 @@ export const Gigs = () => {
   useEffect(() => {
     orderBy && refetch();
     searchTerm && refetch();
+    categoryTerm && refetch();
 
     if (currentUser?.isSeller === false) fetchFavorites();
 
@@ -75,7 +77,7 @@ export const Gigs = () => {
         setPrevErrorMessage(newErrorMessage);
       }
     }
-  }, [error, prevErrorMessage, orderBy, searchTerm]);
+  }, [error, prevErrorMessage, orderBy, searchTerm, categoryTerm]);
 
   const handleClick = () => setOpen(!open);
 
@@ -117,12 +119,14 @@ export const Gigs = () => {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">FIVERR &gt; GRAPHICS & DESIGN</span>
-        <h1>AI Artists</h1>
-        <p>
-          Explore the boundaries of art and technology with Fiverr&apos;s AI
-          artists
-        </p>
+        <span className="breadcrumbs">
+          <Link className="link" to={`/`}>
+            FIVERR&nbsp;
+          </Link>
+          &gt;&nbsp;{utility.toCategoryCase(categoryTerm)}
+        </span>
+        <h1>{utility.toCategoryCase(categoryTerm)}</h1>
+        <p>{utility.catToDesc(categoryTerm)}</p>
         <div className="menu">
           <div className="left">
             <span>Budget</span>

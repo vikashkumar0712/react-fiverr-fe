@@ -1,14 +1,19 @@
 import "./FeaturesBusiness.scss";
 import React from "react";
 import constants from "../../common/constants";
+import { Link } from "react-router-dom";
 
 export const FeaturesBusiness = () => {
   return (
     <div className="features-business">
       <div className="container">
         <div className="left">
-          <h1>fiverr <i>business</i>.</h1>
-          <h1>A business solution designed for <i>teams</i></h1>
+          <h1>
+            fiverr <i>business</i>.
+          </h1>
+          <h1>
+            A business solution designed for <i>teams</i>
+          </h1>
           <p>
             Upgrade to a curated experience packed with tools and benefits,
             dedicated to businesses
@@ -25,7 +30,11 @@ export const FeaturesBusiness = () => {
             <img src={constants.ENUMS.ASSETS.ICONS.CHECK} alt="check-icon" />
             Manage teamwork and boost productivity with one powerful workspace
           </div>
-          <button>Explore Fiverr Business</button>
+          <div className="explore-button">
+            <Link className="link" to={`https://business.fiverr.com/business`}>
+              Explore Fiverr Business
+            </Link>
+          </div>
         </div>
         <div className="right">
           <img
