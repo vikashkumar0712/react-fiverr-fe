@@ -51,7 +51,7 @@ const constants = {
           "https://link.storjshare.io/jupzo34zejs52ksld2hgb5eekleq/react-fiverr-bucket%2Fassets%2Fimages%2Fdislike.svg?wrap=0",
         DOWN: "https://link.storjshare.io/jukn24f2f3txujsj5mj4jvlt737q/react-fiverr-bucket%2Fassets%2Fimages%2Fdown.svg?wrap=0",
         FACEBOOK:
-          "https://link.storjshare.io/juq5taluvksrxlgyzksj5ddbbupa/react-fiverr-bucket%2Fassets%2Fimages%2Ffacebook.png?wrap=0",
+          "https://link.storjshare.io/jvlu4y5qwmeb2pfek3f62b3mqabq/react-fiverr-bucket%2Fassets%2Fimages%2Ffacebook.svg?wrap=0",
         GREEN_CHECK:
           "https://link.storjshare.io/jwpbv5xyfgbemz3ye2dkubllyyoq/react-fiverr-bucket%2Fassets%2Fimages%2Fgreencheck.svg?wrap=0",
         HEART:
