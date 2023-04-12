@@ -21,25 +21,31 @@ export const FeaturesPromo = () => {
             Quality work done quickly
           </div>
           <p>
-          Find the right freelancer to begin working on your project within minutes.
+            Find the right freelancer to begin working on your project within
+            minutes.
           </p>
           <div className="title">
             <img src={constants.ENUMS.ASSETS.ICONS.CHECK} alt="check-icon" />
             Protected payments, every time
           </div>
           <p>
-          Always know what you&apos;ll pay upfront. Your payment isn&apos;t released until you approve the work.
+            Always know what you&apos;ll pay upfront. Your payment isn&apos;t
+            released until you approve the work.
           </p>
           <div className="title">
             <img src={constants.ENUMS.ASSETS.ICONS.CHECK} alt="check-icon" />
             24/7 support
           </div>
           <p>
-          Questions? Our round-the-clock support team is available to help anytime, anywhere.
+            Questions? Our round-the-clock support team is available to help
+            anytime, anywhere.
           </p>
         </div>
         <div className="right">
-          <video src={constants.ENUMS.ASSETS.VIDEOS.PROMO} controls></video>
+          <video
+            src={`${constants.ENUMS.ASSETS.VIDEOS.PROMO}#t=1`}
+            controls
+          ></video>
         </div>
       </div>
     </div>

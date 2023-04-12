@@ -34,10 +34,10 @@ class Utility {
     const timeNow = new Date().getHours();
     const greeting =
       timeNow >= 5 && timeNow < 12
-        ? "Good Morning!"
+        ? "Good Morning "
         : timeNow >= 12 && timeNow < 18
-        ? "Good Afternoon!"
-        : "Good evening!";
+        ? "Good Afternoon "
+        : "Good evening ";
     return greeting;
   }
 

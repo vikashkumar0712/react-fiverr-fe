@@ -10,6 +10,7 @@ import { Loader } from "../../components/loader/Loader";
 import { Reviews } from "../../components/reviews/Reviews";
 import utility from "../../utils/utility";
 import constants from "../../common/constants";
+import { MagicButton } from "../../components/magic_button/MagicButton";
 
 export const Gig = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -145,13 +146,13 @@ export const Gig = () => {
             <div className="user">
               <img className="pp" src={user.img} alt="profile-picture" />
               <div className="verified">
-                  <img
-                    className="icon"
-                    src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
-                    alt="orders"
-                    style={{ width: "12px", height: "12px" }}
-                  />
-                </div>
+                <img
+                  className="icon"
+                  src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
+                  alt="orders"
+                  style={{ width: "12px", height: "12px" }}
+                />
+              </div>
               <span>{user.username}</span>
 
               <div className="stars">
@@ -275,7 +276,10 @@ export const Gig = () => {
                 );
               })}
             </div>
-            <button onClick={handleCheckout}>Checkout ( ₹ {gig.price} )</button>
+            <MagicButton
+              text={`Checkout ( ₹ ${gig.price} )`}
+              onClick={handleCheckout}
+            />
           </div>
         </div>
       )}

@@ -121,9 +121,14 @@ export const Gigs = () => {
       <div className="container">
         <span className="breadcrumbs">
           <Link className="link" to={`/`}>
-            FIVERR&nbsp;
+            <img
+              className="icon"
+              src={constants.ENUMS.ASSETS.ICONS.HOME}
+              alt="home"
+              style={{ width: "20px", height: "20px" }}
+            />
           </Link>
-          &gt;&nbsp;{utility.toCategoryCase(categoryTerm)}
+          &nbsp;&nbsp;&#47;&nbsp;&nbsp;{utility.toCategoryCase(categoryTerm)}
         </span>
         <h1>{utility.toCategoryCase(categoryTerm)}</h1>
         <p>{utility.catToDesc(categoryTerm)}</p>

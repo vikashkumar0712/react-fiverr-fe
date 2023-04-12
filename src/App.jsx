@@ -19,6 +19,7 @@ import { Protected } from "./routes/protected/Protected";
 import { Private } from "./routes/private/Private";
 import { Public } from "./routes/public/Public";
 import constants from "./common/constants";
+import { NotFound } from "./pages/not_found/NotFound";
 
 function App() {
   const queryClient = new QueryClient();
@@ -81,6 +82,10 @@ function App() {
         {
           path: constants.ROUTES.REGISTER,
           element: <Public Component={<Register />} />,
+        },
+        {
+          path: constants.ROUTES.NOT_FOUND,
+          element: <NotFound />,
         },
       ],
     },

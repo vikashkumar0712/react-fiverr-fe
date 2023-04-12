@@ -145,8 +145,13 @@ export const Navbar = () => {
               )}
               {open && (
                 <div className="options">
-                  <span>
+                  <span className="option">
                     <b>{utility.getGreet()}</b>
+                    <div className="c-smileyButton">
+                      <div className="c-smileyButton__hoverListener"></div>
+                      <div className="c-smileyButton__hoverListener"></div>
+                      <span className="c-smileyButton__face"></span>
+                    </div>
                   </span>
                   <span className="option">
                     <img src={currentUser?.img} alt="profile-picture" />

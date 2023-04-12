@@ -11,9 +11,12 @@ export const GigCard = ({
 }) => {
   const { userDetails: user } = gig;
 
-  const stars =
-    !isNaN(gig.totalStars / gig.starNumber) &&
-    Math.round(gig.totalStars / gig.starNumber);
+  const stars = !isNaN(gig.totalStars / gig.starNumber)
+    ? Math.round(gig.totalStars / gig.starNumber)
+    : 0;
+
+  const starsCount = new Array(stars).fill("star");
+
   return (
     <div className="gig-card">
       <Link to={`/gig/${gig._id}`} className="link">
@@ -34,9 +37,15 @@ export const GigCard = ({
           <p>{gig?.title?.substring(0, 38)}...</p>
           <div className="star">
             <span>{stars > 0 ? stars : "No Rating!"}</span>
-            {stars > 0 && (
-              <img src={constants.ENUMS.ASSETS.ICONS.STAR} alt="star" />
-            )}
+            {starsCount.map((star, index) => {
+              return (
+                <img
+                  key={index}
+                  src={constants.ENUMS.ASSETS.ICONS.STAR}
+                  alt={`${star}-${index + 1}`}
+                />
+              );
+            })}
           </div>
         </div>
         <hr />

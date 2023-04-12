@@ -78,6 +78,7 @@ const constants = {
         ADD: "https://link.storjshare.io/juycz6p6dxemo6465pvpkzmxykyq/react-fiverr-bucket%2Fassets%2Fimages%2Fadd.svg?wrap=0",
         VERIFIED:
           "https://link.storjshare.io/juw5jdgzc3ex7d4j2axwdroor35q/react-fiverr-bucket%2Fassets%2Fimages%2Fverified.svg?wrap=0",
+        HOME: "https://link.storjshare.io/jxwamyak3mnm3iwk47w4lqzzp5ha/react-fiverr-bucket%2Fassets%2Fimages%2Fhome.svg?wrap=0",
       },
 
       TRUSTED_BY: {
@@ -155,6 +156,7 @@ const constants = {
   INS_EXCLUDE_COLS: ["created_at", "updated_at", "deleted_at"],
 
   ROUTES: {
+    NOT_FOUND: "*",
     HOME: "/",
     LOGIN: "/login",
     REGISTER: "/register",

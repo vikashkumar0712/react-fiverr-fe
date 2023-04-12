@@ -91,12 +91,21 @@ export const Message = () => {
       <div className="container">
         <span className="breadcrumbs">
           <Link to={`/messages`} className="link">
-            MESSAGES &nbsp;
+            <img
+              className="icon"
+              src={constants.ENUMS.ASSETS.ICONS.MESSAGES}
+              alt="messages"
+              style={{ width: "20px", height: "20px" }}
+            />
           </Link>
-          &gt;&nbsp;
-          {receiver?.username
-            ? utility.toTitleCase(receiver?.username)
-            : receiver}
+          &nbsp;&nbsp;&#47;&nbsp;&nbsp;
+          <img src={receiver?.img} alt="profile-picture" />
+          &nbsp; &nbsp;
+          <h3>
+            {receiver?.username
+              ? utility.toTitleCase(receiver?.username)
+              : receiver}
+          </h3>
         </span>
         <div className="messages">
           {isLoading ? (
@@ -134,8 +143,12 @@ export const Message = () => {
             rows="10"
             value={message.desc}
             onChange={handleMessage}
+            required
           ></textarea>
-          <button type="submit">Send</button>
+          <button className="bt" type="submit">
+            <span className="msg"></span>
+            SEND
+          </button>
         </form>
       </div>
       <ToastContainer

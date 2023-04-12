@@ -256,7 +256,7 @@ export const Add = () => {
                 onChange={handleFeature}
               />
               <button type="button" onClick={handleAddFeature}>
-                add
+                &nbsp;&nbsp;+&nbsp;&nbsp;
               </button>
             </div>
             {state?.features?.length === 0 ? (
