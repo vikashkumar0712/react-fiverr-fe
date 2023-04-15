@@ -1,6 +1,7 @@
 const constants = {
   ENUMS: {
     BE_BASE_URL: "http://localhost:8002/",
+    IP_INFO_URL: "https://ipinfo.io/json?token=",
 
     SORT: {
       ASC: "asc",
@@ -110,6 +111,8 @@ const constants = {
   },
 
   ERROR_MESSAGES: {
+    NO_GENDER_SELECTED: "Please select your gender!",
+    FEATURE_ADD_LIMIT_REACHED: "You can only add maximum 5 features!",
     FEATURE_NOT_VALID: "Please enter a feature before add!",
     ORDER_CANCEL:
       "Order canceled -- continue to shop around and checkout when you're ready.",
@@ -157,17 +160,22 @@ const constants = {
 
   ROUTES: {
     NOT_FOUND: "*",
+    EXPLORE: "https://business.fiverr.com/business/",
     HOME: "/",
     LOGIN: "/login",
     REGISTER: "/register",
     GIGS: "/gigs",
-    GIG_WITH_ID: "/gig/:id",
     ORDERS: "/orders",
     MY_GIGS: "/my-gigs",
     MY_FAVORITES: "/my-favorites",
     ADD: "/add",
     MESSAGES: "/messages",
+    GIG: "/gig/",
+    GIG_WITH_ID: "/gig/:id",
+    MESSAGE: "/message/",
     MESSAGE_WITH_ID: "/message/:id",
+    ACCOUNT: "/account/",
+    ACCOUNT_WITH_ID: "/account/:id",
   },
 
   LOCAL_STORAGE: {
@@ -196,7 +204,7 @@ const constants = {
     },
   },
 
-  REDUCER: {
+  REDUCERS: {
     ADD_GIG: {
       ACTION_TYPES: {
         CHANGE_INPUT: "CHANGE_INPUT",
@@ -205,6 +213,27 @@ const constants = {
         REMOVE_FEATURE: "REMOVE_FEATURE",
       },
     },
+  },
+
+  CATEGORIES: {
+    AI_ARTISTS: "ai-artists",
+    AI_SERVICES: "ai-services",
+    BUSINESS: "business",
+    DIGITAL_MARKETING: "digital-marketing",
+    GRAPHICS_DESIGN: "graphics-design",
+    ILLUSTRATION: "illustration",
+    LOGO_DESIGN: "logo-design",
+    MUSIC_AUDIO: "music-audio",
+    PHOTOGRAPHY: "photography",
+    PROGRAMMING_TECH: "programming-tech",
+    SEO: "seo",
+    SOCIAL_MEDIA: "social-media",
+    VIDEO_ANIMATION: "video-animation",
+    VIDEO_EXPLAINER: "video-explainer",
+    VOICE_OVER: "voice-over",
+    WEB_DEVELOPMENT: "web-development",
+    WORDPRESS: "wordpress",
+    WRITING_TRANSLATION: "writing-translation",
   },
 };
 

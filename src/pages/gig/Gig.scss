@@ -30,10 +30,18 @@
       gap: 20px;
 
       .breadcrumbs {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        text-align: center;
         font-weight: 300;
-        text-transform: uppercase;
-        font-size: 13px;
+        font-style: 13px;
         color: #555;
+
+        .icon {
+          border-radius: 0%;
+          object-fit: contain;
+        }
       }
 
       .user {

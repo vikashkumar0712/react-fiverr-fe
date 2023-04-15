@@ -14,9 +14,14 @@ export const HeroSection = () => {
   };
 
   const handleSearch = () =>
-    navigate(input !== "" ? `/gigs?search=${input}` : `/gigs`);
+    navigate(
+      input !== ""
+        ? `${constants.ROUTES.GIGS}?search=${input}`
+        : constants.ROUTES.GIGS
+    );
 
-  const handlePopular = (params) => navigate(`gigs?cat=${params}`);
+  const handlePopular = (category) =>
+    navigate(`${constants.ROUTES.GIGS}?cat=${category}`);
 
   return (
     <div className="hero-section">
@@ -42,16 +47,26 @@ export const HeroSection = () => {
           </div>
           <div className="popular">
             <span>Popular:</span>
-            <button onClick={() => handlePopular("web-development")}>
+            <button
+              onClick={() =>
+                handlePopular(constants.CATEGORIES.WEB_DEVELOPMENT)
+              }
+            >
               Web Development
             </button>
-            <button onClick={() => handlePopular("wordpress")}>
+            <button
+              onClick={() => handlePopular(constants.CATEGORIES.WORDPRESS)}
+            >
               WordPress
             </button>
-            <button onClick={() => handlePopular("logo-design")}>
+            <button
+              onClick={() => handlePopular(constants.CATEGORIES.LOGO_DESIGN)}
+            >
               Logo Design
             </button>
-            <button onClick={() => handlePopular("ai-services")}>
+            <button
+              onClick={() => handlePopular(constants.CATEGORIES.AI_SERVICES)}
+            >
               AI Services
             </button>
           </div>

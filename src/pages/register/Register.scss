@@ -54,19 +54,28 @@
         }
       }
 
-      .register-button {
-        border: none;
-        padding: 20px;
-        color: white;
-        font-weight: 500;
-        font-size: 18px;
-        background-color: #1dbf73;
-        cursor: pointer;
+      $color_1: white;
+      $font-family_1: inherit;
 
+      .io-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $font-family_1;
+        font-weight: 500;
+        font-size: 16px;
+        padding: 1.5em 1.4em 1.5em 1.1em;
+        color: $color_1;
+        background: #1dbf73;
+        border: none;
+        box-shadow: 0 0.7em 1.5em -0.5em #28b34f98;
+        letter-spacing: 0.05em;
+        border-radius: 0.5em;
         &:hover {
-          background-color: #22ad6c;
-          border-color: #22ad6c;
-          color: white;
+          box-shadow: 0 0.5em 1.5em -0.5em #1dbf73;
+        }
+        &:active {
+          box-shadow: 0 0.3em 1em -0.5em #1dbf73;
         }
       }
 

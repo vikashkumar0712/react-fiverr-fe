@@ -4,30 +4,49 @@ import { ToastContainer, toast } from "react-toastify";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
-import { Flag } from "../flag/Flag";
+import { Menu } from "../menu/Menu";
+import { Dialog } from "../dialog/Dialog";
 import constants from "../../common/constants";
 import utility from "../../utils/utility";
 
 export const Navbar = () => {
-  const [active, setActive] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
-
-  const refClick = useRef(null);
-
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
   );
 
-  const { pathname, search } = useLocation();
+  const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const refClick = useRef(null);
+
   const navigate = useNavigate();
+  const { pathname, search } = useLocation();
+
+  const isAllowed =
+    pathname !== constants.ROUTES.LOGIN &&
+    pathname !== constants.ROUTES.REGISTER;
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   };
 
+  const handleInput = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
+
+  const handleSearch = () =>
+    navigate(input !== "" && `${constants.ROUTES.GIGS}?search=${input}`);
+
+  const isSearchActive = pathname !== constants.ROUTES.HOME ? true : active;
+
+  const handleClick = (e) =>
+    refClick && refClick.current.contains(e.target)
+      ? setOpen(true)
+      : setOpen(false);
+
   useEffect(() => {
-    pathname === "/" && setInput("");
+    pathname === constants.ROUTES.HOME && setInput("");
 
     if (search) {
       const queryParams = utility.urlParamsToObject(search);
@@ -58,203 +77,107 @@ export const Navbar = () => {
     }
   };
 
-  const handleInput = (e) => {
-    const { value } = e.target;
-    setInput(value);
-  };
-
-  const handleSearch = () => navigate(input !== "" && `gigs?search=${input}`);
-
-  const isSearchActive = pathname !== "/" ? true : active;
-
-  const handleClick = (e) => {
-    if (refClick && refClick.current.contains(e.target)) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-    }
-  };
-
   return (
-    <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
-      <div className="container">
-        <div className="logo">
-          <Link to={`/`} className="link">
-            <span className="text">fiverr</span>
-          </Link>
-          <span className="dot">.</span>
-        </div>
-        {isSearchActive && (
-          <div className="search">
-            <div className="search-input">
-              <img
-                src={constants.ENUMS.ASSETS.ICONS.SEARCH}
-                alt="search-icon"
-              />
-              <input
-                type="text"
-                placeholder="What service are you looking for today?"
-                value={input}
-                onChange={handleInput}
-              />
-            </div>
-            <button onClick={handleSearch}>Search</button>
+    isAllowed && (
+      <div
+        className={
+          active || pathname !== constants.ROUTES.HOME
+            ? "navbar active"
+            : "navbar"
+        }
+      >
+        <div className="container">
+          <div className="logo">
+            <Link to={constants.ROUTES.HOME} className="link">
+              <span className="text">fiverr</span>
+            </Link>
+            <span className="dot">.</span>
           </div>
-        )}
-        <div className="links">
-          <Link className="link" to={`https://business.fiverr.com/business`}>
-            Explore
-          </Link>
+          {isSearchActive && (
+            <div className="search">
+              <div className="search-input">
+                <img
+                  src={constants.ENUMS.ASSETS.ICONS.SEARCH}
+                  alt="search-icon"
+                />
+                <input
+                  type="text"
+                  placeholder="What service are you looking for today?"
+                  value={input}
+                  onChange={handleInput}
+                />
+              </div>
+              <button onClick={handleSearch}>Search</button>
+            </div>
+          )}
+          <div className="links">
+            <Link className="link" to={constants.ROUTES.EXPLORE}>
+              Explore
+            </Link>
 
-          <span>English</span>
-          {!currentUser && (
-            <Link className="link" to={`/login`}>
-              Sign in
-            </Link>
-          )}
-          {!currentUser && (
-            <Link className="link" to={`/register?seller=true`}>
-              Become a Seller
-            </Link>
-          )}
-          {currentUser?.isSeller && (
-            <Link className="link" to={`/my-gigs`}>
-              My Gigs
-            </Link>
-          )}
-          {currentUser?.isSeller === false && (
-            <Link className="link" to={`/my-favorites`}>
-              My Favorites
-            </Link>
-          )}
-          {!currentUser && (
-            <button onClick={() => navigate("/register")}>Join</button>
-          )}
-          {currentUser && (
-            <div className="user" ref={refClick}>
-              <img src={currentUser?.img} alt="profile-picture" />
-              {currentUser?.isSeller && (
-                <div className="verified">
-                  <img
-                    className="icon"
-                    src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
-                    alt="orders"
-                    style={{ width: "15px", height: "15px", margin: "-1.4%" }}
-                  />
-                </div>
-              )}
-              {open && (
-                <div className="options">
-                  <span className="option">
-                    <b>{utility.getGreet()}</b>
-                    <div className="c-smileyButton">
-                      <div className="c-smileyButton__hoverListener"></div>
-                      <div className="c-smileyButton__hoverListener"></div>
-                      <span className="c-smileyButton__face"></span>
-                    </div>
-                  </span>
-                  <span className="option">
-                    <img src={currentUser?.img} alt="profile-picture" />
-                    &nbsp;
-                    {utility.toTitleCase(currentUser?.username)}&nbsp;
-                    <Flag country={currentUser.country} />
-                  </span>
-
-                  {currentUser?.isSeller && (
-                    <Link className="link option" to={`/add`}>
-                      <img
-                        className="icon"
-                        src={constants.ENUMS.ASSETS.ICONS.ADD}
-                        alt="add-gig"
-                        style={{
-                          width: "17px",
-                          height: "17px",
-                          margin: "1%",
-                        }}
-                      />
-                      &nbsp; Add Gig
-                    </Link>
-                  )}
-                  <Link className="link option" to={`/orders`}>
+            <span>English</span>
+            {!currentUser && (
+              <Link className="link" to={constants.ROUTES.LOGIN}>
+                Sign in
+              </Link>
+            )}
+            {!currentUser && (
+              <Link
+                className="link"
+                to={`${constants.ROUTES.REGISTER}?seller=true`}
+              >
+                Become a Seller
+              </Link>
+            )}
+            {currentUser?.isSeller && (
+              <Link className="link" to={constants.ROUTES.MY_GIGS}>
+                My Gigs
+              </Link>
+            )}
+            {currentUser?.isSeller === false && (
+              <Link className="link" to={constants.ROUTES.MY_FAVORITES}>
+                My Favorites
+              </Link>
+            )}
+            {!currentUser && (
+              <button onClick={() => navigate(constants.ROUTES.REGISTER)}>
+                Join
+              </button>
+            )}
+            {currentUser && (
+              <div className="user" ref={refClick}>
+                <img src={currentUser?.img} alt="profile-picture" />
+                {currentUser?.isSeller && (
+                  <div className="verified">
                     <img
                       className="icon"
-                      src={constants.ENUMS.ASSETS.ICONS.ORDERS}
+                      src={constants.ENUMS.ASSETS.ICONS.VERIFIED}
                       alt="orders"
-                      style={{ width: "25px", height: "25px", margin: "-1.4%" }}
+                      style={{ width: "15px", height: "15px", margin: "-1.4%" }}
                     />
-                    &nbsp; Orders
-                  </Link>
-                  <Link className="link option" to={`/messages`}>
-                    <img
-                      className="icon"
-                      src={constants.ENUMS.ASSETS.ICONS.MESSAGES}
-                      alt="messages"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                    &nbsp; Messages
-                  </Link>
-                  <Link className="link option" onClick={handleLogout}>
-                    <img
-                      className="icon"
-                      src={constants.ENUMS.ASSETS.ICONS.EXIT}
-                      alt="sign-out"
-                      style={{ width: "17px", height: "17px", margin: "1.4%" }}
-                    />
-                    &nbsp; Sign out
-                  </Link>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-      {(active || pathname !== "/") && (
-        <>
-          <hr />
-          <div className="menu">
-            <Link className="link" to={`/gigs?cat=graphics-design`}>
-              Graphics & Design
-            </Link>
-            <Link className="link" to={`/gigs?cat=video-animation`}>
-              Video & Animation
-            </Link>
-            <Link className="link" to={`/gigs?cat=writing-translation`}>
-              Writing & Translation
-            </Link>
-            <Link className="link" to={`/gigs?cat=ai-services`}>
-              AI Services
-            </Link>
-            <Link className="link" to={`/gigs?cat=digital-marketing`}>
-              Digital Marketing
-            </Link>
-            <Link className="link" to={`/gigs?cat=music-audio`}>
-              Music & Audio
-            </Link>
-            <Link className="link" to={`/gigs?cat=programming-tech`}>
-              Programming & Tech
-            </Link>
-            <Link className="link" to={`/gigs?cat=business`}>
-              Business
-            </Link>
-            <Link className="link" to={`/gigs?cat=photography`}>
-              Photography
-            </Link>
+                  </div>
+                )}
+                {open && (
+                  <Dialog user={currentUser} onClickLogout={handleLogout} />
+                )}
+              </div>
+            )}
           </div>
-          <hr />
-        </>
-      )}
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-    </div>
+        </div>
+        {(active || pathname !== constants.ROUTES.HOME) && <Menu />}
+        <ToastContainer
+          position="bottom-left"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </div>
+    )
   );
 };

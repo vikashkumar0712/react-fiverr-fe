@@ -43,7 +43,7 @@
         font-weight: 300;
 
         input {
-          padding: 5px;
+          padding: 0.7em 1.4em 0.7em 1.1em;
           border: 1px solid lightgray;
           outline: none;
 
@@ -52,19 +52,27 @@
           }
         }
 
-        button {
-          padding: 5px;
-          background-color: #1dbf73;
-          color: white;
-          font-weight: 500;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
+        $color_1: white;
+        $font-family_1: inherit;
 
+        .io-button {
+          display: flex;
+          align-items: center;
+          font-family: $font-family_1;
+          font-weight: 500;
+          font-size: 16px;
+          padding: 0.6em 1.4em 0.6em 1.1em;
+          color: $color_1;
+          background: #1dbf73;
+          border: none;
+          box-shadow: 0 0.7em 1.5em -0.5em #28b34f98;
+          letter-spacing: 0.05em;
+          border-radius: 0.5em;
           &:hover {
-            background-color: #22ad6c;
-            border-color: #22ad6c;
-            color: white;
+            box-shadow: 0 0.5em 1.5em -0.5em #1dbf73;
+          }
+          &:active {
+            box-shadow: 0 0.3em 1em -0.5em #1dbf73;
           }
         }
       }
@@ -82,6 +90,7 @@
 
         .sort-type {
           font-weight: 500;
+          cursor: pointer;
         }
 
         img {

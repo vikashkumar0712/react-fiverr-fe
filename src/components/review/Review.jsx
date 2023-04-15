@@ -5,15 +5,16 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { Flag } from "../flag/Flag";
+import { DeleteButton } from "../../components/delete_button/DeleteButton";
 import utility from "../../utils/utility";
 import constants from "../../common/constants";
 
 export const Review = ({ review }) => {
-  const queryClient = useQueryClient();
-
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
   );
+
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: async (id) => {
@@ -39,7 +40,8 @@ export const Review = ({ review }) => {
   };
 
   const user = review && review.userDetails;
-  const starsCount = new Array(review.star > 0 ? review.star : 1).fill("star");
+  const starsCount = new Array(review.star).fill("star");
+
   return (
     <div className="review">
       <div className="user">
@@ -73,10 +75,10 @@ export const Review = ({ review }) => {
         <img src={constants.ENUMS.ASSETS.ICONS.DISLIKE} alt="dislike" />
         <span>No</span>
         {currentUser?._id === user._id && (
-          <img
-            src={constants.ENUMS.ASSETS.ICONS.DELETE}
-            alt="delete"
-            onClick={() => handleDeleteReview(review._id)}
+          <DeleteButton
+            item={review._id}
+            onClickDelete={handleDeleteReview}
+            small={true}
           />
         )}
       </div>

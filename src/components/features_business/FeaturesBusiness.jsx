@@ -1,7 +1,7 @@
 import "./FeaturesBusiness.scss";
 import React from "react";
-import constants from "../../common/constants";
 import { Link } from "react-router-dom";
+import constants from "../../common/constants";
 
 export const FeaturesBusiness = () => {
   return (
@@ -30,8 +30,8 @@ export const FeaturesBusiness = () => {
             <img src={constants.ENUMS.ASSETS.ICONS.CHECK} alt="check-icon" />
             Manage teamwork and boost productivity with one powerful workspace
           </div>
-          <div className="explore-button">
-            <Link className="link" to={`https://business.fiverr.com/business`}>
+          <div className="io-button">
+            <Link className="link" to={constants.ROUTES.EXPLORE}>
               Explore Fiverr Business
             </Link>
           </div>

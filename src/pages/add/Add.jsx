@@ -32,7 +32,7 @@ export const Add = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch({
-      type: constants.REDUCER.ADD_GIG.ACTION_TYPES.CHANGE_INPUT,
+      type: constants.REDUCERS.ADD_GIG.ACTION_TYPES.CHANGE_INPUT,
       payload: { name: name, value: value },
     });
   };
@@ -47,7 +47,7 @@ export const Add = () => {
     if (state.features.length <= 4) {
       if (feature !== "") {
         dispatch({
-          type: constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_FEATURE,
+          type: constants.REDUCERS.ADD_GIG.ACTION_TYPES.ADD_FEATURE,
           payload: feature,
         });
 
@@ -56,13 +56,13 @@ export const Add = () => {
         toast.error(constants.ERROR_MESSAGES.FEATURE_NOT_VALID);
       }
     } else {
-      toast.error("LIMIT REACHED");
+      toast.error(constants.ERROR_MESSAGES.FEATURE_ADD_LIMIT_REACHED);
     }
   };
 
   const handleRemoveFeature = (removeFeature) => {
     dispatch({
-      type: constants.REDUCER.ADD_GIG.ACTION_TYPES.REMOVE_FEATURE,
+      type: constants.REDUCERS.ADD_GIG.ACTION_TYPES.REMOVE_FEATURE,
       payload: removeFeature,
     });
   };
@@ -86,7 +86,7 @@ export const Add = () => {
           : [];
 
       dispatch({
-        type: constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_IMAGES,
+        type: constants.REDUCERS.ADD_GIG.ACTION_TYPES.ADD_IMAGES,
         payload: { cover: cover, images: images },
       });
     } catch (error) {
@@ -140,24 +140,54 @@ export const Add = () => {
               Category <span>*</span>
             </label>
             <select name="cat" onChange={handleChange}>
-              <option value="ai-artists">AI Artists</option>
-              <option value="ai-services">AI Services</option>
-              <option value="business">Business</option>
-              <option value="digital-marketing">Digital Marketing</option>
-              <option value="graphics-design">Graphics & Design</option>
-              <option value="illustration">Illustration</option>
-              <option value="logo-design">Logo Design</option>
-              <option value="music-audio">Music & Audio</option>
-              <option value="photography">Photography</option>
-              <option value="programming-tech">Programming & Tech</option>
-              <option value="seo">SEO</option>
-              <option value="social-media">Social Media</option>
-              <option value="video-animation">Video & Animation</option>
-              <option value="video-explainer">Video Explainer</option>
-              <option value="voice-over">Voice Over</option>
-              <option value="web-development">Web Development</option>
-              <option value="wordpress">WordPress</option>
-              <option value="writing-translation">Writing & Translation</option>
+              <option value={constants.CATEGORIES.AI_ARTISTS}>
+                AI Artists
+              </option>
+              <option value={constants.CATEGORIES.AI_SERVICES}>
+                AI Services
+              </option>
+              <option value={constants.CATEGORIES.BUSINESS}>Business</option>
+              <option value={constants.CATEGORIES.DIGITAL_MARKETING}>
+                Digital Marketing
+              </option>
+              <option value={constants.CATEGORIES.GRAPHICS_DESIGN}>
+                Graphics & Design
+              </option>
+              <option value={constants.CATEGORIES.ILLUSTRATION}>
+                Illustration
+              </option>
+              <option value={constants.CATEGORIES.LOGO_DESIGN}>
+                Logo Design
+              </option>
+              <option value={constants.CATEGORIES.MUSIC_AUDIO}>
+                Music & Audio
+              </option>
+              <option value={constants.CATEGORIES.PHOTOGRAPHY}>
+                Photography
+              </option>
+              <option value={constants.CATEGORIES.PROGRAMMING_TECH}>
+                Programming & Tech
+              </option>
+              <option value={constants.CATEGORIES.SEO}>SEO</option>
+              <option value={constants.CATEGORIES.SOCIAL_MEDIA}>
+                Social Media
+              </option>
+              <option value={constants.CATEGORIES.VIDEO_ANIMATION}>
+                Video & Animation
+              </option>
+              <option value={constants.CATEGORIES.VIDEO_EXPLAINER}>
+                Video Explainer
+              </option>
+              <option value={constants.CATEGORIES.VOICE_OVER}>
+                Voice Over
+              </option>
+              <option value={constants.CATEGORIES.WEB_DEVELOPMENT}>
+                Web Development
+              </option>
+              <option value={constants.CATEGORIES.WORDPRESS}>WordPress</option>
+              <option value={constants.CATEGORIES.WRITING_TRANSLATION}>
+                Writing & Translation
+              </option>
             </select>
 
             <label htmlFor="">
@@ -277,7 +307,7 @@ export const Add = () => {
             )}
 
             <label htmlFor="">
-              Price <span>*</span>
+              Price <span>*</span> (e.g. ₹ 1000)
             </label>
             <input
               name="price"

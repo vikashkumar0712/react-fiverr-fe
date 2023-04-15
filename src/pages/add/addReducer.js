@@ -2,7 +2,7 @@ import constants from "../../common/constants";
 
 const INITIAL_STATE = {
   title: "",
-  cat: "design",
+  cat: constants.CATEGORIES.AI_ARTISTS,
   cover: "",
   images: [],
   desc: "",
@@ -16,26 +16,26 @@ const INITIAL_STATE = {
 
 const addReducer = (state, action) => {
   switch (action.type) {
-    case constants.REDUCER.ADD_GIG.ACTION_TYPES.CHANGE_INPUT: {
+    case constants.REDUCERS.ADD_GIG.ACTION_TYPES.CHANGE_INPUT: {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
       };
     }
-    case constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_IMAGES: {
+    case constants.REDUCERS.ADD_GIG.ACTION_TYPES.ADD_IMAGES: {
       return {
         ...state,
         cover: action.payload.cover,
         images: action.payload.images,
       };
     }
-    case constants.REDUCER.ADD_GIG.ACTION_TYPES.ADD_FEATURE: {
+    case constants.REDUCERS.ADD_GIG.ACTION_TYPES.ADD_FEATURE: {
       return {
         ...state,
         features: [...state.features, action.payload],
       };
     }
-    case constants.REDUCER.ADD_GIG.ACTION_TYPES.REMOVE_FEATURE: {
+    case constants.REDUCERS.ADD_GIG.ACTION_TYPES.REMOVE_FEATURE: {
       return {
         ...state,
         features: state.features.filter(

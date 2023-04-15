@@ -105,7 +105,9 @@ export const Reviews = ({ gigId }) => {
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
-          <button type="submit">Submit</button>
+          <button className="io-button" type="submit">
+            Submit
+          </button>
         </form>
       </div>
       <ToastContainer

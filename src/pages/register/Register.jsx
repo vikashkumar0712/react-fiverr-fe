@@ -8,12 +8,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import ReactFlagsSelect from "react-flags-select";
 import constants from "../../common/constants";
 import utility from "../../utils/utility";
+import { GenderSelector } from "../../components/gender_selector/GenderSelector";
+import axios from "axios";
 
 export const Register = () => {
   // States management
-  const [selected, setSelected] = useState("IN");
+  const [selected, setSelected] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
+  const [gender, setGender] = useState("");
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -22,6 +25,7 @@ export const Register = () => {
     img: undefined,
     phone: undefined,
     desc: undefined,
+    gender: undefined,
     isSeller: false,
   });
 
@@ -29,11 +33,21 @@ export const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleChange = {
-      ...credentials,
-      isSeller: searchParams.has("seller"),
+    const fetchLocationOrIsSeller = async () => {
+      const { data: response } = await axios.get(
+        `${constants.ENUMS.IP_INFO_URL}${import.meta.env.VITE_IP_INFO_TOKEN}`
+      );
+
+      const handleChange = {
+        ...credentials,
+        isSeller: searchParams.has("seller"),
+      };
+
+      setCredentials(handleChange);
+      setSelected(response.country);
     };
-    setCredentials(handleChange);
+
+    fetchLocationOrIsSeller();
   }, []);
 
   // Methods
@@ -59,25 +73,29 @@ export const Register = () => {
     e.preventDefault();
 
     try {
-      setIsLoading(true);
+      if (gender !== "") {
+        setIsLoading(true);
 
-      const url = file
-        ? await toast.promise(upload(file), constants.PARAMS.IMAGE_UPLOADING)
-        : undefined;
+        const url = file
+          ? await toast.promise(upload(file), constants.PARAMS.IMAGE_UPLOADING)
+          : undefined;
 
-      const registerData = {
-        ...credentials,
-        img: url,
-        country: utility.codeToCountry(selected),
-      };
-      const { data: response } = await newRequest.post(
-        "/services/register",
-        registerData
-      );
+        const registerData = {
+          ...credentials,
+          img: url,
+          gender: gender,
+          country: utility.codeToCountry(selected),
+        };
+        const { data: response } = await newRequest.post(
+          "/services/register",
+          registerData
+        );
 
-      toast.success(response.data);
-      setIsLoading(false);
-      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+        toast.success(response.data);
+        setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+      } else {
+        toast.error(constants.ERROR_MESSAGES.NO_GENDER_SELECTED);
+      }
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.error || error.message);
@@ -133,7 +151,7 @@ export const Register = () => {
           <label htmlFor="">Profile Picture</label>
           <input type="file" name="images/*" onChange={handleFile} />
 
-          <button type="submit" className="register-button">
+          <button type="submit" className="io-button">
             {isLoading ? "Registering..." : "Register"}
           </button>
         </div>
@@ -150,6 +168,7 @@ export const Register = () => {
               <span className="slider round"></span>
             </label>
           </div>
+
           <label htmlFor="">Phone Number</label>
           <input
             name="phone"
@@ -157,6 +176,9 @@ export const Register = () => {
             placeholder="+91 9876543210"
             onChange={handleCredentials}
           />
+
+          <GenderSelector onClickSet={setGender} />
+
           <label htmlFor="">Description</label>
           <textarea
             placeholder="A short description of yourself"

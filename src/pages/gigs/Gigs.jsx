@@ -120,7 +120,7 @@ export const Gigs = () => {
     <div className="gigs">
       <div className="container">
         <span className="breadcrumbs">
-          <Link className="link" to={`/`}>
+          <Link className="link" to={constants.ROUTES.HOME}>
             <img
               className="icon"
               src={constants.ENUMS.ASSETS.ICONS.HOME}
@@ -137,11 +137,13 @@ export const Gigs = () => {
             <span>Budget</span>
             <input ref={minRef} type="number" placeholder="min" />
             <input ref={maxRef} type="number" placeholder="max" />
-            <button onClick={handleApply}>Apply</button>
+            <button className="io-button" onClick={handleApply}>
+              Apply
+            </button>
           </div>
           <div className="right">
             <span className="sort-by">SortBy</span>
-            <span className="sort-type">
+            <span className="sort-type" onClick={handleClick}>
               {orderBy === "sales" ? "Best Selling" : "Newest"}
             </span>
             <img

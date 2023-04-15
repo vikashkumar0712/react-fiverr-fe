@@ -1,11 +1,27 @@
+@keyframes changeBg {
+  25% {
+    background-color: rgb(40, 97, 172);
+  }
+  50% {
+    background-color: rgb(106, 27, 143);
+  }
+  75% {
+    background-color: rgb(204, 169, 11);
+  }
+}
+
 .hero-section {
-  height: 600px;
+  height: 700px;
   display: flex;
   justify-content: center;
+  animation: changeBg 1s infinite;
+  -webkit-animation-duration: 20s;
   background-color: #013914;
   color: white;
+  margin-top: -7.2%;
 
   .container {
+    height: inherit;
     width: 1400px;
     display: flex;
     align-items: center;
@@ -87,6 +103,7 @@
     .right {
       height: 100%;
       .image-container {
+        margin-top: 16.7%;
         height: 600px;
         width: 600px;
         img {

@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Slider } from "infinite-react-carousel/lib";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../../components/loader/Loader";
@@ -68,6 +73,8 @@ export const Gig = () => {
 
   const starsCount = new Array(stars).fill("star");
 
+  const rating = stars > 0 ? stars : "No Rating!";
+
   const handleCheckout = async () => {
     try {
       const checkoutParams = { gigId: id };
@@ -100,7 +107,7 @@ export const Gig = () => {
           `/conversation/${sellerId}/${buyerId}`
         );
 
-        navigate(`/message/${response.data._id}`);
+        navigate(`${constants.ROUTES.MESSAGE}${response.data._id}`);
       } catch (error) {
         if (error.response.status === constants.RESP_ERR_CODES.ERR_404) {
           const conversationData = {
@@ -112,7 +119,7 @@ export const Gig = () => {
             conversationData
           );
 
-          navigate(`/message/${response.data._id}`);
+          navigate(`${constants.ROUTES.MESSAGE}${response.data._id}`);
         } else {
           if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
             toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
@@ -140,11 +147,22 @@ export const Gig = () => {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              Fiverr &gt; {utility.toCategoryCase(gig.cat)}
+              <Link className="link" to={constants.ROUTES.HOME}>
+                <img
+                  className="icon"
+                  src={constants.ENUMS.ASSETS.ICONS.HOME}
+                  alt="home"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </Link>
+              &nbsp;&nbsp;&#47;&nbsp;&nbsp;{utility.toCategoryCase(gig.cat)}
             </span>
+
             <h1>{gig.title}</h1>
+
             <div className="user">
               <img className="pp" src={user.img} alt="profile-picture" />
+
               <div className="verified">
                 <img
                   className="icon"
@@ -153,10 +171,12 @@ export const Gig = () => {
                   style={{ width: "12px", height: "12px" }}
                 />
               </div>
+
               <span>{user.username}</span>
 
               <div className="stars">
-                <span>{stars > 0 ? stars : "No Rating!"}</span>
+                <span>{rating}</span>
+
                 {starsCount.map((star, index) => {
                   return (
                     <img
@@ -195,10 +215,13 @@ export const Gig = () => {
                     style={{ width: "25px", height: "25px" }}
                   />
                 </div>
+
                 <div className="info">
                   <span>{user.username}</span>
+
                   <div className="stars">
-                    <span>{stars > 0 ? stars : "No Rating!"}</span>
+                    <span>{rating}</span>
+
                     {starsCount.map((star, index) => {
                       return (
                         <img
@@ -209,9 +232,11 @@ export const Gig = () => {
                       );
                     })}
                   </div>
+
                   <button onClick={handleContact}>Contact Me</button>
                 </div>
               </div>
+
               <div className="box">
                 <div className="items">
                   <div className="item">

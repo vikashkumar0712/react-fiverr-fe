@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "../../components/loader/Loader";
+import { DeleteButton } from "../../components/delete_button/DeleteButton";
 import utility from "../../utils/utility";
 import constants from "../../common/constants";
 
@@ -64,8 +65,8 @@ export const MyFavorites = () => {
       <div className="container">
         <div className="title">
           <h1>My Favorites</h1>
-          <Link to="/gigs">
-            <button>Explore More Gigs</button>
+          <Link to={constants.ROUTES.GIGS} className="link">
+            <button className="io-button">Explore More Gigs</button>
           </Link>
         </div>
         <hr />
@@ -94,7 +95,10 @@ export const MyFavorites = () => {
                 return (
                   <tr key={favorite._id}>
                     <td>
-                      <Link className="link" to={`/gig/${favorite.gigId}`}>
+                      <Link
+                        className="link"
+                        to={`${constants.ROUTES.GIG}${favorite.gigId}`}
+                      >
                         <img
                           className="gig-image"
                           src={favorite.img}
@@ -103,18 +107,19 @@ export const MyFavorites = () => {
                       </Link>
                     </td>
                     <td>
-                      <Link className="link" to={`/gig/${favorite.gigId}`}>
+                      <Link
+                        className="link"
+                        to={`${constants.ROUTES.GIG}${favorite.gigId}`}
+                      >
                         {favorite?.title?.substring(0, 60)}...
                       </Link>
                     </td>
                     <td>₹ {favorite.price}</td>
                     <td>{utility.timeAgo(favorite.createdAt)}</td>
                     <td>
-                      <img
-                        className="delete"
-                        src={constants.ENUMS.ASSETS.ICONS.DELETE}
-                        alt="delete"
-                        onClick={() => handleRemoveFavorite(favorite.gigId)}
+                      <DeleteButton
+                        item={favorite.gigId}
+                        onClickDelete={handleRemoveFavorite}
                       />
                     </td>
                   </tr>

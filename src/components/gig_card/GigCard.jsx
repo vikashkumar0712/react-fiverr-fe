@@ -17,10 +17,12 @@ export const GigCard = ({
 
   const starsCount = new Array(stars).fill("star");
 
+  const rating = stars > 0 ? stars : "No Rating!";
+
   return (
     <div className="gig-card">
-      <Link to={`/gig/${gig._id}`} className="link">
-        <img src={gig.cover} alt="gig-image" />
+      <Link to={`${constants.ROUTES.GIG}${gig._id}`} className="link">
+        <img className=" cover-img" src={gig.cover} alt="gig-image" />
         <div className="info">
           <div className="user">
             <img src={user.img} alt={user.username} />
@@ -36,7 +38,7 @@ export const GigCard = ({
           </div>
           <p>{gig?.title?.substring(0, 38)}...</p>
           <div className="star">
-            <span>{stars > 0 ? stars : "No Rating!"}</span>
+            <span>{rating}</span>
             {starsCount.map((star, index) => {
               return (
                 <img
@@ -54,7 +56,7 @@ export const GigCard = ({
         <img
           src={constants.ENUMS.ASSETS.ICONS.HEART}
           alt="heart"
-          className={isAdded ? "fill-red" : undefined}
+          className={isAdded && "fill-red"}
           onClick={() =>
             isAdded
               ? onClickRemove(gig._id)

@@ -63,6 +63,10 @@ export const Messages = () => {
     }
   };
 
+  const isSeen = (conversation) =>
+    (currentUser.isSeller && !conversation.readBySeller) ||
+    (!currentUser.isSeller && !conversation.readByBuyer);
+
   return (
     <div className="messages">
       <div className="container">
@@ -85,9 +89,9 @@ export const Messages = () => {
               <tr>
                 <th>PROFILE</th>
                 <th>{currentUser.isSeller ? "BUYER" : "SELLER"}</th>
-                <th>LAST MASSAGE</th>
+                <th>MASSAGE</th>
                 <th>TIMELINE</th>
-                <th>ACTION</th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>
@@ -95,8 +99,7 @@ export const Messages = () => {
                 return (
                   <tr
                     className={
-                      (currentUser.isSeller && !conversation.readBySeller) ||
-                      (!currentUser.isSeller && !conversation.readByBuyer)
+                      isSeen(conversation) && conversation?.lastMessage
                         ? "active"
                         : undefined
                     }
@@ -111,26 +114,28 @@ export const Messages = () => {
                     <td>{conversation.userDetails.username}</td>
                     <td>
                       <Link
-                        to={`/message/${conversation._id}`}
+                        to={`${constants.ROUTES.MESSAGE}${conversation._id}`}
                         className="link"
-                        style={{ color: "blue" }}
+                        style={{
+                          color: conversation?.lastMessage ? "green" : "gray",
+                        }}
+                        onClick={() =>
+                          isSeen(conversation) &&
+                          conversation?.lastMessage &&
+                          handleMarkAsRead(conversation._id)
+                        }
                       >
-                        {conversation?.lastMessage?.substring(0, 100)}...
+                        {conversation?.lastMessage
+                          ? `${conversation?.lastMessage?.substring(0, 100)}...`
+                          : `Don't be shy! Say Hiii ;)`}
                       </Link>
                     </td>
                     <td>{utility.timeAgo(conversation.updatedAt)}</td>
                     <td>
-                      {(currentUser.isSeller && !conversation.readBySeller) ||
-                      (!currentUser.isSeller && !conversation.readByBuyer) ? (
-                        <button
-                          onClick={() => handleMarkAsRead(conversation._id)}
-                        >
-                          Mark as read
-                        </button>
+                      {isSeen(conversation) && conversation?.lastMessage ? (
+                        <button>SEEN</button>
                       ) : (
-                        <button className="button-disabled">
-                          Marked as read
-                        </button>
+                        <button className="button-disabled">NOT SEEN</button>
                       )}
                     </td>
                   </tr>

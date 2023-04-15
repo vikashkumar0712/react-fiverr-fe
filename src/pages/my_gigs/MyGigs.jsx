@@ -5,9 +5,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import constants from "../../common/constants";
 import { Loader } from "../../components/loader/Loader";
+import { DeleteButton } from "../../components/delete_button/DeleteButton";
 import utility from "../../utils/utility";
+import constants from "../../common/constants";
 
 export const MyGigs = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
@@ -64,8 +65,8 @@ export const MyGigs = () => {
       <div className="container">
         <div className="title">
           <h1>My Gigs</h1>
-          <Link to="/add">
-            <button>Add New Gig</button>
+          <Link to={constants.ROUTES.ADD} className="link">
+            <button className="io-button">Add New Gig</button>
           </Link>
         </div>
         <hr />
@@ -95,7 +96,10 @@ export const MyGigs = () => {
                 return (
                   <tr key={gig._id}>
                     <td>
-                      <Link className="link" to={`/gig/${gig._id}`}>
+                      <Link
+                        className="link"
+                        to={`${constants.ROUTES.GIG}${gig._id}`}
+                      >
                         <img
                           className="gig-image"
                           src={gig.cover}
@@ -104,7 +108,10 @@ export const MyGigs = () => {
                       </Link>
                     </td>
                     <td>
-                      <Link className="link" to={`/gig/${gig._id}`}>
+                      <Link
+                        className="link"
+                        to={`${constants.ROUTES.GIG}${gig._id}`}
+                      >
                         {gig?.title?.substring(0, 60)}...
                       </Link>
                     </td>
@@ -116,11 +123,9 @@ export const MyGigs = () => {
                         : "No last delivery available!"}
                     </td>
                     <td>
-                      <img
-                        className="delete"
-                        src={constants.ENUMS.ASSETS.ICONS.DELETE}
-                        alt="delete"
-                        onClick={() => handleDeleteGig(gig._id)}
+                      <DeleteButton
+                        item={gig._id}
+                        onClickDelete={handleDeleteGig}
                       />
                     </td>
                   </tr>

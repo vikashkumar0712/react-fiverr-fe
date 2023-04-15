@@ -3,11 +3,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { Loader } from "../../components/loader/Loader";
-import constants from "../../common/constants";
-import { Link, useNavigate } from "react-router-dom";
+import { ChatButton } from "../../components/chat_button/ChatButton";
 import utility from "../../utils/utility";
+import constants from "../../common/constants";
 
 export const Orders = () => {
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
@@ -48,7 +49,7 @@ export const Orders = () => {
         `/conversation/${sellerId}/${buyerId}`
       );
 
-      navigate(`/message/${response.data._id}`);
+      navigate(`${constants.ROUTES.MESSAGE}${response.data._id}`);
     } catch (error) {
       if (error.response.status === constants.RESP_ERR_CODES.ERR_404) {
         const conversationData = {
@@ -60,7 +61,7 @@ export const Orders = () => {
           conversationData
         );
 
-        navigate(`/message/${response.data._id}`);
+        navigate(`${constants.ROUTES.MESSAGE}${response.data._id}`);
       } else {
         if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
           toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
@@ -98,7 +99,7 @@ export const Orders = () => {
                 <th>TIMELINE</th>
                 <th>PROFILE</th>
                 <th>{currentUser?.isSeller ? "BUYER" : "SELLER"}</th>
-                <th>MESSAGE</th>
+                <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -106,7 +107,10 @@ export const Orders = () => {
                 return (
                   <tr key={order._id}>
                     <td>
-                      <Link className="link" to={`/gig/${order.gigId}`}>
+                      <Link
+                        className="link"
+                        to={`${constants.ROUTES.GIG}${order.gigId}`}
+                      >
                         <img
                           src={order.img}
                           alt="gig-cover-image"
@@ -115,7 +119,10 @@ export const Orders = () => {
                       </Link>
                     </td>
                     <td>
-                      <Link className="link" to={`/gig/${order.gigId}`}>
+                      <Link
+                        className="link"
+                        to={`${constants.ROUTES.GIG}${order.gigId}`}
+                      >
                         {order?.title?.substring(0, 60)}...
                       </Link>
                     </td>
@@ -130,12 +137,7 @@ export const Orders = () => {
                     </td>
                     <td>{order.userDetails.username}</td>
                     <td>
-                      <img
-                        src={constants.ENUMS.ASSETS.ICONS.CHAT}
-                        alt="message"
-                        className="message"
-                        onClick={() => handleContact(order)}
-                      />
+                      <ChatButton item={order} onClickChat={handleContact} />
                     </td>
                   </tr>
                 );

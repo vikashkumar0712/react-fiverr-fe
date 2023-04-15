@@ -18,8 +18,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Protected } from "./routes/protected/Protected";
 import { Private } from "./routes/private/Private";
 import { Public } from "./routes/public/Public";
-import constants from "./common/constants";
 import { NotFound } from "./pages/not_found/NotFound";
+import constants from "./common/constants";
 
 function App() {
   const queryClient = new QueryClient();
