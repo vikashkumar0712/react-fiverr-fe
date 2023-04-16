@@ -90,7 +90,7 @@ export const Login = () => {
             className="input-field"
             name="username"
             type="text"
-            placeholder="Email / Username"
+            placeholder="Enter your Email / Username"
             value={credentials.username}
             onChange={handleCredentials}
             required
@@ -120,7 +120,7 @@ export const Login = () => {
             className="input-field"
             name="password"
             type="password"
-            placeholder="Password"
+            placeholder="Enter your Password"
             value={credentials.password}
             onChange={handleCredentials}
             required

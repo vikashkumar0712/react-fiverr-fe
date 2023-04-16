@@ -2,7 +2,6 @@ import "./Register.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
-import { upload } from "../../utils/upload";
 import { newRequest } from "../../utils/request";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ReactFlagsSelect from "react-flags-select";
@@ -15,16 +14,12 @@ export const Register = () => {
   // States management
   const [selected, setSelected] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [file, setFile] = useState(null);
   const [gender, setGender] = useState("");
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
     password: "",
     country: undefined,
-    img: undefined,
-    phone: undefined,
-    desc: undefined,
     gender: undefined,
     isSeller: false,
   });
@@ -70,16 +65,12 @@ export const Register = () => {
       if (gender !== "") {
         setIsLoading(true);
 
-        // const url = file
-        //   ? await toast.promise(upload(file), constants.PARAMS.IMAGE_UPLOADING)
-        //   : undefined;
-
         const registerData = {
           ...credentials,
-          // img: url,
           gender: gender,
           country: utility.codeToCountry(selected),
         };
+
         const { data: response } = await newRequest.post(
           "/services/register",
           registerData
@@ -135,7 +126,7 @@ export const Register = () => {
             className="input-field"
             name="email"
             type="text"
-            placeholder="What's your best contact email?"
+            placeholder="What's your best contact Email?"
             value={credentials.email}
             onChange={handleCredentials}
             required
@@ -146,17 +137,19 @@ export const Register = () => {
           <svg
             className="input-icon"
             xmlns="http://www.w3.org/2000/svg"
-            width={22}
-            height={22}
-            viewBox="0 0 512 512"
+            width={23}
+            height={23}
+            viewBox="0 0 24 24"
             style={{
               enableBackground: "new 0 0 512 512",
             }}
             xmlSpace="preserve"
           >
             <path
-              d="M437.02 74.981C388.668 26.629 324.381 0 256 0S123.334 26.629 74.981 74.981C26.63 123.333.001 187.62.001 256S26.63 388.667 74.982 437.02C123.334 485.371 187.621 512 256.001 512c42.42 0 84.448-10.595 121.539-30.638 7.483-4.043 10.271-13.387 6.227-20.871-4.042-7.482-13.385-10.27-20.87-6.227-32.609 17.621-69.573 26.934-106.896 26.934-124.175 0-225.199-101.023-225.199-225.198S131.826 30.802 256 30.802c124.175 0 225.198 101.024 225.198 225.198 0 29.389-7.139 64.356-13.546 77.359-5.682 11.53-21.78 27.768-39.78 27.768-23.299 0-42.255-18.955-42.255-42.254V156.484c0-8.505-6.896-15.401-15.401-15.401s-15.401 6.895-15.401 15.401v15.736c-23.794-28.021-59.26-45.837-98.815-45.837-71.47 0-129.617 58.146-129.617 129.617 0 71.47 58.145 129.617 129.617 129.617 40.84 0 77.322-18.991 101.097-48.601 8.089 31.535 36.752 54.912 70.774 54.912 29.711 0 56.402-22.615 67.41-44.954 9.375-19.024 16.718-58.984 16.718-90.973.001-68.381-26.628-132.668-74.979-181.02zM256 354.815c-54.486 0-98.815-44.328-98.815-98.815 0-54.487 44.328-98.815 98.815-98.815 54.487 0 98.815 44.328 98.815 98.815 0 54.487-44.328 98.815-98.815 98.815z"
               fill="#141b34"
+              fillRule="evenodd"
+              d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm-.187 8.617C7.443 15.597 9.633 15 12 15c2.367 0 4.557.598 6.187 1.617C19.803 17.627 21 19.15 21 21a1 1 0 1 1-2 0c0-.911-.594-1.888-1.873-2.688C15.862 17.523 14.052 17 12 17s-3.862.522-5.127 1.313C5.593 19.111 5 20.088 5 21a1 1 0 1 1-2 0c0-1.85 1.197-3.373 2.813-4.383z"
+              clipRule="evenodd"
               data-original="#000000"
             />
           </svg>
