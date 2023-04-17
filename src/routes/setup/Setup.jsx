@@ -2,11 +2,7 @@ import React from "react";
 import constants from "../../common/constants";
 import { Navigate } from "react-router-dom";
 
-export const Setup = ({
-  Component,
-  isAllowedWithoutLogin = false,
-  isAlreadySetupComplete = false,
-}) => {
+export const Setup = ({ Component, isAllowedWithoutLogin = false }) => {
   const currentUser = JSON.parse(
     localStorage.getItem(constants.LOCAL_STORAGE.CURRENT_USER)
   );
@@ -16,11 +12,7 @@ export const Setup = ({
     : isAllowedWithoutLogin;
 
   return isProfileSetupComplete ? (
-    isAlreadySetupComplete ? (
-      <Navigate to={constants.ROUTES.HOME} />
-    ) : (
-      Component
-    )
+    Component
   ) : (
     <Navigate to={constants.ROUTES.SETUP_ACCOUNT} />
   );

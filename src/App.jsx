@@ -93,12 +93,7 @@ function App() {
         },
         {
           path: constants.ROUTES.SETUP_ACCOUNT,
-          element: (
-            <Setup
-              Component={<Private Component={<SetupAccount />} />}
-              isAlreadySetupComplete={true}
-            />
-          ),
+          element: <Private Component={<SetupAccount />} />,
         },
         {
           path: constants.ROUTES.NOT_FOUND,
