@@ -19,9 +19,9 @@ import { Protected } from "./routes/protected/Protected";
 import { Private } from "./routes/private/Private";
 import { Public } from "./routes/public/Public";
 import { NotFound } from "./pages/not_found/NotFound";
-import constants from "./common/constants";
 import { SetupAccount } from "./pages/setup_account/SetupAccount";
 import { Setup } from "./routes/setup/Setup";
+import constants from "./common/constants";
 
 function App() {
   const queryClient = new QueryClient();
@@ -43,15 +43,15 @@ function App() {
       children: [
         {
           path: constants.ROUTES.HOME,
-          element: <Setup Component={<Home />} isAllowedWithoutLogin={true} />,
+          element: <Setup Component={<Home />} isAllowedWithLogin={true} />,
         },
         {
           path: constants.ROUTES.GIGS,
-          element: <Setup Component={<Gigs />} isAllowedWithoutLogin={true} />,
+          element: <Setup Component={<Gigs />} isAllowedWithLogin={true} />,
         },
         {
           path: constants.ROUTES.GIG_WITH_ID,
-          element: <Setup Component={<Gig />} isAllowedWithoutLogin={true} />,
+          element: <Setup Component={<Gig />} isAllowedWithLogin={true} />,
         },
         {
           path: constants.ROUTES.ORDERS,
@@ -93,7 +93,12 @@ function App() {
         },
         {
           path: constants.ROUTES.SETUP_ACCOUNT,
-          element: <Private Component={<SetupAccount />} />,
+          element: (
+            <Setup
+              Component={<Private Component={<SetupAccount />} />}
+              isProfileAlreadySetup={true}
+            />
+          ),
         },
         {
           path: constants.ROUTES.NOT_FOUND,

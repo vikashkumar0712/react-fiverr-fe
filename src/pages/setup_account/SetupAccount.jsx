@@ -113,8 +113,8 @@ export const SetupAccount = () => {
           </label>
 
           <p className="description">
-            Just a few more personal details are needed <br /> to finish the
-            account profile.
+            Just a few more personal information is required to complete your
+            profile.
           </p>
         </div>
 

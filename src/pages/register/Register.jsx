@@ -77,7 +77,7 @@ export const Register = () => {
         );
 
         toast.success(response.data);
-        setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+        setTimeout(() => navigate(constants.ROUTES.LOGIN), 4000);
       } else {
         toast.error(constants.ERROR_MESSAGES.NO_GENDER_SELECTED);
       }
