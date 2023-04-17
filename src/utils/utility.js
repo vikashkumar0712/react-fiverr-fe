@@ -1,5 +1,5 @@
 import moment from "moment/moment";
-import { countries, categoryDescriptions } from "../common/data";
+import { countries, categoryDescriptions, dialCodes } from "../common/data";
 
 class Utility {
   urlParamsToObject(params) {
@@ -69,9 +69,12 @@ class Utility {
     return this.toTitleCase(code);
   }
 
-  codeToCountry(code) {
-    const country = countries[code];
-    return country;
+  getCountriesCountryCode(code) {
+    return code ? countries[code] : countries;
+  }
+
+  getCountriesDialCode(code) {
+    return code ? dialCodes[code] : dialCodes;
   }
 }
 

@@ -111,7 +111,7 @@
         color: #5f5d6b;
       }
 
-      .redirect-link{
+      .redirect-link {
         color: #1dbf73;
 
         &:hover {
@@ -173,6 +173,25 @@
       }
       &:active {
         box-shadow: 0 0.3em 1em -0.5em #1dbf73;
+      }
+
+      svg {
+        display: inline;
+        width: 1.3rem;
+        height: 1.3rem;
+        margin-right: 0.75rem;
+        color: white;
+        animation: spin_357 1s linear infinite;
+      }
+
+      @keyframes spin_357 {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
     }
   }

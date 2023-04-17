@@ -24,7 +24,8 @@ export const Navbar = () => {
 
   const isAllowed =
     pathname !== constants.ROUTES.LOGIN &&
-    pathname !== constants.ROUTES.REGISTER;
+    pathname !== constants.ROUTES.REGISTER &&
+    pathname !== constants.ROUTES.SETUP_ACCOUNT;
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -96,10 +97,6 @@ export const Navbar = () => {
           {isSearchActive && (
             <div className="search">
               <div className="search-input">
-                <img
-                  src={constants.ENUMS.ASSETS.ICONS.SEARCH}
-                  alt="search-icon"
-                />
                 <input
                   type="text"
                   placeholder="What service are you looking for today?"
@@ -107,7 +104,12 @@ export const Navbar = () => {
                   onChange={handleInput}
                 />
               </div>
-              <button onClick={handleSearch}>Search</button>
+              <button onClick={handleSearch}>
+                <img
+                  src={constants.ENUMS.ASSETS.ICONS.SEARCH}
+                  alt="search-icon"
+                />
+              </button>
             </div>
           )}
           <div className="links">

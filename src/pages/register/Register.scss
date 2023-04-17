@@ -174,6 +174,25 @@
       &:active {
         box-shadow: 0 0.3em 1em -0.5em #1dbf73;
       }
+
+      svg {
+        display: inline;
+        width: 1.3rem;
+        height: 1.3rem;
+        margin-right: 0.75rem;
+        color: white;
+        animation: spin_357 1s linear infinite;
+      }
+
+      @keyframes spin_357 {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
     }
   }
 
@@ -207,6 +226,8 @@
       width: 50%;
 
       .switch {
+        border-radius: 24px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         position: relative;
         display: inline-block;
         width: 50px;
@@ -261,23 +282,6 @@
         transform: translateX(26px);
       }
     }
-  }
-
-  .sign-in-ggl {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: #ffffff;
-    border-radius: 7px;
-    outline: none;
-    color: #242424;
-    border: 1px solid #e5e5e5;
-    filter: drop-shadow(0px 1px 0px #efefef)
-      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-    cursor: pointer;
   }
 
   .note {

@@ -1,9 +1,17 @@
 import "./MagicButton.scss";
 import React from "react";
 
-export const MagicButton = ({ text, onClick }) => {
+export const MagicButton = ({
+  text = "Magic Button",
+  type = undefined,
+  onClick = undefined,
+}) => {
   return (
-    <button className="magic-button" onClick={() => onClick()}>
+    <button
+      className="magic-button"
+      type={type}
+      onClick={() => onClick && onClick()}
+    >
       {text}
       <div className="star-1">
         <svg

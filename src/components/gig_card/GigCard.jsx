@@ -56,7 +56,7 @@ export const GigCard = ({
         <img
           src={constants.ENUMS.ASSETS.ICONS.HEART}
           alt="heart"
-          className={isAdded && "fill-red"}
+          className={isAdded === true && "fill-red"}
           onClick={() =>
             isAdded
               ? onClickRemove(gig._id)

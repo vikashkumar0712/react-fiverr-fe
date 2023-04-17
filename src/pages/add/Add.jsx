@@ -195,6 +195,7 @@ export const Add = () => {
             </label>
             <input
               type="file"
+              accept="image/*"
               name="images/*"
               onChange={handleCover}
               required
@@ -202,6 +203,7 @@ export const Add = () => {
             <label htmlFor="">Upload Images</label>
             <input
               type="file"
+              accept="image/*"
               name="images/*"
               multiple
               onChange={handleImages}

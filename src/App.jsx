@@ -20,6 +20,8 @@ import { Private } from "./routes/private/Private";
 import { Public } from "./routes/public/Public";
 import { NotFound } from "./pages/not_found/NotFound";
 import constants from "./common/constants";
+import { SetupAccount } from "./pages/setup_account/SetupAccount";
+import { Setup } from "./routes/setup/Setup";
 
 function App() {
   const queryClient = new QueryClient();
@@ -41,39 +43,45 @@ function App() {
       children: [
         {
           path: constants.ROUTES.HOME,
-          element: <Home />,
+          element: <Setup Component={<Home />} isAllowedWithoutLogin={true} />,
         },
         {
           path: constants.ROUTES.GIGS,
-          element: <Gigs />,
+          element: <Setup Component={<Gigs />} isAllowedWithoutLogin={true} />,
         },
         {
           path: constants.ROUTES.GIG_WITH_ID,
-          element: <Gig />,
+          element: <Setup Component={<Gig />} isAllowedWithoutLogin={true} />,
         },
         {
           path: constants.ROUTES.ORDERS,
-          element: <Private Component={<Orders />} />,
+          element: <Setup Component={<Private Component={<Orders />} />} />,
         },
         {
           path: constants.ROUTES.MY_GIGS,
-          element: <Protected Component={<MyGigs />} />,
+          element: <Setup Component={<Protected Component={<MyGigs />} />} />,
         },
         {
           path: constants.ROUTES.MY_FAVORITES,
-          element: <Protected Component={<MyFavorites />} isSeller={false} />,
+          element: (
+            <Setup
+              Component={
+                <Protected Component={<MyFavorites />} isSeller={false} />
+              }
+            />
+          ),
         },
         {
           path: constants.ROUTES.ADD,
-          element: <Protected Component={<Add />} />,
+          element: <Setup Component={<Protected Component={<Add />} />} />,
         },
         {
           path: constants.ROUTES.MESSAGES,
-          element: <Private Component={<Messages />} />,
+          element: <Setup Component={<Private Component={<Messages />} />} />,
         },
         {
           path: constants.ROUTES.MESSAGE_WITH_ID,
-          element: <Private Component={<Message />} />,
+          element: <Setup Component={<Private Component={<Message />} />} />,
         },
         {
           path: constants.ROUTES.LOGIN,
@@ -84,8 +92,19 @@ function App() {
           element: <Public Component={<Register />} />,
         },
         {
+          path: constants.ROUTES.SETUP_ACCOUNT,
+          element: (
+            <Setup
+              Component={<Private Component={<SetupAccount />} />}
+              isAlreadySetupComplete={true}
+            />
+          ),
+        },
+        {
           path: constants.ROUTES.NOT_FOUND,
-          element: <NotFound />,
+          element: (
+            <Setup Component={<NotFound />} isAllowedWithoutLogin={true} />
+          ),
         },
       ],
     },

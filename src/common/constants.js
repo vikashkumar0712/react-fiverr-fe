@@ -176,6 +176,7 @@ const constants = {
     MESSAGE_WITH_ID: "/message/:id",
     ACCOUNT: "/account/",
     ACCOUNT_WITH_ID: "/account/:id",
+    SETUP_ACCOUNT: "/setup-account",
   },
 
   LOCAL_STORAGE: {

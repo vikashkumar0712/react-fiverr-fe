@@ -5,11 +5,12 @@ import constants from "../../common/constants";
 
 export const Footer = () => {
   const year = new Date().getFullYear();
-  
+
   const { pathname } = useLocation();
   const isAllowed =
     pathname !== constants.ROUTES.LOGIN &&
-    pathname !== constants.ROUTES.REGISTER;
+    pathname !== constants.ROUTES.REGISTER &&
+    pathname !== constants.ROUTES.SETUP_ACCOUNT;
 
   return (
     isAllowed && (

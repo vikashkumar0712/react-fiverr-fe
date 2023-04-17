@@ -1,0 +1,59 @@
+.upload {
+  width: 100px;
+  position: relative;
+  margin: auto;
+
+  .circle {
+    width: 165px;
+    height: 165px;
+    background: linear-gradient(218.58deg, #2bc48a 11.5%, #a2f7c5 87.95%);
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      background: linear-gradient(110.49deg, #eff3f6 26.28%, #d7d7ff 94.17%);
+    }
+  }
+
+  .round {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: -62px;
+    box-shadow: 0 0.7em 1.5em -0.5em #28b34f98;
+    background: linear-gradient(218.58deg, #1dbf73 11.5%, #53dca8 87.95%);
+    width: 50px;
+    height: 50px;
+    line-height: 33px;
+    text-align: center;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+
+    &:hover {
+      box-shadow: 0 0.5em 1.5em -0.5em #1dbf73;
+    }
+    &:active {
+      box-shadow: 0 0.3em 1em -0.5em #1dbf73;
+    }
+
+    input[type="file"] {
+      cursor: pointer;
+      position: absolute;
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+}
