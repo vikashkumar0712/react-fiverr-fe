@@ -13,11 +13,12 @@ import { newRequest } from "../../utils/request";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../../components/loader/Loader";
 import { Reviews } from "../../components/reviews/Reviews";
+import { MagicButton } from "../../components/magic_button/MagicButton";
 import utility from "../../utils/utility";
 import constants from "../../common/constants";
-import { MagicButton } from "../../components/magic_button/MagicButton";
 
 export const Gig = () => {
+  const [success, setSuccess] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevErrorMessage, setPrevErrorMessage] = useState(null);
 
@@ -43,6 +44,7 @@ export const Gig = () => {
 
   useEffect(() => {
     if (searchParams.has("success")) {
+      setSuccess(true);
       searchParams.delete("success");
       setSearchParams(searchParams);
       toast(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
@@ -78,6 +80,7 @@ export const Gig = () => {
   const handleCheckout = async () => {
     try {
       const checkoutParams = { gigId: id };
+
       const { data: response } = await toast.promise(
         newRequest.post(`order/checkout`, checkoutParams),
         constants.PARAMS.PAYMENT_PROCESSING
@@ -135,7 +138,7 @@ export const Gig = () => {
   };
 
   return (
-    <div className="gig">
+    <div className={success ? "gig success" : "gig"}>
       {isLoading ? (
         <div className="loading">
           <Loader />
