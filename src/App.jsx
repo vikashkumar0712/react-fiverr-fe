@@ -103,7 +103,7 @@ function App() {
         {
           path: constants.ROUTES.NOT_FOUND,
           element: (
-            <Setup Component={<NotFound />} isAllowedWithoutLogin={true} />
+            <Setup Component={<NotFound />} isAllowedWithLogin={true} />
           ),
         },
       ],

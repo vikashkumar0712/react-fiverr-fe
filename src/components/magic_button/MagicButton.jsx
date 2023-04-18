@@ -1,16 +1,28 @@
 import "./MagicButton.scss";
 import React from "react";
+import confetti from "https://esm.run/canvas-confetti@1";
 
 export const MagicButton = ({
   text = "Magic Button",
   type = undefined,
   onClick = undefined,
+  isCelebrate = false,
 }) => {
+  const celebrate = () => {
+    confetti({
+      particleCount: 150,
+      spread: 60,
+    });
+  };
+
   return (
     <button
       className="magic-button"
       type={type}
-      onClick={() => onClick && onClick()}
+      onClick={() => {
+        onClick && onClick();
+        isCelebrate && celebrate();
+      }}
     >
       {text}
       <div className="star-1">

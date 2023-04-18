@@ -206,7 +206,7 @@ export const SetupAccount = () => {
           ></textarea>
         </div>
 
-        <MagicButton text={"Complete"} type={"submit"} />
+        <MagicButton text={"Complete"} type={"submit"} isCelebrate={true} />
 
         <p className="note">
           © Fiverr International Ltd. {new Date().getFullYear()}
