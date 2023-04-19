@@ -14,6 +14,7 @@ import utility from "../../utils/utility";
 
 export const SetupAccount = () => {
   // States management
+  const [isCompleted, setCompleted] = useState(false);
   const [selected, setSelected] = useState(null);
   const [image, setImage] = useState({
     file: null,
@@ -86,12 +87,14 @@ export const SetupAccount = () => {
         setupAccountParams
       );
 
+      setCompleted(true);
+
       localStorage.setItem(
         constants.LOCAL_STORAGE.CURRENT_USER,
         JSON.stringify(response.data)
       );
 
-      toast.success("Setup completed successfully");
+      toast.success(constants.SUCCESS_MESSAGES.PROFILE_COMPLETED);
       setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
@@ -206,7 +209,11 @@ export const SetupAccount = () => {
           ></textarea>
         </div>
 
-        <MagicButton text={"Complete"} type={"submit"} isCelebrate={true} />
+        <MagicButton
+          text={"Complete"}
+          type={"submit"}
+          isCelebrate={isCompleted}
+        />
 
         <p className="note">
           © Fiverr International Ltd. {new Date().getFullYear()}

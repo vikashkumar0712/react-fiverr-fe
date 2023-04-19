@@ -15,13 +15,14 @@ export const MagicButton = ({
     });
   };
 
+  isCelebrate && celebrate();
+
   return (
     <button
       className="magic-button"
       type={type}
       onClick={() => {
         onClick && onClick();
-        isCelebrate && celebrate();
       }}
     >
       {text}
