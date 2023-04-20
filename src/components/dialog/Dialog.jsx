@@ -27,9 +27,7 @@ export const Dialog = ({ user, onClickLogout }) => {
       </span>
 
       <hr />
-      <span className="email" style={{ cursor: "text" }}>
-        {user.email}
-      </span>
+      <span className="email">{user.email}</span>
       <hr />
 
       {user.isSeller && (

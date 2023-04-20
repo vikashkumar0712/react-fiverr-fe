@@ -22,6 +22,7 @@ import { NotFound } from "./pages/not_found/NotFound";
 import { SetupAccount } from "./pages/setup_account/SetupAccount";
 import { Setup } from "./routes/setup/Setup";
 import constants from "./common/constants";
+import { VerifyAccount } from "./pages/verify_account/VerifyAccount";
 
 function App() {
   const queryClient = new QueryClient();
@@ -102,9 +103,11 @@ function App() {
         },
         {
           path: constants.ROUTES.NOT_FOUND,
-          element: (
-            <Setup Component={<NotFound />} isAllowedWithLogin={true} />
-          ),
+          element: <Setup Component={<NotFound />} isAllowedWithLogin={true} />,
+        },
+        {
+          path: constants.ROUTES.ACCOUNT_VERIFY_WITH_HASH,
+          element: <Public Component={<VerifyAccount />} />,
         },
       ],
     },

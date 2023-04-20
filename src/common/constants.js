@@ -178,6 +178,8 @@ const constants = {
     ACCOUNT: "/account/",
     ACCOUNT_WITH_ID: "/account/:id",
     SETUP_ACCOUNT: "/setup-account",
+    ACCOUNT_VERIFY_WITH_HASH: "/account-verify/:hash",
+    ACCOUNT_VERIFY: "/account-verify/",
   },
 
   LOCAL_STORAGE: {

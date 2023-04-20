@@ -13,7 +13,7 @@ export const Setup = ({
 
   if (isProfileAlreadySetup) {
     const isProfileSetupComplete = currentUser
-      ? currentUser?.createdAt === currentUser?.updatedAt
+      ? !currentUser?.completed
       : isAllowedWithLogin;
 
     return isProfileSetupComplete ? (
@@ -23,7 +23,7 @@ export const Setup = ({
     );
   } else {
     const isProfileSetupComplete = currentUser
-      ? currentUser?.createdAt !== currentUser?.updatedAt
+      ? currentUser?.completed
       : isAllowedWithLogin;
 
     return isProfileSetupComplete ? (

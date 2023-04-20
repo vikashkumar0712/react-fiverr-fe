@@ -47,7 +47,6 @@
     cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
   animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 
-  width: auto;
   display: flex;
   justify-items: center;
   position: absolute;
@@ -61,7 +60,8 @@
   flex-direction: column;
   gap: 10px;
   color: grey;
-  width: 200px;
+  min-width: 200px;
+  max-width: auto;
   font-weight: 300;
 
   box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01),
@@ -73,6 +73,11 @@
     height: 25px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
+  }
+
+  .email {
+    width: max-content !important;
+    cursor: text;
   }
 
   .icon {
