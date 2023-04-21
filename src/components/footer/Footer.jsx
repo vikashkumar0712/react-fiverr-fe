@@ -2,15 +2,18 @@ import "./Footer.scss";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import constants from "../../common/constants";
+import utility from "../../utils/utility";
 
 export const Footer = () => {
   const year = new Date().getFullYear();
 
   const { pathname } = useLocation();
+
   const isAllowed =
     pathname !== constants.ROUTES.LOGIN &&
     pathname !== constants.ROUTES.REGISTER &&
-    pathname !== constants.ROUTES.SETUP_ACCOUNT;
+    pathname !== constants.ROUTES.SETUP_ACCOUNT &&
+    utility.getPathname(pathname) !== constants.ROUTES.ACCOUNT_VERIFY;
 
   return (
     isAllowed && (

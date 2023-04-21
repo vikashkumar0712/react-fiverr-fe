@@ -1,12 +1,14 @@
 import "./VerifyAccount.scss";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useParams } from "react-router-dom";
 import React, { useEffect } from "react";
-import constants from "../../common/constants";
+import { useNavigate, useParams } from "react-router-dom";
 import { newRequest } from "../../utils/request";
+import { Loader } from "../../components/loader/Loader";
+import constants from "../../common/constants";
 
 export const VerifyAccount = () => {
+  const navigate = useNavigate();
   const { hash } = useParams();
 
   useEffect(() => {
@@ -14,29 +16,32 @@ export const VerifyAccount = () => {
       if (hash.length <= 24 && hash.length >= 24) {
         try {
           const hashParams = { hash: hash };
-          await newRequest.post(`services/verify-link`, hashParams),
-            toast.success("Account verified successfully");
-          setTimeout(
-            () => (window.location.href = constants.ROUTES.HOME),
-            4000
-          );
+          await newRequest.post(`services/verify-link`, hashParams);
+
+          toast.success(constants.SUCCESS_MESSAGES.ACCOUNT_VERIFIED);
+          navigate(constants.ROUTES.HOME);
         } catch (error) {
           console.error(error);
           toast.error(error.response.data.error || error.message);
-          setTimeout(
-            () => (window.location.href = constants.ROUTES.HOME),
-            4000
-          );
+          navigate(constants.ROUTES.HOME);
         }
       } else {
-        setTimeout(() => (window.location.href = constants.ROUTES.HOME), 4000);
+        navigate(constants.ROUTES.HOME);
       }
     };
     VerifyNewAccount();
   }, [hash]);
 
   return (
-    <div>
+    <div className="verify-account">
+      <form>
+        <div className="header">
+          <Loader />
+          <label className="title">
+            <b>Verifying</b> please wait...
+          </label>
+        </div>
+      </form>
       <ToastContainer
         position="bottom-left"
         autoClose={4000}

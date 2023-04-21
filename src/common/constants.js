@@ -140,6 +140,7 @@ const constants = {
   },
 
   SUCCESS_MESSAGES: {
+    ACCOUNT_VERIFIED: "Your account has been verified",
     PROFILE_COMPLETED: "Profile completed successfully",
     GIG_DELETE: "Gig deleted successfully",
     FAV_REMOVE: "Gig remove from My Favorites",

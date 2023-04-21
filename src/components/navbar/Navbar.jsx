@@ -25,7 +25,8 @@ export const Navbar = () => {
   const isAllowed =
     pathname !== constants.ROUTES.LOGIN &&
     pathname !== constants.ROUTES.REGISTER &&
-    pathname !== constants.ROUTES.SETUP_ACCOUNT;
+    pathname !== constants.ROUTES.SETUP_ACCOUNT &&
+    utility.getPathname(pathname) !== constants.ROUTES.ACCOUNT_VERIFY;
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);

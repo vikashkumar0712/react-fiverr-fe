@@ -76,6 +76,10 @@ class Utility {
   getCountriesDialCode(code) {
     return code ? dialCodes[code] : dialCodes;
   }
+
+  getPathname(pathname) {
+    return pathname.split(/^(\/[a-zA-Z-]+\/)/)[1];
+  }
 }
 
 export default new Utility();

@@ -12,7 +12,7 @@ import utility from "../../utils/utility";
 
 export const Register = () => {
   // States management
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState("IN");
   const [isLoading, setIsLoading] = useState(false);
   const [gender, setGender] = useState("");
   const [credentials, setCredentials] = useState({

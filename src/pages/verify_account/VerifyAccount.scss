@@ -1,0 +1,40 @@
+.verify-account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  height: 745px;
+  width: 100%;
+
+  form {
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 9px;
+    background-color: #fff;
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 15px 0;
+
+      .title {
+        margin: 7%;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 21px;
+        text-align: center;
+        color: #404145;
+        margin-bottom: 10px;
+
+        b {
+          color: #1dbf73;
+        }
+      }
+    }
+  }
+}

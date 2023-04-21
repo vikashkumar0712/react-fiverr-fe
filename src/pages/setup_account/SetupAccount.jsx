@@ -15,7 +15,7 @@ import utility from "../../utils/utility";
 export const SetupAccount = () => {
   // States management
   const [isCompleted, setCompleted] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState("IN");
   const [image, setImage] = useState({
     file: null,
     selected: null,
