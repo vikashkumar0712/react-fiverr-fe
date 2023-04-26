@@ -1,6 +1,5 @@
 import "./Add.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useReducer, useState } from "react";
 import { INITIAL_STATE, addReducer } from "./addReducer";
 import { upload } from "../../utils/upload";
@@ -107,8 +106,9 @@ export const Add = () => {
 
     try {
       await mutation.mutateAsync(state);
+
       toast.success(constants.SUCCESS_MESSAGES.GIG_ADD);
-      setTimeout(() => navigate(constants.ROUTES.MY_GIGS), 4000);
+      navigate(constants.ROUTES.MY_GIGS);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
@@ -322,18 +322,6 @@ export const Add = () => {
           </div>
         </form>
       </div>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

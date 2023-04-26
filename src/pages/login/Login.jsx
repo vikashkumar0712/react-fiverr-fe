@@ -1,6 +1,5 @@
 import "./Login.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
@@ -41,19 +40,11 @@ export const Login = () => {
         JSON.stringify(currentUser)
       );
 
-      const isProfileSetupComplete =
-        currentUser.createdAt !== currentUser.updatedAt;
-
       toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_IN);
-
-      setTimeout(
-        () =>
-          navigate(
-            isProfileSetupComplete
-              ? constants.ROUTES.HOME
-              : constants.ROUTES.SETUP_ACCOUNT
-          ),
-        4000
+      navigate(
+        currentUser.completed
+          ? constants.ROUTES.HOME
+          : constants.ROUTES.SETUP_ACCOUNT
       );
     } catch (error) {
       setIsLoading(false);
@@ -221,18 +212,6 @@ export const Login = () => {
           © Fiverr International Ltd. {new Date().getFullYear()}
         </p>
       </form>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

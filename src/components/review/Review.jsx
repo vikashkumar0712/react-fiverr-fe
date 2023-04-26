@@ -1,6 +1,5 @@
 import "./Review.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
@@ -28,6 +27,7 @@ export const Review = ({ review }) => {
   const handleDeleteReview = async (id) => {
     try {
       await mutation.mutateAsync(id);
+
       toast.success(constants.SUCCESS_MESSAGES.REVIEW_DELETE);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
@@ -82,18 +82,6 @@ export const Review = ({ review }) => {
           />
         )}
       </div>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

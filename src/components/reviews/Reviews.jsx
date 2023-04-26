@@ -1,6 +1,5 @@
 import "./Reviews.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { Review } from "../review/Review";
 import { newRequest } from "../../utils/request";
@@ -58,8 +57,10 @@ export const Reviews = ({ gigId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await mutation.mutateAsync(review);
+
       setReview(initialReviewValues);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
@@ -110,18 +111,6 @@ export const Reviews = ({ gigId }) => {
           </button>
         </form>
       </div>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

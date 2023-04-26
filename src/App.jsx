@@ -1,5 +1,7 @@
 import "./App.scss";
+import "react-toastify/dist/ReactToastify.css";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Footer } from "./components/footer/Footer";
 import { Navbar } from "./components/navbar/Navbar";
@@ -21,8 +23,8 @@ import { Public } from "./routes/public/Public";
 import { NotFound } from "./pages/not_found/NotFound";
 import { SetupAccount } from "./pages/setup_account/SetupAccount";
 import { Setup } from "./routes/setup/Setup";
-import constants from "./common/constants";
 import { VerifyAccount } from "./pages/verify_account/VerifyAccount";
+import constants from "./common/constants";
 
 function App() {
   const queryClient = new QueryClient();
@@ -116,6 +118,12 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="dark"
+      />
     </>
   );
 }

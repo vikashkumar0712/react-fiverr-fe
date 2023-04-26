@@ -1,6 +1,5 @@
 import "./VerifyAccount.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { newRequest } from "../../utils/request";
@@ -42,18 +41,6 @@ export const VerifyAccount = () => {
           </label>
         </div>
       </form>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

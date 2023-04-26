@@ -1,6 +1,5 @@
 import "./Register.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { newRequest } from "../../utils/request";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -77,7 +76,7 @@ export const Register = () => {
         );
 
         toast.success(response.data);
-        setTimeout(() => navigate(constants.ROUTES.LOGIN), 4000);
+        navigate(constants.ROUTES.LOGIN);
       } else {
         toast.error(constants.ERROR_MESSAGES.NO_GENDER_SELECTED);
       }
@@ -271,18 +270,6 @@ export const Register = () => {
           © Fiverr International Ltd. {new Date().getFullYear()}
         </p>
       </form>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

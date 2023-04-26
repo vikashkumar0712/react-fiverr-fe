@@ -1,6 +1,5 @@
 import "./Navbar.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
@@ -66,9 +65,9 @@ export const Navbar = () => {
       await newRequest.post("/user/logout");
 
       localStorage.setItem(constants.LOCAL_STORAGE.CURRENT_USER, null);
-      toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_OUT);
 
-      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+      toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_OUT);
+      navigate(constants.ROUTES.HOME);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
@@ -168,18 +167,6 @@ export const Navbar = () => {
           </div>
         </div>
         {(active || pathname !== constants.ROUTES.HOME) && <Menu />}
-        <ToastContainer
-          position="bottom-left"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
       </div>
     )
   );

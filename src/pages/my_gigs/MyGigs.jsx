@@ -1,6 +1,5 @@
 import "./MyGigs.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { newRequest } from "../../utils/request";
@@ -135,18 +134,6 @@ export const MyGigs = () => {
           </table>
         )}
       </div>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import "./SetupAccount.scss";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UploadProfile } from "../../components/upload_profile/UploadProfile";
@@ -95,7 +94,7 @@ export const SetupAccount = () => {
       );
 
       toast.success(constants.SUCCESS_MESSAGES.PROFILE_COMPLETED);
-      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
+      navigate(constants.ROUTES.HOME);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
@@ -219,18 +218,6 @@ export const SetupAccount = () => {
           © Fiverr International Ltd. {new Date().getFullYear()}
         </p>
       </form>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 };
