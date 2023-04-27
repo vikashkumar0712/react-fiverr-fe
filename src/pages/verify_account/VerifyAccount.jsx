@@ -11,7 +11,7 @@ export const VerifyAccount = () => {
   const { hash } = useParams();
 
   useEffect(() => {
-    const VerifyNewAccount = async () => {
+    const verifyNewAccount = async () => {
       if (hash.length <= 24 && hash.length >= 24) {
         try {
           const hashParams = { hash: hash };
@@ -28,7 +28,7 @@ export const VerifyAccount = () => {
         navigate(constants.ROUTES.HOME);
       }
     };
-    VerifyNewAccount();
+    verifyNewAccount();
   }, [hash]);
 
   return (

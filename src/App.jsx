@@ -24,6 +24,8 @@ import { NotFound } from "./pages/not_found/NotFound";
 import { SetupAccount } from "./pages/setup_account/SetupAccount";
 import { Setup } from "./routes/setup/Setup";
 import { VerifyAccount } from "./pages/verify_account/VerifyAccount";
+import { ForgotPassword } from "./pages/forgot_password/ForgotPassword";
+import { ResetPassword } from "./pages/reset_password/ResetPassword";
 import constants from "./common/constants";
 
 function App() {
@@ -110,6 +112,14 @@ function App() {
         {
           path: constants.ROUTES.ACCOUNT_VERIFY_WITH_HASH,
           element: <Public Component={<VerifyAccount />} />,
+        },
+        {
+          path: constants.ROUTES.FORGOT_PASSWORD,
+          element: <Public Component={<ForgotPassword />} />,
+        },
+        {
+          path: constants.ROUTES.RESET_PASSWORD_WITH_HASH,
+          element: <Public Component={<ResetPassword />} />,
         },
       ],
     },

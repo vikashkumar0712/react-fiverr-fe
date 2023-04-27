@@ -64,7 +64,7 @@ export const Register = () => {
       if (gender !== "") {
         setIsLoading(true);
 
-        const registerData = {
+        const registerParams = {
           ...credentials,
           gender: gender,
           country: utility.getCountriesCountryCode(selected),
@@ -72,7 +72,7 @@ export const Register = () => {
 
         const { data: response } = await newRequest.post(
           "/services/register",
-          registerData
+          registerParams
         );
 
         toast.success(response.data);

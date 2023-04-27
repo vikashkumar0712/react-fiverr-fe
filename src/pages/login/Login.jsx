@@ -157,6 +157,15 @@ export const Login = () => {
           )}
         </button>
 
+        <div className="forgot">
+          <Link
+            className="link redirect-link"
+            to={constants.ROUTES.FORGOT_PASSWORD}
+          >
+            Forgot Password ?
+          </Link>
+        </div>
+
         <div className="separator">
           <hr className="line" />
           <span>Or</span>

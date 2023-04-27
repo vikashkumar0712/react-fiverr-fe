@@ -181,6 +181,9 @@ const constants = {
     SETUP_ACCOUNT: "/setup-account",
     ACCOUNT_VERIFY_WITH_HASH: "/account-verify/:hash",
     ACCOUNT_VERIFY: "/account-verify/",
+    FORGOT_PASSWORD: "/forgot-password",
+    RESET_PASSWORD_WITH_HASH: "/reset-password/:hash",
+    RESET_PASSWORD: "/reset-password/",
   },
 
   LOCAL_STORAGE: {

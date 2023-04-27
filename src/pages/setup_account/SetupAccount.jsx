@@ -116,7 +116,7 @@ export const SetupAccount = () => {
 
           <p className="description">
             Just a few more personal information is required to complete your
-            profile.
+            profile!
           </p>
         </div>
 

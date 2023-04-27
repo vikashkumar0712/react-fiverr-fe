@@ -13,7 +13,9 @@ export const Footer = () => {
     pathname !== constants.ROUTES.LOGIN &&
     pathname !== constants.ROUTES.REGISTER &&
     pathname !== constants.ROUTES.SETUP_ACCOUNT &&
-    utility.getPathname(pathname) !== constants.ROUTES.ACCOUNT_VERIFY;
+    pathname !== constants.ROUTES.FORGOT_PASSWORD &&
+    utility.getPathname(pathname) !== constants.ROUTES.ACCOUNT_VERIFY &&
+    utility.getPathname(pathname) !== constants.ROUTES.RESET_PASSWORD;
 
   return (
     isAllowed && (
