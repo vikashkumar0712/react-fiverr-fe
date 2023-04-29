@@ -1,11 +1,12 @@
 import "./Add.scss";
-import { toast } from "react-toastify";
 import React, { useReducer, useState } from "react";
 import { INITIAL_STATE, addReducer } from "./addReducer";
+import { toast } from "react-toastify";
 import { upload } from "../../utils/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { newRequest } from "../../utils/request";
 import { useNavigate } from "react-router-dom";
+import { UploadImages } from "../../components/upload_images/UploadImages";
 import constants from "../../common/constants";
 
 export const Add = () => {
@@ -16,17 +17,6 @@ export const Add = () => {
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  const handleCover = (e) => {
-    const { files } = e.target;
-    const file = files[0];
-    setCoverImage(file);
-  };
-
-  const handleImages = (e) => {
-    const { files } = e.target;
-    setMultipleImages(files);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,10 +65,10 @@ export const Add = () => {
       );
 
       const images =
-        [...multipleImages].length !== 0
+        multipleImages.length !== 0
           ? await toast.promise(
               Promise.all(
-                [...multipleImages].map(async (image) => await upload(image))
+                multipleImages.map(async (image) => await upload(image))
               ),
               constants.PARAMS.IMAGES_UPLOADING
             )
@@ -135,7 +125,6 @@ export const Add = () => {
               onChange={handleChange}
               required
             />
-
             <label htmlFor="">
               Category <span>*</span>
             </label>
@@ -190,23 +179,12 @@ export const Add = () => {
               </option>
             </select>
 
-            <label htmlFor="">
-              Cover Image <span>*</span>
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              name="images/*"
-              onChange={handleCover}
-              required
-            />
-            <label htmlFor="">Upload Images</label>
-            <input
-              type="file"
-              accept="image/*"
-              name="images/*"
-              multiple
-              onChange={handleImages}
+            <UploadImages
+              multiple={true}
+              multipleMaxFileCount={5}
+              labelSingle={`Cover Image *`}
+              setSingleImage={setCoverImage}
+              setMultipleImages={setMultipleImages}
             />
 
             <button type="button" onClick={handleUpload}>
@@ -224,7 +202,6 @@ export const Add = () => {
               onChange={handleChange}
               required
             ></textarea>
-
             <button type="submit">ADD</button>
           </div>
 
