@@ -216,6 +216,34 @@ export const Add = () => {
             />
 
             <label htmlFor="">
+              Price <span>*</span> (e.g. ₹ 1000)
+            </label>
+            <input
+              name="price"
+              type="number"
+              min={1}
+              defaultValue={1000}
+              onChange={handleChange}
+              required
+            />
+
+            <button type="submit">Submit</button>
+          </div>
+
+          <div className="details">
+            <UploadImages
+              multiple={true}
+              multipleMaxFileCount={5}
+              labelSingle={`Cover Image *`}
+              setSingleImage={setCoverImage}
+              setMultipleImages={setMultipleImages}
+            />
+
+            <button type="button" onClick={handleUpload}>
+              Upload
+            </button>
+
+            <label htmlFor="">
               Add Features <span>*</span> (min 1 - max 5)
             </label>
             <div className="add-features">
@@ -246,34 +274,6 @@ export const Add = () => {
                 })}
               </div>
             )}
-
-            <label htmlFor="">
-              Price <span>*</span> (e.g. ₹ 1000)
-            </label>
-            <input
-              name="price"
-              type="number"
-              min={1}
-              defaultValue={1000}
-              onChange={handleChange}
-              required
-            />
-
-            <button type="submit">ADD</button>
-          </div>
-
-          <div className="details">
-            <UploadImages
-              multiple={true}
-              multipleMaxFileCount={5}
-              labelSingle={`Cover Image *`}
-              setSingleImage={setCoverImage}
-              setMultipleImages={setMultipleImages}
-            />
-
-            <button type="button" onClick={handleUpload}>
-              Upload
-            </button>
 
             <label htmlFor="">
               Short Title <span>*</span>
