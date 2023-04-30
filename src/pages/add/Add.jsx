@@ -58,26 +58,31 @@ export const Add = () => {
 
   const handleUpload = async (e) => {
     e.stopPropagation();
+
     try {
-      const cover = await toast.promise(
-        upload(coverImage),
-        constants.PARAMS.COVER_UPLOADING
-      );
+      if (coverImage !== null) {
+        const cover = await toast.promise(
+          upload(coverImage),
+          constants.PARAMS.COVER_UPLOADING
+        );
 
-      const images =
-        multipleImages.length !== 0
-          ? await toast.promise(
-              Promise.all(
-                multipleImages.map(async (image) => await upload(image))
-              ),
-              constants.PARAMS.IMAGES_UPLOADING
-            )
-          : [];
+        const images =
+          multipleImages.length !== 0
+            ? await toast.promise(
+                Promise.all(
+                  multipleImages.map(async (image) => await upload(image))
+                ),
+                constants.PARAMS.IMAGES_UPLOADING
+              )
+            : multipleImages;
 
-      dispatch({
-        type: constants.REDUCERS.ADD_GIG.ACTION_TYPES.ADD_IMAGES,
-        payload: { cover: cover, images: images },
-      });
+        dispatch({
+          type: constants.REDUCERS.ADD_GIG.ACTION_TYPES.ADD_IMAGES,
+          payload: { cover: cover, images: images },
+        });
+      } else {
+        toast.error(constants.ERROR_MESSAGES.NO_COVER_SELECTED);
+      }
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.error || error.message);
