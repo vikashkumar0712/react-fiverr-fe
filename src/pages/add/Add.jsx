@@ -232,7 +232,9 @@ export const Add = () => {
               required
             />
 
-            <button type="submit">Submit</button>
+            <button className="io-button" type="submit">
+              Submit
+            </button>
           </div>
 
           <div className="details">
@@ -244,7 +246,7 @@ export const Add = () => {
               setMultipleImages={setMultipleImages}
             />
 
-            <button type="button" onClick={handleUpload}>
+            <button className="io-button" type="button" onClick={handleUpload}>
               Upload
             </button>
 
@@ -282,7 +284,11 @@ export const Add = () => {
                 value={feature}
                 onChange={handleFeature}
               />
-              <button type="button" onClick={handleAddFeature}>
+              <button
+                className="io-button"
+                type="button"
+                onClick={handleAddFeature}
+              >
                 &nbsp;&nbsp;+&nbsp;&nbsp;
               </button>
             </div>
