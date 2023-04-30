@@ -47,7 +47,6 @@ export const Gig = () => {
       searchParams.delete("success");
       setSearchParams(searchParams);
       toast(constants.SUCCESS_MESSAGES.ORDER_SUCCESS);
-      setTimeout(() => navigate(constants.ROUTES.ORDERS), 4000);
     }
 
     if (searchParams.has("canceled")) {
@@ -86,7 +85,7 @@ export const Gig = () => {
       );
 
       const stripePaymentUrl = response.data;
-      setTimeout(() => (window.location.href = stripePaymentUrl), 4000);
+      window.location.href = stripePaymentUrl;
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);
