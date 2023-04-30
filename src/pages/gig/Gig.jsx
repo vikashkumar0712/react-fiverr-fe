@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../../components/loader/Loader";
 import { Reviews } from "../../components/reviews/Reviews";
 import { MagicButton } from "../../components/magic_button/MagicButton";
+import Confetti from "https://cdn.skypack.dev/confetti-react";
 import utility from "../../utils/utility";
 import constants from "../../common/constants";
 
@@ -135,8 +136,11 @@ export const Gig = () => {
     }
   };
 
+  success && setTimeout(() => setSuccess(false), 10000);
+
   return (
-    <div className={success ? "gig success" : "gig"}>
+    <div className="gig">
+      {success && <Confetti />}
       {isLoading ? (
         <div className="loading">
           <Loader />
