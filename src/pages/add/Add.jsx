@@ -244,6 +244,29 @@ export const Add = () => {
             </button>
 
             <label htmlFor="">
+              Short Title <span>*</span>
+            </label>
+            <input
+              name="shortTitle"
+              type="text"
+              placeholder="e.g. One-page web design"
+              onChange={handleChange}
+              required
+            />
+
+            <label htmlFor="">
+              Short Description <span>*</span>
+            </label>
+            <textarea
+              name="shortDesc"
+              placeholder="Short description of your service"
+              cols="30"
+              rows="10"
+              onChange={handleChange}
+              required
+            ></textarea>
+
+            <label htmlFor="">
               Add Features <span>*</span> (min 1 - max 5)
             </label>
             <div className="add-features">
@@ -274,29 +297,6 @@ export const Add = () => {
                 })}
               </div>
             )}
-
-            <label htmlFor="">
-              Short Title <span>*</span>
-            </label>
-            <input
-              name="shortTitle"
-              type="text"
-              placeholder="e.g. One-page web design"
-              onChange={handleChange}
-              required
-            />
-
-            <label htmlFor="">
-              Short Description <span>*</span>
-            </label>
-            <textarea
-              name="shortDesc"
-              placeholder="Short description of your service"
-              cols="30"
-              rows="10"
-              onChange={handleChange}
-              required
-            ></textarea>
           </div>
         </form>
       </div>
