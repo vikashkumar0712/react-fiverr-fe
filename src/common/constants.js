@@ -111,6 +111,7 @@ const constants = {
   },
 
   ERROR_MESSAGES: {
+    GOOGLE_LOGIN_FAILED: "Google Login Error!",
     NO_GENDER_SELECTED: "Please select your gender!",
     FEATURE_ADD_LIMIT_REACHED: "You can only add maximum 5 features!",
     FEATURE_NOT_VALID: "Please enter a feature before add!",

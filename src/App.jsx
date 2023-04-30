@@ -1,6 +1,7 @@
 import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Footer } from "./components/footer/Footer";
@@ -126,7 +127,7 @@ function App() {
   ]);
 
   return (
-    <>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_AUDIENCE}>
       <RouterProvider router={router} />
       <ToastContainer
         position="bottom-center"
@@ -134,7 +135,7 @@ function App() {
         hideProgressBar={true}
         theme="dark"
       />
-    </>
+    </GoogleOAuthProvider>
   );
 }
 

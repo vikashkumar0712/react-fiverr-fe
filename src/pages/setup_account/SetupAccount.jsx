@@ -94,7 +94,7 @@ export const SetupAccount = () => {
       );
 
       toast.success(constants.SUCCESS_MESSAGES.PROFILE_COMPLETED);
-      setTimeout(() => navigate(constants.ROUTES.HOME), 3000);
+      setTimeout(() => navigate(constants.ROUTES.HOME), 4000);
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {
         toast.error(constants.ERROR_MESSAGES.NOT_AUTHORIZED);

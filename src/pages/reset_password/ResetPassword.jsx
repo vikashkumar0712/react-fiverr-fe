@@ -45,12 +45,9 @@ export const ResetPassword = () => {
         ...credentials,
       };
 
-      const { data: response } = await newRequest.post(
-        "/services/verify-link",
-        resetPasswordParams
-      );
+      await newRequest.post("/services/verify-link", resetPasswordParams);
 
-      toast.success(response.data);
+      toast.success(constants.SUCCESS_MESSAGES.PASSWORD_RESET);
       navigate(constants.ROUTES.LOGIN);
     } catch (error) {
       console.error(error);

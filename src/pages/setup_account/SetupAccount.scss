@@ -74,25 +74,25 @@
       flex-direction: row;
       gap: 5px;
 
+      .input-icon {
+        width: 20px;
+        position: absolute;
+        z-index: 99;
+        right: 178px;
+        bottom: 13px;
+      }
+
       .dial-code-selector {
         margin-top: 1.8%;
-        width: 32%;
+        width: 45%;
       }
 
       .input-profile {
         padding-right: 22%;
       }
 
-      .input-icon {
-        width: 20px;
-        position: absolute;
-        z-index: 99;
-        left: 36%;
-        bottom: 13.5px;
-      }
-
       .input-field {
-        width: 70%;
+        width: 55%;
         height: 40px;
         padding: 0 0 0 40px;
         border-radius: 7px;

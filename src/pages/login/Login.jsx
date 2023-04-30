@@ -1,19 +1,36 @@
 import "./Login.scss";
 import { toast } from "react-toastify";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 import constants from "../../common/constants";
+import utility from "../../utils/utility";
 
 export const Login = () => {
   // States management
+  const [countryCode, setCountryCode] = useState("IN");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      const { data: response } = await axios.get(
+        `${constants.ENUMS.IP_INFO_URL}${import.meta.env.VITE_IP_INFO_TOKEN}`
+      );
+
+      setCountryCode(response.country);
+    };
+
+    fetchLocation();
+  }, []);
 
   // Methods
   const handleCredentials = (e) => {
@@ -52,6 +69,43 @@ export const Login = () => {
       toast.error(error.response.data.error);
     }
   };
+
+  const handleGoogleLoginSuccess = async ({ credential }) => {
+    try {
+      setIsGoogleLoading(true);
+
+      const credentials = {
+        credential: credential,
+        country: utility.getCountriesCountryCode(countryCode),
+      };
+
+      const { data: response } = await newRequest.post(
+        "/services/social-login",
+        credentials
+      );
+
+      const currentUser = response.data.user;
+
+      localStorage.setItem(
+        constants.LOCAL_STORAGE.CURRENT_USER,
+        JSON.stringify(currentUser)
+      );
+
+      toast.success(constants.SUCCESS_MESSAGES.USER_LOGGED_IN);
+      navigate(
+        currentUser.completed
+          ? constants.ROUTES.HOME
+          : constants.ROUTES.SETUP_ACCOUNT
+      );
+    } catch (error) {
+      setIsGoogleLoading(false);
+      console.error(error.response.data.error);
+      toast.error(error.response.data.error);
+    }
+  };
+
+  const handleGoogleLoginFailure = () =>
+    toast.error(constants.ERROR_MESSAGES.GOOGLE_LOGIN_FAILED);
 
   return (
     <div className="login bg-animation">
@@ -172,41 +226,35 @@ export const Login = () => {
           <hr className="line" />
         </div>
 
-        <button title="Sign In" type="button" className="sign-in-ggl">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 512 512"
-            style={{ enableBackground: "new 0 0 512 512" }}
-            xmlSpace="preserve"
-          >
-            <path
-              d="M113.47 309.408 95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014L86.63 148.9l25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456.002 18.792 3.406 36.797 9.651 53.408z"
-              fill="#fbbb00"
-              data-original="#fbbb00"
+        <div className="center-google-btn">
+          {isGoogleLoading ? (
+            <>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.59c0 27.615-22.386 50.001-50 50.001s-50-22.386-50-50 22.386-50 50-50 50 22.386 50 50Zm-90.919 0c0 22.6 18.32 40.92 40.919 40.92 22.599 0 40.919-18.32 40.919-40.92 0-22.598-18.32-40.918-40.919-40.918-22.599 0-40.919 18.32-40.919 40.919Z"
+                  fill="#E5E7EB"
+                />
+                <path
+                  d="M93.968 39.04c2.425-.636 3.894-3.128 3.04-5.486A50 50 0 0 0 41.735 1.279c-2.474.414-3.922 2.919-3.285 5.344.637 2.426 3.12 3.849 5.6 3.484a40.916 40.916 0 0 1 44.131 25.769c.902 2.34 3.361 3.802 5.787 3.165Z"
+                  fill="currentColor"
+                />
+              </svg>
+              Signing in with Google...
+            </>
+          ) : (
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={handleGoogleLoginFailure}
+              useOneTap={true}
+              text="continue_with"
             />
-            <path
-              d="M507.527 208.176C510.467 223.662 512 239.655 512 256c0 18.328-1.927 36.206-5.598 53.451-12.462 58.683-45.025 109.925-90.134 146.187l-.014-.014-73.044-3.727-10.338-64.535c29.932-17.554 53.324-45.025 65.646-77.911h-136.89V208.176h245.899z"
-              fill="#518ef8"
-              data-original="#518ef8"
-            />
-            <path
-              d="m416.253 455.624.014.014C372.396 490.901 316.666 512 256 512c-97.491 0-182.252-54.491-225.491-134.681l82.961-67.91c21.619 57.698 77.278 98.771 142.53 98.771 28.047 0 54.323-7.582 76.87-20.818l83.383 68.262z"
-              fill="#28b446"
-              data-original="#28b446"
-            />
-            <path
-              d="m419.404 58.936-82.933 67.896C313.136 112.246 285.552 103.82 256 103.82c-66.729 0-123.429 42.957-143.965 102.724l-83.397-68.276h-.014C71.23 56.123 157.06 0 256 0c62.115 0 119.068 22.126 163.404 58.936z"
-              fill="#f14336"
-              data-original="#f14336"
-            />
-          </svg>
-
-          <span>
-            <b>Continue with Google</b>
-          </span>
-        </button>
+          )}
+        </div>
 
         <div className="header">
           <h3>

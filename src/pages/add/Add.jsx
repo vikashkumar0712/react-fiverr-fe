@@ -179,18 +179,6 @@ export const Add = () => {
               </option>
             </select>
 
-            <UploadImages
-              multiple={true}
-              multipleMaxFileCount={5}
-              labelSingle={`Cover Image *`}
-              setSingleImage={setCoverImage}
-              setMultipleImages={setMultipleImages}
-            />
-
-            <button type="button" onClick={handleUpload}>
-              Upload
-            </button>
-
             <label htmlFor="">
               Description <span>*</span>
             </label>
@@ -199,32 +187,6 @@ export const Add = () => {
               placeholder="Brief descriptions to introduce your service to customers"
               cols="0"
               rows="16"
-              onChange={handleChange}
-              required
-            ></textarea>
-            <button type="submit">ADD</button>
-          </div>
-
-          <div className="details">
-            <label htmlFor="">
-              Short Title <span>*</span>
-            </label>
-            <input
-              name="shortTitle"
-              type="text"
-              placeholder="e.g. One-page web design"
-              onChange={handleChange}
-              required
-            />
-
-            <label htmlFor="">
-              Short Description <span>*</span>
-            </label>
-            <textarea
-              name="shortDesc"
-              placeholder="Short description of your service"
-              cols="30"
-              rows="10"
               onChange={handleChange}
               required
             ></textarea>
@@ -296,6 +258,45 @@ export const Add = () => {
               onChange={handleChange}
               required
             />
+
+            <button type="submit">ADD</button>
+          </div>
+
+          <div className="details">
+            <UploadImages
+              multiple={true}
+              multipleMaxFileCount={5}
+              labelSingle={`Cover Image *`}
+              setSingleImage={setCoverImage}
+              setMultipleImages={setMultipleImages}
+            />
+
+            <button type="button" onClick={handleUpload}>
+              Upload
+            </button>
+
+            <label htmlFor="">
+              Short Title <span>*</span>
+            </label>
+            <input
+              name="shortTitle"
+              type="text"
+              placeholder="e.g. One-page web design"
+              onChange={handleChange}
+              required
+            />
+
+            <label htmlFor="">
+              Short Description <span>*</span>
+            </label>
+            <textarea
+              name="shortDesc"
+              placeholder="Short description of your service"
+              cols="30"
+              rows="10"
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
         </form>
       </div>
