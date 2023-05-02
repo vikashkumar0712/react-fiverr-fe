@@ -75,6 +75,8 @@ export const Login = () => {
     try {
       setIsGoogleLoading(true);
 
+      console.log(credential);
+
       const credentials = {
         credential: credential,
         country: utility.getCountriesCountryCode(countryCode),
