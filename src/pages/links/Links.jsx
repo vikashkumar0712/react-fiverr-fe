@@ -3,7 +3,7 @@ import React from "react";
 
 export const Links = () => {
   return (
-    <div className="links">
+    <div className="links-menu">
       <form>
         <div className="header">
           <label className="title">Project Links</label>
