@@ -186,6 +186,7 @@ const constants = {
     FORGOT_PASSWORD: "/forgot-password",
     RESET_PASSWORD_WITH_HASH: "/reset-password/:hash",
     RESET_PASSWORD: "/reset-password/",
+    LINKS: "/links",
   },
 
   LOCAL_STORAGE: {

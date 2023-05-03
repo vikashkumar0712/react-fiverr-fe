@@ -27,6 +27,7 @@ import { Setup } from "./routes/setup/Setup";
 import { VerifyAccount } from "./pages/verify_account/VerifyAccount";
 import { ForgotPassword } from "./pages/forgot_password/ForgotPassword";
 import { ResetPassword } from "./pages/reset_password/ResetPassword";
+import { Links } from "./pages/links/Links";
 import constants from "./common/constants";
 
 function App() {
@@ -121,6 +122,10 @@ function App() {
         {
           path: constants.ROUTES.RESET_PASSWORD_WITH_HASH,
           element: <Public Component={<ResetPassword />} />,
+        },
+        {
+          path: constants.ROUTES.LINKS,
+          element: <Setup Component={<Links />} isAllowedWithLogin={true} />,
         },
       ],
     },

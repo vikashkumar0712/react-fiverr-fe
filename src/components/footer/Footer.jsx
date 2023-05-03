@@ -11,6 +11,7 @@ export const Footer = () => {
 
   const isAllowed =
     pathname !== constants.ROUTES.LOGIN &&
+    pathname !== constants.ROUTES.LINKS &&
     pathname !== constants.ROUTES.REGISTER &&
     pathname !== constants.ROUTES.SETUP_ACCOUNT &&
     pathname !== constants.ROUTES.FORGOT_PASSWORD &&

@@ -1,0 +1,133 @@
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  height: 745px;
+  width: 100%;
+
+  form {
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 9px;
+    background-color: #fff;
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 15px 0;
+
+      .title {
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 21px;
+        text-align: center;
+        color: #404145;
+        margin-bottom: 10px;
+      }
+
+      .description {
+        max-width: 80%;
+        margin: auto;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+        color: #5f5d6b;
+      }
+
+      h3 {
+        max-width: 80%;
+        margin: auto;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 14px;
+        text-align: center;
+        color: #5f5d6b;
+      }
+
+      .redirect-link {
+        color: #1dbf73;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .link-button {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 0.7em 1.4em 0.7em 1.1em;
+      color: white;
+      background: #1dbf73;
+      border: none;
+      box-shadow: 0 0.7em 1.5em -0.5em #28b34f98;
+      letter-spacing: 0.05em;
+      border-radius: 0.5em;
+      &:hover {
+        box-shadow: 0 0.5em 1.5em -0.5em #1dbf73;
+      }
+      &:active {
+        box-shadow: 0 0.3em 1em -0.5em #1dbf73;
+      }
+
+      svg {
+        width: 20px;
+        position: absolute;
+        z-index: 99;
+        left: 12px;
+        bottom: 10px;
+      }
+    }
+  }
+
+  .github-button {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0.7em 1.4em 0.7em 1.1em;
+    color: white;
+    background: #212121;
+    border: none;
+    box-shadow: 0 0.7em 1.5em -0.5em #000000;
+    letter-spacing: 0.05em;
+    border-radius: 0.5em;
+    &:hover {
+      box-shadow: 0 0.5em 1.5em -0.5em #212121;
+    }
+    &:active {
+      box-shadow: 0 0.3em 1em -0.5em #212121;
+    }
+
+    svg {
+      width: 20px;
+      position: absolute;
+      z-index: 99;
+      left: 12px;
+      bottom: 10px;
+    }
+  }
+
+  .note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #8b8e98;
+  }
+}
