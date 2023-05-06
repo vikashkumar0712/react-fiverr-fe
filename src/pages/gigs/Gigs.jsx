@@ -129,7 +129,11 @@ export const Gigs = () => {
           </Link>
           &nbsp;&nbsp;&#47;&nbsp;&nbsp;{utility.toCategoryCase(categoryTerm)}
         </span>
-        <h1>{utility.toCategoryCase(categoryTerm)}</h1>
+        <h1>
+          {searchTerm
+            ? `Results for "${searchTerm}"`
+            : `${utility.toCategoryCase(categoryTerm)}`}
+        </h1>
         <p>{utility.catToDesc(categoryTerm)}</p>
         <div className="menu">
           <div className="left">

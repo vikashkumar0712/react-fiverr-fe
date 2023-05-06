@@ -5,8 +5,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { newRequest } from "../../utils/request";
 import { Menu } from "../menu/Menu";
 import { Dialog } from "../dialog/Dialog";
-import constants from "../../common/constants";
+import { SearchResults } from "../search_results/SearchResults";
+import { categoriesList } from "../../common/data";
+import { tagsList } from "../../common/data";
 import utility from "../../utils/utility";
+import constants from "../../common/constants";
 
 export const Navbar = () => {
   const currentUser = JSON.parse(
@@ -16,6 +19,8 @@ export const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
   const refClick = useRef(null);
 
   const navigate = useNavigate();
@@ -37,6 +42,17 @@ export const Navbar = () => {
   const handleInput = (e) => {
     const { value } = e.target;
     setInput(value);
+
+    const getCategories = categoriesList.filter((category) =>
+      category?.name?.toLowerCase()?.includes(value?.toLowerCase())
+    );
+
+    const getTags = tagsList.filter((tag) =>
+      tag?.toLowerCase()?.includes(value?.toLowerCase())
+    );
+
+    setTags(getTags);
+    setCategories(getCategories);
   };
 
   const handleSearch = () =>
@@ -44,17 +60,22 @@ export const Navbar = () => {
 
   const isSearchActive = pathname !== constants.ROUTES.HOME ? true : active;
 
-  const handleClick = (e) =>
-    refClick && refClick.current.contains(e.target)
-      ? setOpen(true)
-      : setOpen(false);
+  const handleClick = (e) => {
+    if (refClick && refClick.current.contains(e.target)) {
+      setOpen(true);
+    } else {
+      setTags([]);
+      setCategories([]);
+      setOpen(false);
+    }
+  };
 
   useEffect(() => {
     pathname === constants.ROUTES.HOME && setInput("");
 
     if (search) {
       const queryParams = utility.urlParamsToObject(search);
-      setInput(queryParams.search);
+      setInput(queryParams.search || queryParams.cat);
     }
 
     document.addEventListener("click", handleClick);
@@ -98,21 +119,32 @@ export const Navbar = () => {
             <span className="dot">.</span>
           </div>
           {isSearchActive && (
-            <div className="search">
-              <div className="search-input">
-                <input
-                  type="text"
-                  placeholder="What service are you looking for today?"
-                  value={input}
-                  onChange={handleInput}
-                />
+            <div className="search-bar-container">
+              <div className="search">
+                <div className="search-input">
+                  <input
+                    type="text"
+                    placeholder="What service are you looking for today?"
+                    value={input}
+                    onChange={handleInput}
+                  />
+                </div>
+                <button onClick={handleSearch}>
+                  <img
+                    src={constants.ENUMS.ASSETS.ICONS.SEARCH}
+                    alt="search-icon"
+                  />
+                </button>
               </div>
-              <button onClick={handleSearch}>
-                <img
-                  src={constants.ENUMS.ASSETS.ICONS.SEARCH}
-                  alt="search-icon"
+              {((categories && categories.length > 0) ||
+                (tags && tags.length > 0)) && (
+                <SearchResults
+                  tags={tags}
+                  categories={categories}
+                  input={input}
+                  width="37%"
                 />
-              </button>
+              )}
             </div>
           )}
           <div className="links">
