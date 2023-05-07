@@ -42,7 +42,7 @@ export const Messages = () => {
   const mutation = useMutation({
     mutationFn: async (id) => {
       const readParams = { id: id };
-      await newRequest.post(`/conversation-read`, readParams);
+      await newRequest.put(`/conversation-read`, readParams);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["conversations"]);

@@ -17,7 +17,7 @@ export const Review = ({ review }) => {
 
   const mutation = useMutation({
     mutationFn: async (id) => {
-      await newRequest.post(`/review/${id}`);
+      await newRequest.delete(`/review/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews"]);

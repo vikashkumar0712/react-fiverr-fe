@@ -103,7 +103,7 @@ export const Gigs = () => {
 
   const handleFavoriteRemove = async (id) => {
     try {
-      await newRequest.post(`/favorite/${id}`);
+      await newRequest.delete(`/favorite/${id}`);
       fetchFavorites();
     } catch (error) {
       if (error.code === constants.RESP_ERR_CODES.ERR_NETWORK) {

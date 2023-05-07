@@ -38,7 +38,7 @@ export const MyGigs = () => {
 
   const mutation = useMutation({
     mutationFn: async (id) => {
-      await newRequest.post(`/gig/${id}`);
+      await newRequest.delete(`/gig/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["myGigs"]);

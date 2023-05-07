@@ -38,7 +38,7 @@ export const MyFavorites = () => {
 
   const mutation = useMutation({
     mutationFn: async (id) => {
-      await newRequest.post(`/favorite/${id}`);
+      await newRequest.delete(`/favorite/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["myFavorites"]);
