@@ -148,8 +148,8 @@ export const Navbar = () => {
             </div>
           )}
           <div className="links">
-            <Link className="link" to={constants.ROUTES.EXPLORE}>
-              Explore
+            <Link className="link" to={constants.ROUTES.GIGS}>
+              Explore Gigs
             </Link>
 
             <span>English</span>

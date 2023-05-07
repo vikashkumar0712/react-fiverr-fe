@@ -31,11 +31,7 @@ export const HeroSection = () => {
   };
 
   const handleSearch = () =>
-    navigate(
-      input !== ""
-        ? `${constants.ROUTES.GIGS}?search=${input}`
-        : constants.ROUTES.GIGS
-    );
+    navigate(input !== "" && `${constants.ROUTES.GIGS}?search=${input}`);
 
   const handlePopular = (category) =>
     navigate(`${constants.ROUTES.GIGS}?cat=${category}`);
