@@ -81,7 +81,7 @@ export const SetupAccount = () => {
         phone: `${utility.getCountriesDialCode(selected)} ${credentials.phone}`,
       };
 
-      const { data: response } = await newRequest.post(
+      const { data: response } = await newRequest.put(
         "/user/setup-account",
         setupAccountParams
       );
