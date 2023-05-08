@@ -119,7 +119,7 @@ export const Navbar = () => {
             <span className="dot">.</span>
           </div>
           {isSearchActive && (
-            <div className="search-bar-container">
+            <div className="search-bar-container" ref={refClick}>
               <div className="search">
                 <div className="search-input">
                   <input

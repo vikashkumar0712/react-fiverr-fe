@@ -650,6 +650,13 @@ export const categoriesList = [
 export const tagsList = [
   "Artificial Intelligence",
   "AI Development",
+  "AI",
+  "AI Services",
+  "AI Generated Images",
+  "Midjourney",
+  "AI Artists",
+  "AI Code Generation",
+  "AI Web Services",
   "Machine Learning",
   "Deep Learning",
   "Natural Language Processing",
