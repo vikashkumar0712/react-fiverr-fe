@@ -57,10 +57,10 @@ export const HeroSection = () => {
           <div className="search-bar-container" ref={refClick}>
             <div className="search">
               <div className="search-input">
-//                 <img
-//                   src={constants.ENUMS.ASSETS.ICONS.SEARCH}
-//                   alt="search-icon"
-//                 />
+                <img
+                  src={constants.ENUMS.ASSETS.ICONS.SEARCH}
+                  alt="search-icon"
+                />
                 <input
                   type="text"
                   placeholder='Try "building web app"'
