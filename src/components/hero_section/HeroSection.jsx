@@ -107,9 +107,9 @@ export const HeroSection = () => {
           </div>
         </div>
         <div className="right">
-          <div className="image-container">
-            <img src={constants.ENUMS.ASSETS.IMAGES.POSTER} alt="poster" />
-          </div>
+//           <div className="image-container">
+//             <img src={constants.ENUMS.ASSETS.IMAGES.POSTER} alt="poster" />
+//           </div>
         </div>
       </div>
     </div>
