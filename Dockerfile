@@ -2,8 +2,8 @@
 FROM node:16-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm i --force
 COPY . .
+RUN npm i --force
 RUN npm run build
 
 # Production stage
